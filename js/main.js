@@ -68,6 +68,38 @@ function initStepFlow() {
   });
 }
 
+function initMealUpload() {
+  const input = document.querySelector("#meal-upload");
+  const preview = document.querySelector(".upload-preview");
+  if (!input || !preview) return;
+  input.addEventListener("change", () => {
+    const file = input.files?.[0];
+    if (!file) return;
+    if (file.size > 10 * 1024 * 1024) {
+      window.alert("图片不能超过 10MB，请重新选择。");
+      input.value = "";
+      return;
+    }
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+      preview.src = reader.result;
+      preview.hidden = false;
+      document.querySelector('.step[data-step="2"]')?.click();
+    });
+    reader.readAsDataURL(file);
+  });
+}
+
+function initFloatingMascot() {
+  if (document.body.classList.contains("home-page")) return;
+  const link = document.createElement("a");
+  link.className = "floating-mascot";
+  link.href = "assistant.html";
+  link.setAttribute("aria-label", "咨询小穗");
+  link.innerHTML = '<span>问问小穗</span><img src="images/xiaosui-assistant.png" alt="">';
+  document.body.appendChild(link);
+}
+
 // -------- Assistant chat --------
 const REPLIES = {
   "本餐营养": {
@@ -120,10 +152,10 @@ function appendMsg(role, avatar, html) {
 function botReply(key) {
   const data = REPLIES[key];
   if (!data) {
-    appendMsg("bot", "🤖", "我可以帮你解读本餐营养、评价今日膳食、推荐下一餐，也能提醒过敏与营养失衡。试试上面的快捷问题吧。");
+    appendMsg("bot", "🌱", "我可以帮你解读本餐营养、评价今日膳食、推荐下一餐，也能提醒过敏与营养失衡。试试上面的快捷问题吧。");
     return;
   }
-  appendMsg("bot", "🤖", `<b>${data.title}</b><br>${data.lines.join("<br>")}`);
+  appendMsg("bot", "🌱", `<b>${data.title}</b><br>${data.lines.join("<br>")}`);
 }
 
 function initChat() {
@@ -203,5 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   initPersonaTabs();
   initStepFlow();
+  initMealUpload();
   initChat();
+  initFloatingMascot();
 });

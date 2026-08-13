@@ -4,21 +4,21 @@
    ============================================== */
 
 :root {
-  --green: #2E7D32;
-  --green-light: #66BB6A;
-  --green-soft: #E8F5E9;
-  --blue: #1565C0;
-  --blue-light: #42A5F5;
-  --blue-soft: #E3F2FD;
-  --danger: #D32F2F;
-  --danger-soft: #FFEBEE;
-  --warning: #F57C00;
-  --gray-900: #1a1a1a;
-  --gray-700: #424242;
-  --gray-500: #757575;
-  --gray-300: #E0E0E0;
-  --gray-100: #F5F5F5;
-  --bg: #FAFBFC;
+  --green: #187A66;
+  --green-light: #7DD3C0;
+  --green-soft: #EAF8F4;
+  --blue: #2A88A8;
+  --blue-light: #8CCFE0;
+  --blue-soft: #E8F4F8;
+  --danger: #E74C3C;
+  --danger-soft: #FFF0EE;
+  --warning: #FF8C42;
+  --gray-900: #2D3436;
+  --gray-700: #455A57;
+  --gray-500: #636E72;
+  --gray-300: #DCE7E2;
+  --gray-100: #F6F8F5;
+  --bg: #FAFAF5;
   --white: #FFFFFF;
   --radius: 14px;
   --radius-lg: 20px;
@@ -444,6 +444,23 @@ img { max-width: 100%; display: block; }
 }
 .upload-box:hover { background: var(--white); transform: scale(1.02); }
 .upload-emoji { font-size: 56px; margin-bottom: 10px; }
+.visually-hidden { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0,0,0,0) !important; white-space: nowrap !important; border: 0 !important; }
+.upload-preview { width: 100%; max-height: 280px; margin-top: 18px; border-radius: 14px; object-fit: cover; }
+.prototype-note, .assistant-disclaimer { width: min(760px, calc(100% - 40px)); margin: 0 auto 48px; padding: 13px 18px; border: 1px solid rgba(27,67,50,.12); border-radius: 999px; background: #fafaf5; color: #636e72; font-size: 13px; text-align: center; }
+.mascot-avatar { overflow: hidden; background: #f4fbf7 !important; }
+.mascot-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 16%; transform: scale(1.55); }
+.assistant-character { width: min(1120px, calc(100% - 48px)); min-height: 480px; margin: 18px auto 88px; display: grid; grid-template-columns: 1fr .92fr; overflow: hidden; border: 1px solid rgba(27,67,50,.12); border-radius: 24px; background: linear-gradient(135deg, #fafaf5 0%, #e8f4f8 100%); box-shadow: 0 24px 70px rgba(42,106,87,.12); }
+.assistant-character-copy { align-self: center; padding: clamp(34px, 6vw, 72px); }
+.assistant-character-copy h2 { margin: 14px 0 16px; color: #1b4332; font-size: clamp(36px, 5vw, 58px); line-height: 1.1; }
+.assistant-character-copy p { max-width: 530px; color: #526963; font-size: 16px; line-height: 1.85; }
+.assistant-prompts { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 26px; }
+.assistant-prompts span { padding: 9px 13px; border: 1px solid rgba(27,67,50,.12); border-radius: 999px; background: rgba(255,255,255,.72); color: #1b4332; font-size: 13px; }
+.assistant-character-portrait { position: relative; min-height: 480px; overflow: hidden; background: #f3faf7; }
+.assistant-character-portrait img { width: 100%; height: 135%; object-fit: cover; object-position: 50% 10%; }
+.floating-mascot { position: fixed; right: 22px; bottom: 22px; z-index: 90; display: grid; grid-template-columns: auto 74px; align-items: center; gap: 10px; color: #1b4332; }
+.floating-mascot span { padding: 10px 14px; border: 1px solid rgba(27,67,50,.12); border-radius: 14px; background: rgba(250,250,245,.92); box-shadow: 0 12px 35px rgba(27,67,50,.12); font-size: 12px; font-weight: 700; backdrop-filter: blur(12px); }
+.floating-mascot img { width: 74px; height: 88px; object-fit: cover; object-position: 50% 14%; border-radius: 42%; filter: drop-shadow(0 12px 12px rgba(27,67,50,.16)); }
+.floating-mascot:hover img { transform: translateY(-5px) rotate(2deg); }
 
 /* Nutrition table */
 .nutrition-table {
@@ -586,6 +603,12 @@ img { max-width: 100%; display: block; }
   }
   .nav.menu-open .nav-links { display: grid; grid-template-columns: 1fr 1fr; }
   .nav.menu-open .nav-links a { min-height: 42px; display: flex; align-items: center; justify-content: center; }
+  .floating-mascot { right: 12px; bottom: 12px; grid-template-columns: 58px; }
+  .floating-mascot span { display: none; }
+  .floating-mascot img { width: 58px; height: 70px; }
+  .assistant-character { width: min(100% - 32px, 680px); grid-template-columns: 1fr; }
+  .assistant-character-portrait { min-height: 360px; grid-row: 1; }
+  .assistant-character-portrait img { height: 150%; object-position: 50% 8%; }
 }
 
 @media (prefers-reduced-motion: reduce) {

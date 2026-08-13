@@ -110,7 +110,7 @@
 .trend-line i { flex: 1; border-radius: 5px 5px 0 0; background: rgba(70,191,165,.28); }
 .trend-line i:nth-child(1) { height: 24%; }.trend-line i:nth-child(2) { height: 40%; }.trend-line i:nth-child(3) { height: 34%; }.trend-line i:nth-child(4) { height: 58%; }.trend-line i:nth-child(5) { height: 70%; }.trend-line i:nth-child(6) { height: 92%; background: var(--home-mint); }
 .story-guangzhou { grid-area: guangzhou; display: grid; grid-template-columns: .86fr 1.14fr; padding: 0; background: #edf7fb; }
-.guangzhou-photo { min-height: 350px; background: linear-gradient(180deg, transparent, rgba(16,76,61,.16)), url("https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=82") center / cover; }
+.guangzhou-photo { min-height: 350px; background: linear-gradient(180deg, transparent, rgba(16,76,61,.16)), url("../images/cantonese-dim-sum.png") 36% center / cover; }
 .guangzhou-copy { padding: 34px 30px; }
 .guangzhou-copy dl { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0 0; }
 .guangzhou-copy dl div { padding-top: 16px; border-top: 1px solid var(--home-line); }
@@ -143,6 +143,7 @@
 .assistant-section { padding-block: 112px; }
 .assistant-stage { display: grid; grid-template-columns: .7fr 1.3fr; gap: clamp(48px, 8vw, 120px); align-items: center; padding: 58px clamp(28px, 5vw, 72px); border-radius: var(--home-radius); background: linear-gradient(135deg, #f5f0e6 0%, #eff9f5 100%); }
 .assistant-orbit { width: min(100%, 320px); aspect-ratio: 1; display: grid; place-items: center; margin: auto; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.95) 0 37%, rgba(70,191,165,.15) 38% 52%, transparent 53% 100%); }
+.mascot-art { width: 82%; height: 92%; object-fit: cover; object-position: 50% 18%; border-radius: 48% 48% 44% 44%; filter: drop-shadow(0 22px 24px rgba(24,118,95,.16)); }
 .mascot-face { position: relative; width: 130px; height: 116px; border-radius: 48% 48% 44% 44%; background: var(--home-mint-dark); box-shadow: inset 0 10px 25px rgba(255,255,255,.16), 0 18px 45px rgba(24,118,95,.2); }
 .mascot-face::before { content: ""; position: absolute; left: calc(50% - 5px); top: -30px; width: 10px; height: 34px; border-radius: 10px; background: var(--home-mint-dark); }
 .mascot-face::after { content: ""; position: absolute; left: calc(50% - 12px); top: -39px; width: 24px; height: 24px; border-radius: 50%; background: var(--home-mint); }
@@ -161,7 +162,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .hero-result { animation: home-float 5s ease-in-out infinite; }
-  .mascot-face { animation: mascot-breathe 3.6s ease-in-out infinite; }
+  .mascot-art { animation: mascot-breathe 3.6s ease-in-out infinite; }
   @keyframes home-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
   @keyframes mascot-breathe { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-5px) scale(1.025); } }
 }

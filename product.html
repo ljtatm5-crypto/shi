@@ -68,11 +68,13 @@
       <!-- Step 1 -->
       <div class="step-panel active" data-step="1">
         <div class="step-visual">
-          <div class="upload-box">
+          <label class="upload-box" for="meal-upload">
+            <input id="meal-upload" class="visually-hidden" type="file" accept="image/jpeg,image/png,image/heic,image/webp">
             <div class="upload-emoji">📷</div>
             <p><b>点击拍照或上传餐食照片</b></p>
             <p style="font-size:13px;color:var(--gray-500);margin-top:6px">支持 JPG / PNG / HEIC · 最大10MB</p>
-          </div>
+            <img class="upload-preview" alt="已选择的餐食照片预览" hidden>
+          </label>
         </div>
         <div class="step-body">
           <h3>第一步：上传餐食</h3>
@@ -185,11 +187,11 @@
         </div>
         <div class="step-body">
           <h3>第四步：营养计算</h3>
-          <p>匹配本地食材数据库与《中国食物成分表》第六版，计算本餐五大关键营养指标。</p>
+          <p>原型示例依据食物数据与份量换算，展示本餐五项关键营养指标。</p>
           <ul>
             <li>热量 / 蛋白 / 脂肪 / 碳水 / 钠 · 一目了然</li>
             <li>超标或不足指标会用暖色警示</li>
-            <li>粤菜隐性油盐糖也在计算范围</li>
+            <li>所有结果均为估算值，实际值会因食材与烹饪方式而变化</li>
           </ul>
         </div>
       </div>
@@ -238,6 +240,8 @@
 
   </div>
 </section>
+
+<p class="prototype-note">原型演示 · 当前识别结果与营养数据为示例估算，不构成医疗或诊断建议。</p>
 
 <footer class="footer">
   <div>"穗"食拍，AI来算 · 广州商学院 · 挑战杯参赛作品 · 2026</div>
