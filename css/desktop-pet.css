@@ -209,7 +209,21 @@
 
 .desktop-pet-message {
   display: flex;
+  align-items: flex-start;
+  gap: 8px;
   margin: 0 0 10px;
+}
+
+.desktop-pet-message-avatar {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border: 1px solid var(--pet-line);
+  border-radius: 50%;
+  background: #fff;
+  object-fit: cover;
+  object-position: 50% 15%;
 }
 
 .desktop-pet-message:last-child {

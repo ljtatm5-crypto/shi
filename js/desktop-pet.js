@@ -296,6 +296,12 @@
 
     function appendRenderedMessage(item) {
       var row = makeElement("div", "desktop-pet-message " + item.role);
+      if (item.role !== "user") {
+        row.appendChild(makeElement("img", "desktop-pet-message-avatar", {
+          src: "images/xiaosui-assistant.png",
+          alt: "小穗"
+        }));
+      }
       var bubble = makeElement("div", "desktop-pet-bubble", { text: item.text });
       row.appendChild(bubble);
       ui.messages.appendChild(row);
