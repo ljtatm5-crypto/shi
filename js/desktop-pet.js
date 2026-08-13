@@ -74,6 +74,11 @@
       "aria-label": "小穗助手问答窗",
       hidden: ""
     });
+    var resizeHandle = makeElement("button", "desktop-pet-resize-handle", {
+      type: "button",
+      "aria-label": "从左上角拖动调整问答窗大小",
+      title: "拖动调整窗口大小"
+    });
     var head = makeElement("header", "desktop-pet-panel-head");
     var avatar = makeElement("img", "", {
       src: "images/xiaosui-assistant.png",
@@ -137,6 +142,7 @@
     var hide = makeElement("button", "", { type: "button", text: "隐藏助手" });
     foot.appendChild(hide);
 
+    panel.appendChild(resizeHandle);
     panel.appendChild(head);
     panel.appendChild(messages);
     panel.appendChild(typing);
@@ -158,6 +164,7 @@
       root: root,
       launcher: launcher,
       panel: panel,
+      resizeHandle: resizeHandle,
       messages: messages,
       typing: typing,
       quick: quick,
@@ -212,6 +219,7 @@
       return item && (item.role === "user" || item.role === "bot") && typeof item.text === "string";
     }).slice(-MAX_MESSAGES) : [];
     var drag = null;
+    var panelResize = null;
     var suppressClick = false;
     var replying = false;
 
@@ -242,13 +250,13 @@
         return;
       }
       var maxWidth = Math.max(320, window.innerWidth - PET_MARGIN * 2);
-      var maxHeight = Math.max(410, window.innerHeight - PET_MARGIN * 2);
+      var maxHeight = Math.max(320, window.innerHeight - PET_MARGIN * 2);
       if (state.panelWidth !== null) {
         state.panelWidth = Math.round(clamp(state.panelWidth, 320, maxWidth));
         ui.panel.style.setProperty("--pet-panel-width", state.panelWidth + "px");
       }
       if (state.panelHeight !== null) {
-        state.panelHeight = Math.round(clamp(state.panelHeight, 410, maxHeight));
+        state.panelHeight = Math.round(clamp(state.panelHeight, 320, maxHeight));
         ui.panel.style.setProperty("--pet-panel-height", state.panelHeight + "px");
       }
     }
@@ -280,7 +288,7 @@
     }
 
     function placePanel() {
-      if (!state.panelOpen || ui.panel.hidden) return;
+      if (!state.panelOpen || ui.panel.hidden || panelResize) return;
       var panelWidth = ui.panel.offsetWidth || Math.min(360, window.innerWidth - 24);
       var panelHeight = ui.panel.offsetHeight || Math.min(540, window.innerHeight - 24);
       var size = petSize();
@@ -477,6 +485,54 @@
       event.preventDefault();
       placePet(state.x + deltaX, state.y + deltaY, true);
     });
+
+    ui.resizeHandle.addEventListener("pointerdown", function (event) {
+      if (window.innerWidth <= 600 || (event.button !== undefined && event.button !== 0)) return;
+      var rect = ui.panel.getBoundingClientRect();
+      panelResize = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        startLeft: rect.left,
+        startTop: rect.top,
+        startWidth: rect.width,
+        startHeight: rect.height,
+        right: rect.right,
+        bottom: rect.bottom
+      };
+      ui.panel.classList.add("pet-panel-resizing");
+      ui.resizeHandle.setPointerCapture(event.pointerId);
+      event.preventDefault();
+    });
+
+    ui.resizeHandle.addEventListener("pointermove", function (event) {
+      if (!panelResize || panelResize.pointerId !== event.pointerId) return;
+      var minWidth = 320;
+      var minHeight = 320;
+      var maxWidth = panelResize.right - PET_MARGIN;
+      var maxHeight = panelResize.bottom - PET_MARGIN;
+      var width = clamp(panelResize.startWidth - (event.clientX - panelResize.startX), minWidth, maxWidth);
+      var height = clamp(panelResize.startHeight - (event.clientY - panelResize.startY), minHeight, maxHeight);
+      var left = panelResize.right - width;
+      var top = panelResize.bottom - height;
+      ui.panel.style.setProperty("--pet-panel-width", Math.round(width) + "px");
+      ui.panel.style.setProperty("--pet-panel-height", Math.round(height) + "px");
+      ui.panel.style.left = Math.round(left) + "px";
+      ui.panel.style.top = Math.round(top) + "px";
+      event.preventDefault();
+    });
+
+    function finishPanelResize(event) {
+      if (!panelResize || panelResize.pointerId !== event.pointerId) return;
+      state.panelWidth = Math.round(ui.panel.offsetWidth);
+      state.panelHeight = Math.round(ui.panel.offsetHeight);
+      panelResize = null;
+      ui.panel.classList.remove("pet-panel-resizing");
+      saveState();
+    }
+
+    ui.resizeHandle.addEventListener("pointerup", finishPanelResize);
+    ui.resizeHandle.addEventListener("pointercancel", finishPanelResize);
 
     ui.close.addEventListener("click", function () { setOpen(false, true); });
     ui.hide.addEventListener("click", function () { setVisible(false); });

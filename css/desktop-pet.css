@@ -134,7 +134,7 @@
   max-width: calc(100vw - 24px);
   max-height: calc(100dvh - 24px);
   overflow: hidden;
-  resize: both;
+  resize: none;
   border: 1px solid rgba(24, 91, 73, 0.17);
   border-radius: var(--pet-radius);
   background: var(--pet-surface);
@@ -144,6 +144,51 @@
   opacity: 0;
   transform: translateY(8px) scale(0.98);
   transform-origin: var(--pet-panel-origin, bottom right);
+}
+
+.desktop-pet-resize-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--pet-radius) 0 10px 0;
+  background: rgba(24, 122, 102, .12);
+  color: var(--pet-accent-deep);
+  cursor: nwse-resize;
+  touch-action: none;
+}
+
+.desktop-pet-resize-handle::before,
+.desktop-pet-resize-handle::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 7px;
+  width: 10px;
+  height: 1px;
+  border-radius: 2px;
+  background: currentColor;
+  transform: rotate(-45deg);
+  transform-origin: left center;
+}
+
+.desktop-pet-resize-handle::after {
+  top: 13px;
+  width: 15px;
+}
+
+.desktop-pet-resize-handle:hover,
+.desktop-pet-resize-handle:focus-visible {
+  background: rgba(24, 122, 102, .22);
+}
+
+.desktop-pet-panel.pet-panel-resizing {
+  transition: none !important;
+  user-select: none;
 }
 
 .desktop-pet-panel.pet-panel-visible {
@@ -436,6 +481,8 @@
     border-radius: 14px;
     resize: none;
   }
+
+  .desktop-pet-resize-handle { display: none; }
 
   .desktop-pet-panel-foot {
     padding-bottom: max(10px, env(safe-area-inset-bottom));
