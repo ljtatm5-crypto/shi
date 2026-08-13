@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>产品体验 · 穗食拍AI来算</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">穗</div>
+      <span>穗食拍 · AI来算</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="about.html">膳食简介</a>
+      <a href="industry.html">行业焦点</a>
+      <a href="guangzhou.html">广州发现</a>
+      <a href="solution.html">解决方案</a>
+      <a href="product.html" class="active">产品体验</a>
+      <a href="assistant.html">智能助手</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" style="padding:80px 24px 60px">
+  <div class="hero-inner">
+    <div class="hero-badge">📷 60秒完成一餐记录</div>
+    <h1>拍一张照片，<span class="grad">读懂这一餐</span></h1>
+    <p class="lead">
+      上传 → 识别 → 修正 → 计算 → 记录，五步闭环，粤菜与本地食材优先识别。
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+
+    <!-- 五步流程按钮 -->
+    <div class="step-flow reveal">
+      <div class="step active" data-step="1">
+        <div class="step-num">1</div>
+        <div class="step-name">上传餐食</div>
+      </div>
+      <div class="step" data-step="2">
+        <div class="step-num">2</div>
+        <div class="step-name">菜品识别</div>
+      </div>
+      <div class="step" data-step="3">
+        <div class="step-num">3</div>
+        <div class="step-name">结果修正</div>
+      </div>
+      <div class="step" data-step="4">
+        <div class="step-num">4</div>
+        <div class="step-name">营养计算</div>
+      </div>
+      <div class="step" data-step="5">
+        <div class="step-num">5</div>
+        <div class="step-name">饮食记录</div>
+      </div>
+    </div>
+
+    <!-- 步骤面板 -->
+    <div class="reveal">
+      <!-- Step 1 -->
+      <div class="step-panel active" data-step="1">
+        <div class="step-visual">
+          <div class="upload-box">
+            <div class="upload-emoji">📷</div>
+            <p><b>点击拍照或上传餐食照片</b></p>
+            <p style="font-size:13px;color:var(--gray-500);margin-top:6px">支持 JPG / PNG / HEIC · 最大10MB</p>
+          </div>
+        </div>
+        <div class="step-body">
+          <h3>第一步：上传餐食</h3>
+          <p>用手机拍摄或从相册选择当前这一餐的照片。系统建议：</p>
+          <ul>
+            <li>光线充足，从上方45°拍摄</li>
+            <li>尽量把所有菜品完整入镜</li>
+            <li>可以拍多张分菜识别，再合并入本餐</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-panel" data-step="2">
+        <div class="step-visual">
+          <div style="width:100%;text-align:left">
+            <div style="background:#fff;padding:16px;border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow-sm)">
+              <b style="color:var(--green)">✓ 广式腊味煲仔饭</b>
+              <span style="float:right;color:var(--gray-500);font-size:13px">置信度 94%</span>
+            </div>
+            <div style="background:#fff;padding:16px;border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow-sm)">
+              <b style="color:var(--green)">✓ 蒜蓉炒菜心</b>
+              <span style="float:right;color:var(--gray-500);font-size:13px">置信度 91%</span>
+            </div>
+            <div style="background:#fff;padding:16px;border-radius:12px;box-shadow:var(--shadow-sm)">
+              <b style="color:var(--warning)">? 例汤（可能是老火汤）</b>
+              <span style="float:right;color:var(--gray-500);font-size:13px">置信度 68%</span>
+            </div>
+          </div>
+        </div>
+        <div class="step-body">
+          <h3>第二步：菜品识别</h3>
+          <p>基于广州本地餐食数据库，AI识别菜品、食材与份量，并给出置信度。</p>
+          <ul>
+            <li>粤菜、早茶、煲仔饭、老火汤等本土菜品优先识别</li>
+            <li>置信度低于70%的菜品会明确标红，提示用户确认</li>
+            <li>可点击任一菜品查看识别依据</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-panel" data-step="3">
+        <div class="step-visual">
+          <div style="width:100%">
+            <div style="background:#fff;padding:20px;border-radius:12px;box-shadow:var(--shadow-sm)">
+              <p style="margin-bottom:12px"><b>老火汤类型</b>：</p>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+                <span style="padding:6px 12px;border-radius:999px;background:var(--green);color:#fff;font-size:13px">✓ 冬瓜薏米汤</span>
+                <span style="padding:6px 12px;border-radius:999px;background:var(--gray-100);font-size:13px">霸王花猪骨汤</span>
+                <span style="padding:6px 12px;border-radius:999px;background:var(--gray-100);font-size:13px">莲藕排骨汤</span>
+              </div>
+              <p><b>份量调整</b>：</p>
+              <p style="margin-top:8px">煲仔饭 <b>1.2 碗</b> · 菜心 <b>150g</b> · 汤 <b>200ml</b></p>
+            </div>
+          </div>
+        </div>
+        <div class="step-body">
+          <h3>第三步：结果修正</h3>
+          <p>识别不是黑盒——用户可以调整菜品、食材和份量，让记录准确到你实际吃的那一口。</p>
+          <ul>
+            <li>低置信度菜品提供 top-3 候选供用户选择</li>
+            <li>份量支持滑动条微调（0.5~2倍）</li>
+            <li>可标记"过敏 / 忌口"，下次不再推荐</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-panel" data-step="4">
+        <div class="step-visual">
+          <div style="width:100%">
+            <table class="nutrition-table">
+              <thead>
+                <tr>
+                  <th>营养</th>
+                  <th>本餐</th>
+                  <th>占日推荐</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>热量</td>
+                  <td><b>612 kcal</b></td>
+                  <td><span class="nutrition-bar" style="width:70px"></span> 34%</td>
+                </tr>
+                <tr>
+                  <td>蛋白质</td>
+                  <td><b>28 g</b></td>
+                  <td><span class="nutrition-bar" style="width:60px"></span> 47%</td>
+                </tr>
+                <tr>
+                  <td>脂肪</td>
+                  <td><b>22 g</b></td>
+                  <td><span class="nutrition-bar" style="width:80px;background:linear-gradient(135deg,#F57C00,#D32F2F)"></span> 38%</td>
+                </tr>
+                <tr>
+                  <td>碳水</td>
+                  <td><b>76 g</b></td>
+                  <td><span class="nutrition-bar" style="width:65px"></span> 30%</td>
+                </tr>
+                <tr>
+                  <td>钠</td>
+                  <td><b>980 mg</b></td>
+                  <td><span class="nutrition-bar" style="width:90px;background:linear-gradient(135deg,#F57C00,#D32F2F)"></span> 49%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="step-body">
+          <h3>第四步：营养计算</h3>
+          <p>匹配本地食材数据库与《中国食物成分表》第六版，计算本餐五大关键营养指标。</p>
+          <ul>
+            <li>热量 / 蛋白 / 脂肪 / 碳水 / 钠 · 一目了然</li>
+            <li>超标或不足指标会用暖色警示</li>
+            <li>粤菜隐性油盐糖也在计算范围</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="step-panel" data-step="5">
+        <div class="step-visual">
+          <div style="width:100%">
+            <div style="background:#fff;padding:20px;border-radius:12px;box-shadow:var(--shadow-sm)">
+              <div style="display:flex;justify-content:space-between;margin-bottom:14px">
+                <b>今日累计</b>
+                <span style="color:var(--green);font-weight:700">1650 / 1800 kcal</span>
+              </div>
+              <div style="height:10px;background:var(--gray-100);border-radius:5px;overflow:hidden">
+                <div style="width:82%;height:100%;background:var(--grad-primary);border-radius:5px"></div>
+              </div>
+              <div style="margin-top:20px;padding:14px;background:var(--green-soft);border-radius:10px">
+                <b style="color:var(--green)">✓ 本餐已保存</b>
+                <p style="font-size:13px;color:var(--gray-700);margin-top:4px">
+                  今日目标达成 82%，剩余 150 kcal 可用于晚餐后水果
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-body">
+          <h3>第五步：饮食记录</h3>
+          <p>保存本餐，自动同步至今日膳食档案。你可以在时间轴查看每一餐、每一天的完整轨迹。</p>
+          <ul>
+            <li>本餐 → 今日 → 本周 → 本月，四层聚合</li>
+            <li>支持导出健康档案（PDF / 分享给营养师）</li>
+            <li>关联智能硬件（手环/体脂秤）可自动打卡</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 与AI助手串联 -->
+    <div class="text-center mt-6 reveal">
+      <p style="color:var(--gray-500);margin-bottom:20px">
+        记录完成后，让AI助手给你解读本餐、评价今日、推荐下一餐
+      </p>
+      <a href="assistant.html" class="btn btn-primary">🤖 进入智能助手 →</a>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div>"穗"食拍，AI来算 · 广州商学院 · 挑战杯参赛作品 · 2026</div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
