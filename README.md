@@ -25,7 +25,7 @@
   - 全站 IntersectionObserver reveal-on-scroll
   - 解决方案页三类用户画像可切换 tab
   - 产品体验页五步流程可切换 tab
-  - 智能助手页快捷问答 + 输入框对话
+  - 智能助手页 DeepSeek 项目问答 + 本地历史记录
   - "问题→箭头→建议"箭头脉动动画
 
 ## 数据来源
@@ -36,12 +36,40 @@
 
 ## 本地预览
 
-直接双击 `index.html` 用浏览器打开即可。所有静态资源都在同一目录下，无需搭建服务器。
+静态页面可直接打开；AI 接口需要 Serverless 运行环境。本地可用静态服务器预览：
+
+```powershell
+python -m http.server 5500
+```
+
+## 小穗 AI 架构
+
+- `POST /api/research-chat`：项目知识召回 + DeepSeek 生成回答。
+- `POST /api/recalculate-food`：用户确认菜品和重量后，由 DeepSeek 输出结构化营养估算。
+- `POST /api/analyze-food`：视觉模型预留接口。DeepSeek V4 官方 API 当前为文本输入，不能直接分析餐食照片。
+- `GET /api/health`：服务健康检查。
+- `data/research_chunks.json`：第一版静态项目知识库。
+
+默认使用本地关键词召回。配置 Embedding 和 Reranker 环境变量后，会自动升级为向量 Top10 召回与 Top4 重排。
+
+### Vercel 部署
+
+1. 在 Vercel 导入本 GitHub 仓库。
+2. 添加环境变量 `DEEPSEEK_API_KEY`（Secret）与 `DEEPSEEK_MODEL=deepseek-v4-flash`。
+3. 部署后，将七个 HTML 的 `<head>` 中加入：
+
+```html
+<meta name="suishipai-api-base" content="https://你的项目.vercel.app">
+```
+
+4. 访问 `/api/health`，确认 `deepseekConfigured` 为 `true`。
+
+不要把真实密钥写入 `.env.example`、HTML、前端 JavaScript 或 Git 提交。已经在聊天或其他公开位置出现的密钥应立即轮换。
 
 ## 技术栈
 
 - 原生 HTML5 + CSS3 + Vanilla JavaScript
-- 零依赖，无框架，无构建，无第三方 CDN
+- 前端零依赖；后端为 Vercel Node.js Serverless Functions
 - 响应式设计，兼容桌面 & 移动端
 
 ## 项目背景

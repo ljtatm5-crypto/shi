@@ -56,7 +56,7 @@
       "aria-describedby": "desktop-pet-instructions"
     });
     var petImage = makeElement("img", "", {
-      src: "images/xiaosui-assistant.png",
+      src: "images/xiaosui-assistant.webp",
       alt: "",
       width: "84",
       height: "104",
@@ -80,8 +80,28 @@
       title: "拖动调整窗口大小"
     });
     var head = makeElement("header", "desktop-pet-panel-head");
+    var halo = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    halo.setAttribute("class", "pet-halo");
+    halo.setAttribute("viewBox", "0 0 100 100");
+    halo.setAttribute("aria-hidden", "true");
+    halo.innerHTML =
+      '<defs>' +
+        '<linearGradient id="petHaloGrad" x1="0" y1="0" x2="1" y2="1">' +
+          '<stop offset="0%" stop-color="#dff8e9"/>' +
+          '<stop offset="55%" stop-color="#79d8af"/>' +
+          '<stop offset="100%" stop-color="#37a8ba"/>' +
+        '</linearGradient>' +
+      '</defs>' +
+      '<circle cx="50" cy="50" r="46" fill="none" stroke="#a9e8ce" stroke-width="1" stroke-dasharray="3 6"/>' +
+      '<circle cx="50" cy="50" r="38" fill="none" stroke="url(#petHaloGrad)" stroke-width="2" stroke-dasharray="1 4" opacity=".7"/>' +
+      '<circle cx="50" cy="50" r="30" fill="none" stroke="#53d7a2" stroke-width="1" stroke-dasharray="2 8" opacity=".55"/>';
+    head.appendChild(halo);
+    ["p1", "p2", "p3"].forEach(function (cls) {
+      var dot = makeElement("span", "pet-particle " + cls, { "aria-hidden": "true" });
+      head.appendChild(dot);
+    });
     var avatar = makeElement("img", "", {
-      src: "images/xiaosui-assistant.png",
+      src: "images/xiaosui-assistant.old.png",
       alt: "",
       width: "40",
       height: "40",
@@ -326,7 +346,7 @@
       var row = makeElement("div", "desktop-pet-message " + item.role);
       if (item.role !== "user") {
         row.appendChild(makeElement("img", "desktop-pet-message-avatar", {
-          src: "images/xiaosui-assistant.png",
+          src: "images/xiaosui-assistant.old.png",
           alt: "小穗"
         }));
       }
@@ -387,6 +407,12 @@
       }
     }
 
+    function apiHistory() {
+      return chat.slice(0, -1).slice(-6).map(function (item) {
+        return { role: item.role === "bot" ? "assistant" : "user", content: item.text.slice(0, 600) };
+      });
+    }
+
     function submitQuestion(question) {
       var value = String(question || "").trim();
       if (!value || replying) return;
@@ -400,8 +426,11 @@
       ui.send.disabled = true;
       ui.typing.textContent = "小穗正在整理建议...";
       saveChat();
-      window.setTimeout(function () {
-        var answer = { role: "bot", text: createAnswer(value), time: Date.now() };
+      var request = window.SuishipaiAPI
+        ? window.SuishipaiAPI.chat(value, apiHistory())
+        : Promise.reject(new Error("AI接口尚未加载"));
+      request.then(function (result) {
+        var answer = { role: "bot", text: result.reply, time: Date.now() };
         chat.push(answer);
         chat = chat.slice(-MAX_MESSAGES);
         appendRenderedMessage(answer);
@@ -411,7 +440,18 @@
         requestAnimationFrame(placePanel);
         replying = false;
         ui.send.disabled = false;
-      }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 320);
+      }).catch(function () {
+        var answer = { role: "bot", text: "小穗暂时无法连接AI服务，请稍后再试。", time: Date.now() };
+        chat.push(answer);
+        chat = chat.slice(-MAX_MESSAGES);
+        appendRenderedMessage(answer);
+        saveChat();
+        ui.typing.textContent = "";
+        ui.messages.scrollTop = ui.messages.scrollHeight;
+        requestAnimationFrame(placePanel);
+        replying = false;
+        ui.send.disabled = false;
+      });
     }
 
     var size = petSize();

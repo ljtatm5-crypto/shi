@@ -130,18 +130,13 @@
       <!-- Step 3 -->
       <div class="step-panel" data-step="3">
         <div class="step-visual">
-          <div style="width:100%">
-            <div style="background:#fff;padding:20px;border-radius:12px;box-shadow:var(--shadow-sm)">
-              <p style="margin-bottom:12px"><b>老火汤类型</b>：</p>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
-                <span style="padding:6px 12px;border-radius:999px;background:var(--green);color:#fff;font-size:13px">✓ 冬瓜薏米汤</span>
-                <span style="padding:6px 12px;border-radius:999px;background:var(--gray-100);font-size:13px">霸王花猪骨汤</span>
-                <span style="padding:6px 12px;border-radius:999px;background:var(--gray-100);font-size:13px">莲藕排骨汤</span>
-              </div>
-              <p><b>份量调整</b>：</p>
-              <p style="margin-top:8px">煲仔饭 <b>1.2 碗</b> · 菜心 <b>150g</b> · 汤 <b>200ml</b></p>
-            </div>
-          </div>
+          <form class="meal-correction" id="meal-correction">
+            <label><span>确认菜品</span><input name="dish" value="广式腊味煲仔饭" maxlength="60" required></label>
+            <label><span>预计重量</span><div class="weight-input"><input name="weight" type="number" value="430" min="30" max="3000" required><b>g</b></div></label>
+            <label><span>主要食材</span><textarea name="ingredients" rows="3">米饭280g、腊肠60g、腊肉45g、青菜45g</textarea></label>
+            <button class="btn btn-primary meal-recalculate" type="submit">确认并重新估算</button>
+            <p class="meal-api-status" aria-live="polite">由用户确认菜品和份量后，DeepSeek 生成结构化营养估算。</p>
+          </form>
         </div>
         <div class="step-body">
           <h3>第三步：结果修正</h3>
@@ -157,17 +152,18 @@
       <!-- Step 4 -->
       <div class="step-panel" data-step="4">
         <div class="step-visual">
-          <div style="width:100%">
+          <div class="nutrition-result" style="width:100%">
             <div style="position:relative;margin-bottom:20px">
               <div class="nutrition-ring" style="--ring-value:34%"></div>
-              <div class="ring-center" style="inset:50% auto auto 50%;transform:translate(-50%,-50%)"><strong>612</strong>kcal · 34%</div>
+              <div class="ring-center" style="inset:50% auto auto 50%;transform:translate(-50%,-50%)"><strong data-nutrition="calories_kcal">612</strong>kcal · 估算</div>
             </div>
             <div class="ring-metrics">
-              <div class="ring-metric"><strong>28 g</strong><span>蛋白质 · 47%</span></div>
-              <div class="ring-metric"><strong>22 g</strong><span>脂肪 · 38%</span></div>
-              <div class="ring-metric"><strong>76 g</strong><span>碳水 · 30%</span></div>
-              <div class="ring-metric"><strong>980 mg</strong><span>钠 · 49%</span></div>
+              <div class="ring-metric"><strong><span data-nutrition="protein_g">28</span> g</strong><span>蛋白质</span></div>
+              <div class="ring-metric"><strong><span data-nutrition="fat_g">22</span> g</strong><span>脂肪</span></div>
+              <div class="ring-metric"><strong><span data-nutrition="carbohydrate_g">76</span> g</strong><span>碳水</span></div>
+              <div class="ring-metric"><strong><span data-nutrition="sodium_mg">980</span> mg</strong><span>钠</span></div>
             </div>
+            <p class="nutrition-ai-summary">当前为原型示例。请在第三步确认菜品与重量后生成新的估算。</p>
           </div>
         </div>
         <div class="step-body">
@@ -237,6 +233,7 @@
   </div>
 </footer>
 
+<script src="js/api.js"></script>
 <script src="js/main.js"></script>
 <script src="js/desktop-pet.js"></script>
 </body>

@@ -18,8 +18,8 @@
   top: 0;
   left: 0;
   z-index: 980;
-  width: 94px;
-  height: 112px;
+  width: 108px;
+  height: 130px;
   transform: translate3d(var(--pet-x, 0), var(--pet-y, 0), 0);
   contain: layout style;
   user-select: none;
@@ -36,8 +36,8 @@
   position: relative;
   display: grid;
   place-items: end center;
-  width: 94px;
-  height: 112px;
+  width: 108px;
+  height: 130px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -61,15 +61,16 @@
 
 .desktop-pet-launcher img {
   position: relative;
-  width: 84px;
-  height: 104px;
-  object-fit: cover;
-  object-position: 50% 38%;
-  border-radius: 42px 42px 28px 28px;
+  width: 96px;
+  height: 118px;
+  object-fit: contain;
+  object-position: 50% 50%;
   border: 0;
-  box-shadow: 0 7px 24px rgba(24, 82, 64, 0.17);
+  filter: drop-shadow(0 6px 14px rgba(24, 82, 64, 0.28));
   pointer-events: none;
+  background: transparent;
 }
+
 
 .desktop-pet-launcher .desktop-pet-hint {
   position: absolute;
@@ -101,7 +102,8 @@
 }
 
 .desktop-pet-root.pet-dragging .desktop-pet-launcher img {
-  transform: scale(0.97);
+  animation-play-state: paused;
+  scale: 0.97;
 }
 
 .desktop-pet-root.pet-panel-open .desktop-pet-launcher img {
@@ -120,7 +122,7 @@
 }
 
 .desktop-pet-launcher:focus-visible img {
-  box-shadow: 0 7px 24px rgba(24, 82, 64, 0.2), 0 0 0 3px rgba(255,255,255,.92);
+  filter: drop-shadow(0 6px 14px rgba(24, 82, 64, 0.42)) drop-shadow(0 0 0 rgba(0,0,0,0));
 }
 
 .desktop-pet-panel {
@@ -135,11 +137,11 @@
   max-height: calc(100dvh - 24px);
   overflow: hidden;
   resize: none;
-  border: 1px solid #294b40;
+  border: 1px solid #7DD3C0;
   border-radius: var(--pet-radius);
-  background: #16251f;
-  color: #eef5f1;
-  box-shadow: 0 18px 50px rgba(3, 12, 9, .35), inset 0 1px 0 rgba(255,255,255,.05);
+  background: #eaf9f4;
+  color: #14453a;
+  box-shadow: var(--pet-shadow);
   font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
   opacity: 0;
   transform: translateY(8px) scale(0.98);
@@ -156,8 +158,8 @@
   padding: 0;
   border: 0;
   border-radius: var(--pet-radius) 0 10px 0;
-  background: #1f4a3d;
-  color: #9addcb;
+  background: #7DD3C0;
+  color: #ffffff;
   cursor: nwse-resize;
   touch-action: none;
 }
@@ -183,7 +185,7 @@
 
 .desktop-pet-resize-handle:hover,
 .desktop-pet-resize-handle:focus-visible {
-  background: #27604f;
+  background: #5cbfa9;
 }
 
 .desktop-pet-panel.pet-panel-resizing {
@@ -202,18 +204,21 @@
   gap: 10px;
   min-height: 62px;
   padding: 10px 12px;
-  border-bottom: 1px solid #315147;
-  background: linear-gradient(135deg, #173228, #1c4034);
+  border-bottom: 1px solid #7DD3C0;
+  background: linear-gradient(135deg, #b8ecdf 0%, #7DD3C0 100%);
+  color: #0f3a30;
 }
 
 .desktop-pet-panel-head img {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   flex: 0 0 auto;
   object-fit: cover;
-  object-position: 50% 35%;
-  border: 1px solid rgba(24, 122, 102, 0.2);
+  object-position: 50% 50%;
+  border: 2px solid #fff;
   border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(24, 82, 64, 0.16);
 }
 
 .desktop-pet-panel-title {
@@ -233,7 +238,7 @@
 
 .desktop-pet-panel-title small {
   margin-top: 2px;
-  color: #afc2bb;
+  color: #2f6a5b;
   font-size: 11px;
 }
 
@@ -244,10 +249,10 @@
   min-width: 36px;
   height: 36px;
   padding: 0 9px;
-  border: 1px solid #35564b;
+  border: 1px solid #7DD3C0;
   border-radius: 10px;
-  background: #102019;
-  color: #eef5f1;
+  background: rgba(255, 255, 255, 0.85);
+  color: #0f3a30;
   font: inherit;
   font-size: 12px;
   font-weight: 700;
@@ -258,9 +263,9 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 14px;
-  background: #182922;
+  background: #eaf9f4;
   scrollbar-width: thin;
-  scrollbar-color: #bfd5cd transparent;
+  scrollbar-color: #7DD3C0 transparent;
 }
 
 .desktop-pet-message {
@@ -275,11 +280,11 @@
   height: 30px;
   flex: 0 0 auto;
   overflow: hidden;
-  border: 1px solid var(--pet-line);
+  border: 1px solid #7DD3C0;
   border-radius: 50%;
   background: #fff;
   object-fit: cover;
-  object-position: 50% 15%;
+  object-position: 50% 50%;
 }
 
 .desktop-pet-message:last-child {
@@ -293,27 +298,27 @@
 .desktop-pet-bubble {
   max-width: 88%;
   padding: 9px 11px;
-  border: 1px solid #35564b;
+  border: 1px solid #b8ecdf;
   border-radius: 13px 13px 13px 4px;
-  background: #13231d;
-  box-shadow: 0 2px 8px rgba(0,0,0,.12);
-  color: #eef5f1;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(24, 82, 64, 0.08);
+  color: #14453a;
   font-size: 13px;
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
 
 .desktop-pet-message.user .desktop-pet-bubble {
-  border-color: var(--pet-accent);
+  border-color: #7DD3C0;
   border-radius: 13px 13px 4px 13px;
-  background: var(--pet-accent);
-  color: #fff;
+  background: #7DD3C0;
+  color: #0f3a30;
 }
 
 .desktop-pet-typing {
   padding: 5px 14px 8px;
-  background: #182922;
-  color: #afc2bb;
+  background: #eaf9f4;
+  color: #2f6a5b;
   font-size: 11px;
 }
 
@@ -322,8 +327,8 @@
   gap: 6px;
   padding: 9px 12px;
   overflow-x: auto;
-  border-top: 1px solid #315147;
-  background: #16251f;
+  border-top: 1px solid #b8ecdf;
+  background: #dff5ee;
   scrollbar-width: none;
 }
 
@@ -335,10 +340,10 @@
   min-height: 34px;
   flex: 0 0 auto;
   padding: 6px 10px;
-  border: 1px solid #35564b;
+  border: 1px solid #7DD3C0;
   border-radius: 999px;
-  background: #13231d;
-  color: #eef5f1;
+  background: #ffffff;
+  color: #0f3a30;
   font: inherit;
   font-size: 12px;
   font-weight: 650;
@@ -350,8 +355,8 @@
   grid-template-columns: 1fr auto;
   gap: 8px;
   padding: 10px 12px 8px;
-  border-top: 1px solid #315147;
-  background: #16251f;
+  border-top: 1px solid #b8ecdf;
+  background: #dff5ee;
 }
 
 .desktop-pet-form textarea {
@@ -360,17 +365,17 @@
   max-height: 88px;
   resize: none;
   padding: 10px 11px;
-  border: 1px solid #42665a;
+  border: 1px solid #7DD3C0;
   border-radius: 12px;
-  background: #102019;
-  color: #eef5f1;
+  background: #ffffff;
+  color: #14453a;
   font: inherit;
   font-size: 13px;
   line-height: 1.45;
 }
 
 .desktop-pet-form textarea::placeholder {
-  color: #9db1aa;
+  color: #5c9083;
 }
 
 .desktop-pet-send {
@@ -379,8 +384,8 @@
   padding: 0 13px;
   border: 0;
   border-radius: 12px;
-  background: var(--pet-accent);
-  color: #fff;
+  background: #7DD3C0;
+  color: #0f3a30;
   font: inherit;
   font-size: 13px;
   font-weight: 750;
@@ -398,8 +403,8 @@
   justify-content: space-between;
   gap: 8px;
   padding: 0 12px 10px;
-  background: #16251f;
-  color: #c0d0ca;
+  background: #dff5ee;
+  color: #2f6a5b;
   font-size: 10px;
   line-height: 1.45;
 }
@@ -409,7 +414,7 @@
   padding: 4px 0;
   border: 0;
   background: transparent;
-  color: var(--pet-danger);
+  color: #c0463b;
   font: inherit;
   font-size: 11px;
   font-weight: 700;
@@ -441,12 +446,13 @@
 
   .desktop-pet-icon-button:hover,
   .desktop-pet-quick button:hover {
-    border-color: #4c8f7d;
-    background: #203d34;
+    border-color: #5cbfa9;
+    background: #dff5ee;
   }
 
   .desktop-pet-send:hover {
-    background: var(--pet-accent-deep);
+    background: #5cbfa9;
+    color: #ffffff;
   }
 }
 
@@ -489,40 +495,73 @@
   }
 }
 
+/* 夜间模式：保留浅色玻璃感（不再强行反转成深墨绿实心底） */
 @media (prefers-color-scheme: dark) {
   :root {
-    --pet-surface: rgba(22, 33, 29, 0.98);
-    --pet-surface-muted: #1c2a25;
-    --pet-line: #354b43;
-    --pet-text: #eef5f1;
-    --pet-text-muted: #afc2bb;
-    --pet-accent-soft: #203d34;
-    --pet-shadow: 0 18px 50px rgba(3, 12, 9, 0.42);
+    --pet-line: rgba(24, 122, 102, 0.22);
+    --pet-text: #243832;
+    --pet-text-muted: #60736d;
   }
+}
 
-  .desktop-pet-panel-head,
-  .desktop-pet-icon-button,
-  .desktop-pet-bubble,
-  .desktop-pet-quick,
-  .desktop-pet-quick button,
-  .desktop-pet-form,
-  .desktop-pet-form textarea,
-  .desktop-pet-panel-foot {
-    background-color: #16211d;
-    color: var(--pet-text);
-  }
+/* 助手 panel 装饰层：SVG 科技环 + CSS 粒子/发光（人物图不动） */
+.desktop-pet-panel-head {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.desktop-pet-panel-head::before {
+  content: "";
+  position: absolute;
+  left: -18px; top: 50%;
+  width: 96px; height: 96px;
+  transform: translateY(-50%);
+  background:
+    radial-gradient(circle, rgba(102,187,106,.22) 0%, rgba(102,187,106,0) 62%);
+  filter: blur(6px);
+  pointer-events: none;
+  z-index: 0;
+}
+.desktop-pet-panel-head > * { position: relative; z-index: 1; }
 
-  .desktop-pet-panel-head {
-    background-image: linear-gradient(135deg, #192720, #203d34);
-  }
+.desktop-pet-panel-head .pet-halo {
+  position: absolute;
+  left: -6px; top: 50%;
+  width: 76px; height: 76px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  animation: pet-halo-spin 22s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(102,187,106,.35));
+}
+@keyframes pet-halo-spin { to { transform: translateY(-50%) rotate(360deg); } }
 
-  .desktop-pet-form textarea {
-    border-color: #526960;
-  }
+.desktop-pet-panel-head .pet-particle {
+  position: absolute;
+  width: 6px; height: 6px; border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle, #66BB6A 0%, rgba(102,187,106,0) 70%);
+  filter: blur(0.5px);
+  animation: pet-particle-float 4.4s ease-in-out infinite;
+}
+.desktop-pet-panel-head .pet-particle.p1 { top: 10px; left: 24px; animation-delay: 0s; }
+.desktop-pet-panel-head .pet-particle.p2 { top: 40px; left: 6px; width: 5px; height: 5px;
+  background: radial-gradient(circle, #42A5F5 0%, transparent 70%); animation-delay: 1.4s; }
+.desktop-pet-panel-head .pet-particle.p3 { top: 8px; left: 62px; width: 4px; height: 4px;
+  background: radial-gradient(circle, #F5A524 0%, transparent 70%); animation-delay: 2.6s; }
+@keyframes pet-particle-float {
+  0%,100% { transform: translate(0,0) scale(1); opacity: .75; }
+  50%     { transform: translate(6px,-8px) scale(1.4); opacity: 1; }
+}
 
-  .desktop-pet-form textarea::placeholder {
-    color: #a7bab3;
-  }
+.desktop-pet-panel-head img {
+  filter: drop-shadow(0 3px 8px rgba(24,82,64,.14));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-pet-panel-head .pet-halo,
+  .desktop-pet-panel-head .pet-particle { animation: none !important; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -539,12 +578,57 @@
   }
 
   .desktop-pet-root:not(.pet-dragging) .desktop-pet-launcher img {
-    animation: desktop-pet-breathe 3.4s ease-in-out infinite;
+    transform-origin: 50% 100%;
+    animation:
+      desktop-pet-breathe 3.4s ease-in-out infinite,
+      desktop-pet-sway 5.2s ease-in-out infinite,
+      desktop-pet-wiggle 9s ease-in-out infinite;
   }
 
   @keyframes desktop-pet-breathe {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-3px); }
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 0 -4px; }
+  }
+  @keyframes desktop-pet-sway {
+    0%, 100% { rotate: -2deg; }
+    50%      { rotate:  2deg; }
+  }
+  @keyframes desktop-pet-wiggle {
+    0%, 84%, 100% { scale: 1; }
+    88%           { scale: 1.05 0.95; }
+    92%           { scale: 0.96 1.04; }
+    96%           { scale: 1.02 0.98; }
+  }
+
+  .desktop-pet-root:not(.pet-dragging) .desktop-pet-launcher:hover img {
+    animation-duration: 1.6s, 2.4s, 9s;
+  }
+
+  .desktop-pet-root.pet-panel-open .desktop-pet-launcher img {
+    transform-origin: 50% 90%;
+    animation: desktop-pet-hello 1400ms ease-in-out 1;
+  }
+
+  @keyframes desktop-pet-hello {
+    0%   { rotate: 0deg;   translate: 0 0;   scale: 1; }
+    10%  { rotate: -12deg; translate: -1px -4px; scale: 1.04; }
+    25%  { rotate:  14deg; translate:  1px -6px; scale: 1.05; }
+    40%  { rotate: -12deg; translate: -1px -5px; scale: 1.04; }
+    55%  { rotate:  12deg; translate:  1px -6px; scale: 1.04; }
+    70%  { rotate: -8deg;  translate: -1px -3px; scale: 1.03; }
+    85%  { rotate:  6deg;  translate:  1px -2px; scale: 1.02; }
+    100% { rotate: 0deg;   translate: 0 0;   scale: 1; }
+  }
+
+  .desktop-pet-panel.pet-panel-visible .desktop-pet-panel-head img {
+    animation: desktop-pet-head-pop 640ms cubic-bezier(0.34, 1.56, 0.64, 1) 1;
+    transform-origin: 50% 100%;
+  }
+
+  @keyframes desktop-pet-head-pop {
+    0%   { scale: 0.6; rotate: -14deg; opacity: 0; }
+    60%  { scale: 1.08; rotate: 6deg;  opacity: 1; }
+    100% { scale: 1;   rotate: 0deg;  opacity: 1; }
   }
 }
 

@@ -740,3 +740,14 @@
   .content-page .step-body p,
   .content-page .step-body li { color: var(--shell-copy); }
 }
+
+.meal-correction { width: 100%; display: grid; gap: 13px; padding: 22px; text-align: left; background: rgba(255,255,255,.9); border: 1px solid rgba(31,139,112,.16); border-radius: 18px; box-shadow: var(--shadow-sm); }
+.meal-correction label { display: grid; gap: 6px; }
+.meal-correction label > span { color: var(--gray-700); font-size: 13px; font-weight: 700; }
+.meal-correction input, .meal-correction textarea { width: 100%; padding: 11px 13px; color: var(--gray-900); font: inherit; background: #fff; border: 1px solid #dce8e3; border-radius: 10px; outline: none; }
+.meal-correction input:focus, .meal-correction textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(28,166,127,.12); }
+.weight-input { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; }
+.meal-recalculate { justify-content: center; border: 0; cursor: pointer; }
+.meal-recalculate:disabled { cursor: wait; opacity: .65; }
+.meal-api-status, .nutrition-ai-summary { margin: 0; color: var(--gray-500); font-size: 12px; line-height: 1.65; }
+.nutrition-ai-summary { margin-top: 16px; padding: 12px 14px; color: var(--green-dark); background: rgba(231,247,239,.72); border-radius: 10px; }

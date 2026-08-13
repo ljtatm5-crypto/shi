@@ -31,14 +31,6 @@
 </nav>
 
 <main class="assistant-workspace">
-  <header class="assistant-intro">
-    <div>
-      <span class="assistant-eyebrow">AI 膳食问答</span>
-      <h1>有什么膳食问题，问小穗</h1>
-    </div>
-    <p>结合本餐分析、今日记录与健康目标，为你解释营养结果并推荐更易执行的下一餐。</p>
-  </header>
-
   <section class="assistant-console" aria-label="小穗AI问答">
     <aside class="assistant-history" aria-label="问答记录">
       <div class="history-head">
@@ -57,22 +49,29 @@
 
     <div class="chat-shell chat-shell-large">
       <div class="chat-header">
-        <div class="chat-avatar mascot-avatar"><img src="images/xiaosui-assistant.png" alt="小穗"></div>
+        <div class="chat-avatar mascot-avatar">
+          <img src="images/xiaosui-assistant.old.png" alt="小穗">
+        </div>
         <div>
           <div class="chat-title">和小穗聊聊</div>
           <div class="chat-status">随时可以提问</div>
         </div>
+        <div class="chat-header-center">AI 膳食问答</div>
       </div>
 
       <div class="chat-body">
         <div class="msg">
-          <div class="msg-avatar mascot-avatar"><img src="images/xiaosui-assistant.png" alt="小穗"></div>
+          <div class="msg-avatar mascot-avatar">
+            <img src="images/xiaosui-assistant.old.png" alt="小穗">
+          </div>
           <div class="msg-bubble">
             你好，我是小穗。你可以问我这顿饭的营养、今天吃得是否均衡，或者下一餐该怎么搭配。
           </div>
         </div>
         <div class="msg">
-          <div class="msg-avatar mascot-avatar"><img src="images/xiaosui-assistant.png" alt="小穗"></div>
+          <div class="msg-avatar mascot-avatar">
+            <img src="images/xiaosui-assistant.old.png" alt="小穗">
+          </div>
           <div class="msg-bubble">
             例如：<b>“今天午餐吃了煲仔饭，晚餐怎么安排？”</b>
           </div>
@@ -107,6 +106,7 @@
   </div>
 </footer>
 
+<script src="js/api.js"></script>
 <script src="js/main.js"></script>
 <script src="js/desktop-pet.js"></script>
 </body>

@@ -90,6 +90,42 @@ function initMealUpload() {
   });
 }
 
+function initMealRecalculation() {
+  const form = document.querySelector("#meal-correction");
+  if (!form || !window.SuishipaiAPI) return;
+  const button = form.querySelector(".meal-recalculate");
+  const status = form.querySelector(".meal-api-status");
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const dish = String(data.get("dish") || "").trim();
+    const estimatedWeight = Number(data.get("weight"));
+    const ingredients = String(data.get("ingredients") || "").split(/[、,，]/).map((name) => name.trim()).filter(Boolean);
+    if (!dish || !Number.isFinite(estimatedWeight)) return;
+    button.disabled = true;
+    button.textContent = "正在估算";
+    status.textContent = "小穗正在根据确认后的份量重新估算……";
+    try {
+      const response = await window.SuishipaiAPI.recalculate({ dish, estimated_weight_g: estimatedWeight, ingredients });
+      const result = response.result || {};
+      const nutrition = result.nutrition || {};
+      Object.keys(nutrition).forEach((key) => {
+        const target = document.querySelector(`[data-nutrition="${key}"]`);
+        if (target) target.textContent = Math.round(Number(nutrition[key]) || 0);
+      });
+      const summary = document.querySelector(".nutrition-ai-summary");
+      if (summary) summary.textContent = `${result.summary || "已完成营养估算。"} ${result.suggestion || ""} 结果为AI估算值。`;
+      status.textContent = "估算完成，已更新第四步营养卡片。";
+      document.querySelector('.step[data-step="4"]')?.click();
+    } catch (error) {
+      status.textContent = error.message || "营养估算服务暂时不可用，请稍后再试。";
+    } finally {
+      button.disabled = false;
+      button.textContent = "确认并重新估算";
+    }
+  });
+}
+
 function initFloatingMascot() {
   if (document.body.classList.contains("home-page") || document.body.classList.contains("assistant-page")) return;
   const link = document.createElement("a");
@@ -142,7 +178,7 @@ function appendMsg(role, avatar, html) {
   const msg = document.createElement("div");
   msg.className = "msg " + role;
   const avatarMarkup = role === "bot"
-    ? '<div class="msg-avatar mascot-avatar"><img src="images/xiaosui-assistant.png" alt="小穗"></div>'
+    ? '<div class="msg-avatar mascot-avatar"><img src="images/xiaosui-assistant.old.png" alt="小穗"></div>'
     : `<div class="msg-avatar">${avatar}</div>`;
   msg.innerHTML = `
     ${avatarMarkup}
@@ -150,6 +186,27 @@ function appendMsg(role, avatar, html) {
   `;
   body.appendChild(msg);
   body.scrollTop = body.scrollHeight;
+}
+
+function chatHistoryForAPI() {
+  return Array.from(document.querySelectorAll(".chat-body .msg")).slice(-6).map((item) => ({
+    role: item.classList.contains("user") ? "user" : "assistant",
+    content: (item.querySelector(".msg-bubble")?.textContent || "").trim().slice(0, 600)
+  })).filter((item) => item.content);
+}
+
+function escapeChatText(text) {
+  const span = document.createElement("span");
+  span.textContent = String(text || "");
+  return span.innerHTML.replace(/\n/g, "<br>");
+}
+
+async function askXiaosui(question) {
+  if (!window.SuishipaiAPI) throw new Error("AI接口尚未加载");
+  const history = chatHistoryForAPI();
+  if (history.length && history[history.length - 1].role === "user" && history[history.length - 1].content === question) history.pop();
+  const result = await window.SuishipaiAPI.chat(question, history);
+  return result.reply;
 }
 
 function botReply(key) {
@@ -164,26 +221,38 @@ function botReply(key) {
 function initChat() {
   const quickBtns = document.querySelectorAll(".quick-btn");
   quickBtns.forEach(b => {
-    b.addEventListener("click", () => {
+    b.addEventListener("click", async () => {
       const q = b.textContent.trim();
       appendMsg("user", "👤", q);
-      setTimeout(() => botReply(b.dataset.reply), 350);
+      b.disabled = true;
+      try {
+        const reply = await askXiaosui(q);
+        appendMsg("bot", "🌱", escapeChatText(reply));
+      } catch (error) {
+        appendMsg("bot", "🌱", "小穗暂时无法连接AI服务，请稍后再试。项目介绍与调研数据仍可在网站其他页面查看。");
+      } finally { b.disabled = false; }
     });
   });
 
   const input = document.querySelector(".chat-input input");
   const send = document.querySelector(".chat-send");
-  function handleSend() {
+  async function handleSend() {
     const v = input.value.trim();
-    if (!v) return;
+    if (!v || send.disabled) return;
     appendMsg("user", "👤", v);
     input.value = "";
-    let key = null;
-    if (/营养|热量|卡路里|蛋白|脂肪|碳水/.test(v)) key = "本餐营养";
-    else if (/今日|评价|全天|整体/.test(v)) key = "今日膳食";
-    else if (/推荐|晚餐|下一餐|吃什么|粤/.test(v)) key = "推荐晚餐";
-    else if (/过敏|提醒|注意|钠|盐|风险/.test(v)) key = "健康提醒";
-    setTimeout(() => botReply(key), 400);
+    send.disabled = true;
+    send.textContent = "思考中";
+    try {
+      const reply = await askXiaosui(v);
+      appendMsg("bot", "🌱", escapeChatText(reply));
+    } catch (error) {
+      appendMsg("bot", "🌱", "小穗暂时无法连接AI服务，请稍后再试。若持续失败，请检查AI服务配置。");
+    } finally {
+      send.disabled = false;
+      send.textContent = "发送";
+      input.focus();
+    }
   }
   send?.addEventListener("click", handleSend);
   input?.addEventListener("keydown", e => { if (e.key === "Enter") handleSend(); });
@@ -299,6 +368,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initPersonaTabs();
   initStepFlow();
   initMealUpload();
+  initMealRecalculation();
   initChat();
   initChatHistory();
   initFloatingMascot();
