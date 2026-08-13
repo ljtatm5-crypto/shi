@@ -5,8 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>产品体验 · 穗食拍AI来算</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/desktop-pet.css">
+<link rel="stylesheet" href="css/content-enhance.css">
 </head>
-<body>
+<body class="content-page">
 
 <nav class="nav">
   <div class="nav-inner">
@@ -26,13 +28,20 @@
   </div>
 </nav>
 
-<section class="hero" style="padding:80px 24px 60px">
+<section class="hero content-hero">
   <div class="hero-inner">
-    <div class="hero-badge">📷 60秒完成一餐记录</div>
-    <h1>拍一张照片，<span class="grad">读懂这一餐</span></h1>
-    <p class="lead">
-      上传 → 识别 → 修正 → 计算 → 记录，五步闭环，粤菜与本地食材优先识别。
-    </p>
+    <div class="hero-copy">
+      <div class="hero-badge">60秒餐食记录原型</div>
+      <h1>拍一张照片，<span class="grad hero-line">读懂这一餐</span></h1>
+      <p class="lead">上传、识别、修正、计算、记录，五步完成餐食档案，并优先适配粤菜与广州本地食材。</p>
+    </div>
+    <figure class="hero-media organic-accent">
+      <img src="images/cantonese-dim-sum.png" alt="等待拍照识别的粤式餐食" width="1400" height="1000">
+      <figcaption class="hero-proof">
+        <span class="hero-proof-item"><strong>60 秒</strong><span>完成一餐记录</span></span>
+        <span class="hero-proof-item"><strong>5 步</strong><span>形成完整闭环</span></span>
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -42,23 +51,23 @@
     <!-- 五步流程按钮 -->
     <div class="step-flow reveal">
       <div class="step active" data-step="1">
-        <div class="step-num">1</div>
+        <div class="step-num">拍</div>
         <div class="step-name">上传餐食</div>
       </div>
       <div class="step" data-step="2">
-        <div class="step-num">2</div>
+        <div class="step-num">识</div>
         <div class="step-name">菜品识别</div>
       </div>
       <div class="step" data-step="3">
-        <div class="step-num">3</div>
+        <div class="step-num">校</div>
         <div class="step-name">结果修正</div>
       </div>
       <div class="step" data-step="4">
-        <div class="step-num">4</div>
+        <div class="step-num">算</div>
         <div class="step-name">营养计算</div>
       </div>
       <div class="step" data-step="5">
-        <div class="step-num">5</div>
+        <div class="step-num">存</div>
         <div class="step-name">饮食记录</div>
       </div>
     </div>
@@ -70,7 +79,7 @@
         <div class="step-visual">
           <label class="upload-box" for="meal-upload">
             <input id="meal-upload" class="visually-hidden" type="file" accept="image/jpeg,image/png,image/heic,image/webp">
-            <div class="upload-emoji">📷</div>
+            <img class="upload-icon" src="images/ppt-assets/icon-market-contact-teal.png" alt="" width="56" height="56">
             <p><b>点击拍照或上传餐食照片</b></p>
             <p style="font-size:13px;color:var(--gray-500);margin-top:6px">支持 JPG / PNG / HEIC · 最大10MB</p>
             <img class="upload-preview" alt="已选择的餐食照片预览" hidden>
@@ -134,7 +143,7 @@
         </div>
         <div class="step-body">
           <h3>第三步：结果修正</h3>
-          <p>识别不是黑盒——用户可以调整菜品、食材和份量，让记录准确到你实际吃的那一口。</p>
+          <p>识别结果可以修正。用户可调整菜品、食材和份量，让记录更接近实际摄入。</p>
           <ul>
             <li>低置信度菜品提供 top-3 候选供用户选择</li>
             <li>份量支持滑动条微调（0.5~2倍）</li>
@@ -147,42 +156,16 @@
       <div class="step-panel" data-step="4">
         <div class="step-visual">
           <div style="width:100%">
-            <table class="nutrition-table">
-              <thead>
-                <tr>
-                  <th>营养</th>
-                  <th>本餐</th>
-                  <th>占日推荐</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>热量</td>
-                  <td><b>612 kcal</b></td>
-                  <td><span class="nutrition-bar" style="width:70px"></span> 34%</td>
-                </tr>
-                <tr>
-                  <td>蛋白质</td>
-                  <td><b>28 g</b></td>
-                  <td><span class="nutrition-bar" style="width:60px"></span> 47%</td>
-                </tr>
-                <tr>
-                  <td>脂肪</td>
-                  <td><b>22 g</b></td>
-                  <td><span class="nutrition-bar" style="width:80px;background:linear-gradient(135deg,#F57C00,#D32F2F)"></span> 38%</td>
-                </tr>
-                <tr>
-                  <td>碳水</td>
-                  <td><b>76 g</b></td>
-                  <td><span class="nutrition-bar" style="width:65px"></span> 30%</td>
-                </tr>
-                <tr>
-                  <td>钠</td>
-                  <td><b>980 mg</b></td>
-                  <td><span class="nutrition-bar" style="width:90px;background:linear-gradient(135deg,#F57C00,#D32F2F)"></span> 49%</td>
-                </tr>
-              </tbody>
-            </table>
+            <div style="position:relative;margin-bottom:20px">
+              <div class="nutrition-ring" style="--ring-value:34%"></div>
+              <div class="ring-center" style="inset:50% auto auto 50%;transform:translate(-50%,-50%)"><strong>612</strong>kcal · 34%</div>
+            </div>
+            <div class="ring-metrics">
+              <div class="ring-metric"><strong>28 g</strong><span>蛋白质 · 47%</span></div>
+              <div class="ring-metric"><strong>22 g</strong><span>脂肪 · 38%</span></div>
+              <div class="ring-metric"><strong>76 g</strong><span>碳水 · 30%</span></div>
+              <div class="ring-metric"><strong>980 mg</strong><span>钠 · 49%</span></div>
+            </div>
           </div>
         </div>
         <div class="step-body">
@@ -205,9 +188,7 @@
                 <b>今日累计</b>
                 <span style="color:var(--green);font-weight:700">1650 / 1800 kcal</span>
               </div>
-              <div style="height:10px;background:var(--gray-100);border-radius:5px;overflow:hidden">
-                <div style="width:82%;height:100%;background:var(--grad-primary);border-radius:5px"></div>
-              </div>
+              <div style="font-size:34px;font-weight:800;color:var(--green);line-height:1">82%</div>
               <div style="margin-top:20px;padding:14px;background:var(--green-soft);border-radius:10px">
                 <b style="color:var(--green)">✓ 本餐已保存</b>
                 <p style="font-size:13px;color:var(--gray-700);margin-top:4px">
@@ -235,7 +216,7 @@
       <p style="color:var(--gray-500);margin-bottom:20px">
         记录完成后，让AI助手给你解读本餐、评价今日、推荐下一餐
       </p>
-      <a href="assistant.html" class="btn btn-primary">🤖 进入智能助手 →</a>
+      <a href="assistant.html" class="btn btn-primary">进入智能助手 →</a>
     </div>
 
   </div>
@@ -248,5 +229,6 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/desktop-pet.js"></script>
 </body>
 </html>

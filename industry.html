@@ -5,8 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>行业焦点 · 穗食拍AI来算</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/desktop-pet.css">
+<link rel="stylesheet" href="css/content-enhance.css">
 </head>
-<body>
+<body class="content-page">
 
 <nav class="nav">
   <div class="nav-inner">
@@ -26,14 +28,20 @@
   </div>
 </nav>
 
-<section class="hero" style="padding:80px 24px 60px">
+<section class="hero content-hero">
   <div class="hero-inner">
-    <div class="hero-badge">📊 政策·市场·隐患</div>
-    <h1>行业<span class="grad">高增长</span>与<span class="grad" style="background:linear-gradient(135deg,#D32F2F,#F57C00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">口碑下降</span>并存</h1>
-    <p class="lead">
-      政策与市场同时按下加速键，但用户负面评论占比接近60%——
-      AI膳食管理正处于"技术热"与"信任冷"的悖论之中。
-    </p>
+    <div class="hero-copy">
+      <div class="hero-badge">政策、市场与用户体验</div>
+      <h1>增长很快，<span class="grad hero-line">信任仍需重建</span></h1>
+      <p class="lead">政策与市场共同推动行业扩张，但竞品评论样本中的负面体验接近六成。规模增长还没有转化为用户满意。</p>
+    </div>
+    <figure class="hero-media organic-accent">
+      <img src="images/cantonese-dim-sum.png" alt="广州餐桌上的粤式点心" width="1400" height="1000">
+      <figcaption class="hero-proof">
+        <span class="hero-proof-item"><strong>35 亿+</strong><span>10款样本应用累计安装</span></span>
+        <span class="hero-proof-item"><strong>近 60%</strong><span>样本评论中的负面评价</span></span>
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -41,9 +49,9 @@
 <section class="section">
   <div class="section-inner">
     <div class="section-head reveal">
-      <span class="section-tag">政策支持</span>
+      <span class="section-tag">政策链条</span>
       <h2>健康中国 × 人工智能，双轮驱动</h2>
-      <p>从国家战略到地方落地，10年间形成完整政策链条</p>
+      <p>从国家战略到地方实践，政策支持逐步延伸到营养评估、健康干预和应用创新。</p>
     </div>
     <div class="reveal" style="max-width:820px;margin:0 auto">
       <div class="timeline">
@@ -86,25 +94,46 @@
 <section class="section section-alt">
   <div class="section-inner">
     <div class="section-head reveal">
-      <span class="section-tag blue">市场规模</span>
+      <span class="section-tag blue">市场证据</span>
       <h2>累计安装可观，头部效应突出</h2>
-      <p>10款主流应用累计安装量超35亿，Keep与薄荷健康合计占99%</p>
+      <p>10款样本应用累计安装量超35亿次，Keep与薄荷健康在样本口径中占99%以上。</p>
     </div>
-    <div class="grid-3 reveal">
-      <div class="card">
-        <div class="card-icon blue">📱</div>
-        <h3>35亿+ 累计安装</h3>
+    <div class="glass-data-grid reveal">
+      <div class="glass-data-card tint">
+        <div class="data-kicker">样本累计安装</div>
+        <div class="data-value">35 亿+</div>
         <p>纳入调查的10款主流AI膳食应用累计安装量突破35亿次。该指标是累计安装口径，不等同于去重用户规模。</p>
       </div>
-      <div class="card">
-        <div class="card-icon">🏆</div>
-        <h3>头部通吃 99%</h3>
+      <div class="glass-data-card">
+        <div class="data-kicker">头部集中度</div>
+        <div class="data-value">99%+</div>
         <p>Keep + 薄荷健康两款头部综合应用累计安装量超33亿次，占样本总安装量99%以上。</p>
       </div>
-      <div class="card">
-        <div class="card-icon blue">💵</div>
-        <h3>1157亿 → 1598亿</h3>
+      <div class="glass-data-card">
+        <div class="data-kicker">AI医疗市场预测</div>
+        <div class="data-value">1598 亿</div>
         <p>2025年我国AI医疗行业规模约1157亿元，2028年预计攀升至1598亿元（甲子光年数据）。</p>
+      </div>
+    </div>
+
+    <div class="trend-card mt-6 reveal">
+      <div class="trend-copy">
+        <span class="data-kicker">2025-2028 预测趋势</span>
+        <strong>+441 亿</strong>
+        <p>从1157亿元增至1598亿元。图中仅呈现报告给出的两个端点，不插补中间年度数值。</p>
+      </div>
+      <div class="trend-plot" role="img" aria-label="AI医疗行业规模从2025年1157亿元增长至2028年1598亿元">
+        <svg viewBox="0 0 560 230" aria-hidden="true">
+          <defs><linearGradient id="trendFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7dd3c0" stop-opacity=".65"/><stop offset="1" stop-color="#7dd3c0" stop-opacity="0"/></linearGradient></defs>
+          <line class="trend-axis" x1="34" y1="190" x2="530" y2="190"/>
+          <path class="trend-area" d="M55 164 L505 50 L505 190 L55 190 Z"/>
+          <path class="trend-line" d="M55 164 L505 50"/>
+          <circle class="trend-dot" cx="55" cy="164" r="7"/><circle class="trend-dot" cx="505" cy="50" r="7"/>
+          <text class="trend-number" x="55" y="140" text-anchor="middle">1157亿</text>
+          <text class="trend-number" x="505" y="28" text-anchor="middle">1598亿</text>
+          <text class="trend-label" x="55" y="216" text-anchor="middle">2025</text>
+          <text class="trend-label" x="505" y="216" text-anchor="middle">2028</text>
+        </svg>
       </div>
     </div>
 
@@ -148,7 +177,7 @@
 <section class="section">
   <div class="section-inner">
     <div class="section-head reveal">
-      <span class="section-tag" style="background:#FFEBEE;color:#D32F2F">行业隐患</span>
+      <span class="section-tag">体验缺口</span>
       <h2>市场增长 ≠ 用户满意</h2>
       <p>基于10款样本应用的1352条有效公开评论，负面体验值得重视</p>
     </div>
@@ -192,5 +221,6 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/desktop-pet.js"></script>
 </body>
 </html>

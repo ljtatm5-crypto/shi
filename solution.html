@@ -5,8 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>解决方案 · 穗食拍AI来算</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/desktop-pet.css">
+<link rel="stylesheet" href="css/content-enhance.css">
 </head>
-<body>
+<body class="content-page">
 
 <nav class="nav">
   <div class="nav-inner">
@@ -26,14 +28,20 @@
   </div>
 </nav>
 
-<section class="hero" style="padding:80px 24px 60px">
+<section class="hero content-hero">
   <div class="hero-inner">
-    <div class="hero-badge">💡 问题→建议一一对应</div>
-    <h1>四位一体<span class="grad">发展建议</span></h1>
-    <p class="lead">
-      本土化识别 · 分层运营 · 分级付费 · 生态协同——
-      每一项都对应一个具体的行业问题，不是空泛口号。
-    </p>
+    <div class="hero-copy">
+      <div class="hero-badge">从问题到可执行建议</div>
+      <h1>四条路径，<span class="grad hero-line">逐项回应痛点</span></h1>
+      <p class="lead">本土化识别、分级付费、分层运营与生态协同，分别对应技术、商业、产品和应用场景问题。</p>
+    </div>
+    <figure class="hero-media organic-accent">
+      <img src="images/hero-morning-kitchen.png" alt="使用智能膳食工具规划健康餐食" width="1400" height="1000">
+      <figcaption class="hero-proof">
+        <span class="hero-proof-item"><strong>4 项</strong><span>问题对应建议</span></span>
+        <span class="hero-proof-item"><strong>3 类</strong><span>调研用户画像</span></span>
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -43,19 +51,19 @@
     <div class="section-head reveal">
       <span class="section-tag">对应关系</span>
       <h2>问题 → 建议，一目了然</h2>
-      <p>三大问题，三个核心建议，加上一个生态层建议，形成完整的解决方案</p>
+      <p>三项核心建议解决直接痛点，再由生态协同补足长期落地条件。</p>
     </div>
 
     <div class="reveal">
       <!-- Flow 1 -->
       <div class="flow-row">
         <div class="flow-problem">
-          <div class="flow-problem-tag">🔴 问题一</div>
+          <div class="flow-problem-tag">技术问题</div>
           <div class="flow-problem-text">食物识别不准</div>
         </div>
         <div class="flow-arrow">➜</div>
         <div class="flow-solution">
-          <div class="flow-solution-tag">💚 建议一：本土化识别</div>
+          <div class="flow-solution-tag">本土化识别</div>
           <div class="flow-solution-text">建立广州特色餐食数据库</div>
           <div class="flow-solution-detail">
             重点打磨粤菜、早茶、煲仔饭、老火汤等复杂菜品识别；<br>
@@ -69,12 +77,12 @@
       <!-- Flow 2 -->
       <div class="flow-row">
         <div class="flow-problem">
-          <div class="flow-problem-tag">🔴 问题二</div>
+          <div class="flow-problem-tag">商业问题</div>
           <div class="flow-problem-text">广告泛滥</div>
         </div>
         <div class="flow-arrow">➜</div>
         <div class="flow-solution">
-          <div class="flow-solution-tag">💚 建议二：分级付费</div>
+          <div class="flow-solution-tag">分级付费</div>
           <div class="flow-solution-text">基础版免费无广告，高级版按需订阅</div>
           <div class="flow-solution-detail">
             <b>基础版（免费·无广告）</b>：拍照识别、热量估算、每日记录；<br>
@@ -88,12 +96,12 @@
       <!-- Flow 3 -->
       <div class="flow-row">
         <div class="flow-problem">
-          <div class="flow-problem-tag">🔴 问题三</div>
+          <div class="flow-problem-tag">产品问题</div>
           <div class="flow-problem-text">功能同质化</div>
         </div>
         <div class="flow-arrow">➜</div>
         <div class="flow-solution">
-          <div class="flow-solution-tag">💚 建议三：分层运营</div>
+          <div class="flow-solution-tag">分层运营</div>
           <div class="flow-solution-text">聚类分析驱动的差异化运营</div>
           <div class="flow-solution-detail">
             将用户分为 <b>积极拥趸型 / 理性观望型 / 冷漠怀疑型</b> 三类；<br>
@@ -107,12 +115,12 @@
       <!-- Flow 4 -->
       <div class="flow-row" style="border-top:3px solid var(--blue);border-radius:var(--radius)">
         <div class="flow-problem" style="background:var(--blue-soft);border-left-color:var(--blue)">
-          <div class="flow-problem-tag" style="color:var(--blue)">🌐 生态层</div>
+          <div class="flow-problem-tag" style="color:var(--blue)">生态层</div>
           <div class="flow-problem-text">单点产品难以形成健康闭环</div>
         </div>
         <div class="flow-arrow">➜</div>
         <div class="flow-solution">
-          <div class="flow-solution-tag">💚 建议四：生态协同</div>
+          <div class="flow-solution-tag">生态协同</div>
           <div class="flow-solution-text">拓展学校、企业、社区场景</div>
           <div class="flow-solution-detail">
             接入手环、体脂秤等智能硬件数据；<br>
@@ -130,22 +138,38 @@
 <section class="section section-alt">
   <div class="section-inner">
     <div class="section-head reveal">
-      <span class="section-tag blue">分层运营详解</span>
+      <span class="section-tag blue">用户分层</span>
       <h2>三类用户画像 × 差异化策略</h2>
       <p>基于1248份样本的K-means聚类分析，平均轮廓系数0.376，聚类效果稳健</p>
     </div>
 
-    <div class="persona-tabs reveal">
-      <button class="persona-tab active" data-persona="a">🟢 积极拥趸型 · 40.38%</button>
-      <button class="persona-tab tab-yellow" data-persona="b">🟡 理性观望型 · 39.82%</button>
-      <button class="persona-tab tab-red" data-persona="c">🔴 冷漠怀疑型 · 19.79%</button>
+    <div class="ring-board reveal" aria-label="三类用户画像占比">
+      <div style="position:relative">
+        <div class="nutrition-ring cluster-ring"></div>
+        <div class="ring-center" style="inset:50% auto auto 50%;transform:translate(-50%,-50%)"><strong>1248</strong>份有效样本</div>
+      </div>
+      <div>
+        <h3 style="font-size:26px;margin-bottom:10px">画像分布接近 4 : 4 : 2</h3>
+        <p style="color:var(--content-muted);margin-bottom:18px">积极拥趸型与理性观望型各约四成，冷漠怀疑型约两成。策略重点因此不是“一套方案覆盖所有人”。</p>
+        <div class="cluster-legend">
+          <span><i></i>积极拥趸型 40.38%</span>
+          <span><i></i>理性观望型 39.82%</span>
+          <span><i></i>冷漠怀疑型 19.79%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="persona-tabs reveal mt-6">
+      <button class="persona-tab active" data-persona="a">积极拥趸型 · 40.38%</button>
+      <button class="persona-tab tab-yellow" data-persona="b">理性观望型 · 39.82%</button>
+      <button class="persona-tab tab-red" data-persona="c">冷漠怀疑型 · 19.79%</button>
     </div>
 
     <div class="reveal">
       <!-- Persona A -->
       <div class="persona-card active" data-persona="a">
         <div class="persona-visual">
-          <div class="persona-emoji">🌱</div>
+          <img class="persona-portrait" src="images/ppt-assets/persona-positive-portrait.png" alt="积极拥趸型用户画像" width="280" height="250">
           <div class="persona-pct">40.38%</div>
           <div class="persona-label">积极拥趸型 · 核心高价值用户</div>
         </div>
@@ -167,7 +191,7 @@
       <!-- Persona B -->
       <div class="persona-card" data-persona="b">
         <div class="persona-visual" style="background:linear-gradient(135deg,#FFF3E0,#FFECB3)">
-          <div class="persona-emoji">🤔</div>
+          <img class="persona-portrait" src="images/ppt-assets/persona-rational-portrait.png" alt="理性观望型用户画像" width="280" height="250">
           <div class="persona-pct yellow">39.82%</div>
           <div class="persona-label">理性观望型 · 关键拓展人群</div>
         </div>
@@ -175,7 +199,7 @@
           <h3>特征：中等评分 · 观望态度 · 有拉动空间</h3>
           <p class="desc">
             各维度评分处于中等水平，对AI膳食应用持理性观望态度。
-            他们是市场渗透广度的决定者——转化了他们，就转化了整个市场。
+            他们是市场渗透广度的关键。赢得这一人群的信任，才能扩大市场覆盖。
           </p>
           <ul class="persona-features">
             <li><b>运营重点</b>：7天免费试用、限时折扣、权威背书</li>
@@ -189,7 +213,7 @@
       <!-- Persona C -->
       <div class="persona-card" data-persona="c">
         <div class="persona-visual" style="background:linear-gradient(135deg,#FFEBEE,#FFCDD2)">
-          <div class="persona-emoji">😐</div>
+          <img class="persona-portrait" src="images/ppt-assets/persona-skeptic-portrait.png" alt="冷漠怀疑型用户画像" width="280" height="250">
           <div class="persona-pct red">19.79%</div>
           <div class="persona-label">冷漠怀疑型 · 长期培养对象</div>
         </div>
@@ -231,17 +255,17 @@
         <tbody>
           <tr>
             <td>信任与感知易用性较高</td>
-            <td style="color:var(--green)"><b>🟢 积极拥趸型</b></td>
+            <td style="color:var(--green)"><b>积极拥趸型</b></td>
             <td>直推付费方案 + VIP社群</td>
           </tr>
           <tr>
             <td>信任与AI了解程度较低</td>
-            <td style="color:var(--danger)"><b>🔴 冷漠怀疑型</b></td>
+            <td style="color:var(--danger)"><b>冷漠怀疑型</b></td>
             <td>科普内容 + 免费工具体验</td>
           </tr>
           <tr>
             <td>其余</td>
-            <td style="color:var(--warning)"><b>🟡 理性观望型</b></td>
+            <td style="color:var(--warning)"><b>理性观望型</b></td>
             <td>7天试用 + 权威背书内容</td>
           </tr>
         </tbody>
@@ -260,23 +284,23 @@
     </div>
     <div class="grid-3 reveal">
       <div class="card">
-        <div class="card-icon">🏢</div>
+        <div class="feature-mark">企</div>
         <h3>企业</h3>
         <p>本土化识别 + 分层运营 + 分级付费，破解"识别不准、广告泛滥、功能同质化"三大痛点，重建用户信任。</p>
       </div>
       <div class="card">
-        <div class="card-icon blue">👤</div>
+        <div class="feature-mark">用</div>
         <h3>用户</h3>
         <p>从免费体验到付费订阅，从被动记录到主动健康管理，享受AI带来的科学膳食决策支持。</p>
       </div>
       <div class="card">
-        <div class="card-icon">🏛️</div>
+        <div class="feature-mark">政</div>
         <h3>政府</h3>
         <p>完善AI膳食识别标准与分级监管机制，推动健康城市与智慧湾区建设，让技术普惠更广人群。</p>
       </div>
     </div>
     <div class="text-center mt-6 reveal">
-      <a href="product.html" class="btn btn-primary">📷 立即体验穗食拍</a>
+      <a href="product.html" class="btn btn-primary">立即体验穗食拍</a>
     </div>
   </div>
 </section>
@@ -286,5 +310,6 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/desktop-pet.js"></script>
 </body>
 </html>

@@ -1,0 +1,99 @@
+PPT 视觉资产清单
+来源：第 1–55 页完整审计，源 PPTX 未修改。
+
+一、三类人物画像（核心）
+
+1. persona-positive-card.png
+   来源：第 44 页，原始媒体 image71.png，721×432。
+   内容：积极拥抱型（40.38%）完整画像卡。
+   推荐：用户画像/市场洞察区的主卡；也可作为 AI 回答中的“典型用户”案例。
+
+2. persona-skeptic-card.png
+   来源：第 45 页，原始媒体 image72.png，831×516。
+   内容：冷漠怀疑型（19.79%）完整画像卡。
+   推荐：用户画像/转化障碍区，用于说明教育、体验与信任建设需求。
+
+3. persona-rational-card.png
+   来源：第 46 页，原始媒体 image73.png，697×433。
+   内容：理性观望型（39.82%）完整画像卡。
+   推荐：用户画像/潜力用户区，用于说明中间态度与市场渗透空间。
+
+4. persona-positive-portrait.png
+5. persona-skeptic-portrait.png
+6. persona-rational-portrait.png
+   来源：分别从第 44、45、46 页原始画像卡无缩放裁切。
+   推荐：人物头像、问答示例、轮播标签、悬浮窗欢迎语。建议圆角或圆形遮罩使用，避免继续裁切放大。
+
+二、品牌与桌宠资产
+
+1. brand-ai-chef-mascot.png
+   来源：第 1 页（第 55 页也复用），原始媒体 image15.png，577×542。
+   推荐：AI 助手桌宠、悬浮入口、加载/空状态。它是 PPT 内最适合作为网站桌宠的现成项目形象。
+
+2. brand-logo-suishipai.png
+   来源：第 1 页，原始媒体 image11.png，1672×810。
+   推荐：首页项目主标识或页尾品牌署名。
+
+3. brand-logo-ai-laisuan.png
+   来源：第 1 页，原始媒体 image12.png，1774×692。
+   推荐：与上一个标识组合使用；不建议单独重复出现在每个页面。
+
+4. brand-mountains.png
+   来源：第 1/55 页，原始媒体 image10.png，2000×325。
+   推荐：页尾、分区过渡、广州主题区的低对比装饰。
+
+5. brand-steam-left.png / brand-steam-right.png
+   来源：第 1/55 页，原始媒体 image5.png / image6.png。
+   推荐：页面边缘、食物卡片背景的淡化纹样；透明度建议控制在 8%–16%。
+
+6. brand-wave-band.png / brand-wave-pattern.png
+   来源：第 1 页，原始媒体 image7.png / image8.png。
+   推荐：章节分隔、页尾纹样；避免大面积铺满。
+
+三、助手界面直接可用图标
+
+1. icon-chat-white.png / .svg
+   来源：第 12 页，原始媒体 image39.png / image40.svg。
+   推荐：AI 问答入口、对话发送或新建会话。白色图标需放在蓝绿实色底上。
+
+2. icon-record-folder-white.png / .svg
+   来源：第 12 页，原始媒体 image41.png / image42.svg。
+   推荐：助手左侧“历史记录/记录存储”入口。白色图标需放在蓝绿实色底上。
+
+3. icon-contact-record-white.png / .svg
+   来源：第 8 页，原始媒体 image30.png / image31.svg。
+   推荐：会话记录、用户档案或收藏问答。
+
+4. icon-analysis-monitor-white.png / .svg
+   来源：第 8 页，原始媒体 image28.png / image29.svg。
+   推荐：营养分析、数据面板入口。
+
+四、研究与功能图标
+
+1. icon-section-layers-white.png / .svg
+2. icon-section-chart-white.png / .svg
+3. icon-section-cube-white.png / .svg
+4. icon-section-balance-white.png / .svg
+   来源：第 3 页；第 16、50 页复用。对应原始媒体 image16–23。
+   推荐：网站四类功能、流程节点或首页功能导航。图标为白色，建议沿用 PPT 的青绿/蓝/绿/黄圆形底。
+
+5. icon-questionnaire-white.png / .svg
+6. icon-literature-white.png / .svg
+7. icon-statistics-white.png / .svg
+8. icon-interview-white.png / .svg
+   来源：第 19 页，对应原始媒体 image46–53。
+   推荐：调研方法、可信度说明、关于项目页面。图标为白色，建议使用 PPT 同色系实色底。
+
+9. icon-market-contact-teal.png / .svg
+10. icon-review-check-green.png / .svg
+11. icon-web-data-blue.png / .svg
+   来源：第 10 页，对应原始媒体 image32–37。
+   推荐：市场洞察、用户评价、数据采集三个功能入口；已有颜色，可直接使用。
+
+使用建议
+
+- 网页优先引用 SVG，PNG 作为兼容回退；三类人物画像与品牌插画使用 PNG。
+- 白色线性图标本身透明，必须置于 PPT 同系的青绿、蓝、绿或黄色圆形/方形底上。
+- 三类人物完整卡不要再叠加大量说明文字；网页侧只保留一句核心结论即可。
+- 桌宠优先使用 brand-ai-chef-mascot.png，人物画像更适合作为用户分群内容，不宜混成助手官方形象。
+- 品牌山形、蒸汽和波纹只作低对比装饰，避免重新出现 PPT 式满页背景。

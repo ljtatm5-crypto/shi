@@ -91,7 +91,7 @@ function initMealUpload() {
 }
 
 function initFloatingMascot() {
-  if (document.body.classList.contains("home-page")) return;
+  if (document.body.classList.contains("home-page") || document.body.classList.contains("assistant-page")) return;
   const link = document.createElement("a");
   link.className = "floating-mascot";
   link.href = "assistant.html";
@@ -186,6 +186,66 @@ function initChat() {
   input?.addEventListener("keydown", e => { if (e.key === "Enter") handleSend(); });
 }
 
+function initChatHistory() {
+  const storageKey = "suishipai_chat_history_v1";
+  const list = document.querySelector(".history-list");
+  const empty = document.querySelector(".history-empty");
+  const newButton = document.querySelector(".history-new");
+  const clearButton = document.querySelector(".history-clear");
+  const mobileToggle = document.querySelector(".history-mobile-toggle");
+  const historyPanel = document.querySelector(".assistant-history");
+  const chatBody = document.querySelector(".chat-body");
+  if (!list || !empty || !chatBody) return;
+
+  const welcome = chatBody.innerHTML;
+  let sessions = [];
+  let activeId = null;
+  try { sessions = JSON.parse(localStorage.getItem(storageKey) || "[]"); } catch { sessions = []; }
+
+  const save = () => localStorage.setItem(storageKey, JSON.stringify(sessions.slice(0, 12)));
+  const render = () => {
+    list.innerHTML = "";
+    empty.hidden = sessions.length > 0;
+    sessions.forEach((session) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = `history-item${session.id === activeId ? " active" : ""}`;
+      button.innerHTML = `<strong></strong><small></small>`;
+      button.querySelector("strong").textContent = session.title;
+      button.querySelector("small").textContent = session.time;
+      button.addEventListener("click", () => {
+        activeId = session.id;
+        chatBody.innerHTML = session.html || welcome;
+        render();
+      });
+      list.appendChild(button);
+    });
+  };
+
+  const persistCurrent = () => {
+    const userMessages = Array.from(chatBody.querySelectorAll(".msg.user .msg-bubble"));
+    if (!userMessages.length) return;
+    const title = userMessages[0].textContent.trim().slice(0, 22) || "新对话";
+    if (!activeId) activeId = String(Date.now());
+    const now = new Date();
+    const record = { id: activeId, title, time: `${now.getMonth() + 1}月${now.getDate()}日 ${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}`, html: chatBody.innerHTML };
+    sessions = [record, ...sessions.filter((item) => item.id !== activeId)];
+    save();
+    render();
+  };
+
+  new MutationObserver(() => persistCurrent()).observe(chatBody, { childList: true });
+  newButton?.addEventListener("click", () => { activeId = null; chatBody.innerHTML = welcome; render(); });
+  clearButton?.addEventListener("click", () => { sessions = []; activeId = null; save(); chatBody.innerHTML = welcome; render(); });
+  mobileToggle?.addEventListener("click", () => {
+    const open = !historyPanel.classList.contains("history-open");
+    historyPanel.classList.toggle("history-open", open);
+    mobileToggle.setAttribute("aria-expanded", String(open));
+    mobileToggle.textContent = open ? "收起历史记录" : "查看历史记录";
+  });
+  render();
+}
+
 // -------- Mobile navigation --------
 function initMobileNav() {
   const nav = document.querySelector(".nav");
@@ -237,5 +297,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initStepFlow();
   initMealUpload();
   initChat();
+  initChatHistory();
   initFloatingMascot();
 });

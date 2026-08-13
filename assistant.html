@@ -3,10 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="小穗AI膳食助手，提供本餐营养解读、全天饮食评价、粤式餐食推荐与一般性健康提醒。">
 <title>智能助手 · 穗食拍AI来算</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/desktop-pet.css">
 </head>
-<body>
+<body class="assistant-page">
 
 <nav class="nav">
   <div class="nav-inner">
@@ -26,164 +28,77 @@
   </div>
 </nav>
 
-<section class="hero" style="padding:80px 24px 60px">
-  <div class="hero-inner">
-    <div class="hero-badge">🌱 膳食推荐管理助手</div>
-    <h1>小穗，<span class="grad">陪你规划</span>下一餐</h1>
-    <p class="lead">
-      本餐营养解读、今日膳食评价、粤式下一餐推荐、健康提醒——
-      四类核心能力，让AI真正介入你的每一次饮食决策。
-    </p>
-  </div>
-</section>
-
-<section class="assistant-character" aria-label="小穗助手形象">
-  <div class="assistant-character-copy">
-    <span class="section-tag">你的膳食搭子</span>
-    <h2>你好，我是小穗</h2>
-    <p>我会结合你的健康目标、本餐分析和今日记录，用更容易执行的方式，帮你看懂营养并安排下一餐。</p>
-    <div class="assistant-prompts"><span>解释这顿饭</span><span>评价今天</span><span>推荐晚餐</span></div>
-  </div>
-  <div class="assistant-character-portrait">
-    <img src="images/xiaosui-assistant.png" alt="头顶嫩芽、身穿白绿科技服的小穗助手上半身">
-  </div>
-</section>
-
-<!-- 四大能力介绍 -->
-<section class="section">
-  <div class="section-inner">
-    <div class="section-head reveal">
-      <span class="section-tag">四大能力</span>
-      <h2>不只是记录，更是陪你决策</h2>
-      <p>从"这一餐吃了什么"到"下一餐吃什么"，AI助手贯穿膳食管理全过程</p>
+<main class="assistant-workspace">
+  <header class="assistant-intro">
+    <div>
+      <span class="assistant-eyebrow">AI 膳食问答</span>
+      <h1>有什么膳食问题，问小穗</h1>
     </div>
-    <div class="grid-4 reveal">
-      <div class="card">
-        <div class="card-icon">🥗</div>
-        <h3>营养解读</h3>
-        <p>解释本餐的热量、蛋白、脂肪、碳水、钠含量，用大白话告诉你"高不高、够不够"。</p>
-      </div>
-      <div class="card">
-        <div class="card-icon blue">📊</div>
-        <h3>饮食评价</h3>
-        <p>分析今日全天膳食是否均衡，给出A/B/C评分与主要问题清单，直接指向可改善项。</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🍲</div>
-        <h3>膳食推荐</h3>
-        <p>结合今日缺口推荐下一餐，粤式替代方案优先，覆盖清蒸、白灼、老火汤等本土做法。</p>
-      </div>
-      <div class="card">
-        <div class="card-icon blue">⚠️</div>
-        <h3>健康提醒</h3>
-        <p>过敏原自动提示，钠/糖/脂肪超标预警，连续多日营养失衡给出改善建议。</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <p>结合本餐分析、今日记录与健康目标，为你解释营养结果并推荐更易执行的下一餐。</p>
+  </header>
 
-<!-- 对话演示 -->
-<section class="section section-alt">
-  <div class="section-inner">
-    <div class="section-head reveal">
-      <span class="section-tag blue">对话演示</span>
-      <h2>试试和助手聊几句</h2>
-      <p>点击下方快捷问题，或直接输入你的问题</p>
-    </div>
+  <section class="assistant-console" aria-label="小穗AI问答">
+    <aside class="assistant-history" aria-label="问答记录">
+      <div class="history-head">
+        <div><span>记录存储</span><strong><img src="images/ppt-assets/icon-record-folder-white.svg" alt="">膳食问答</strong></div>
+        <button class="history-new" type="button" aria-label="新建对话">＋</button>
+      </div>
+      <button class="history-mobile-toggle" type="button" aria-expanded="false">查看历史记录</button>
+      <div class="history-list" aria-live="polite"></div>
+      <div class="history-empty">
+        <div class="history-empty-mark">穗</div>
+        <strong>还没有问答记录</strong>
+        <p>向小穗提问后，对话会自动保存在这里。</p>
+      </div>
+      <button class="history-clear" type="button">清空全部记录</button>
+    </aside>
 
-    <div class="reveal">
-      <div class="chat-shell">
-        <div class="chat-header">
-          <div class="chat-avatar mascot-avatar"><img src="images/xiaosui-assistant.png" alt="小穗"></div>
-          <div>
-          <div class="chat-title">小穗 · 膳食助手</div>
-            <div class="chat-status">在线 · 基于本地餐食数据库</div>
+    <div class="chat-shell chat-shell-large">
+      <div class="chat-header">
+        <div class="chat-avatar mascot-avatar"><img src="images/xiaosui-assistant.png" alt="小穗"></div>
+        <div>
+          <div class="chat-title">和小穗聊聊</div>
+          <div class="chat-status">随时可以提问</div>
+        </div>
+      </div>
+
+      <div class="chat-body">
+        <div class="msg">
+          <div class="msg-avatar mascot-avatar"><img src="images/xiaosui-assistant.png" alt="小穗"></div>
+          <div class="msg-bubble">
+            你好，我是小穗。你可以问我这顿饭的营养、今天吃得是否均衡，或者下一餐该怎么搭配。
           </div>
         </div>
-
-        <div class="chat-body">
-          <div class="msg">
-            <div class="msg-avatar mascot-avatar"><img src="images/xiaosui-assistant.png" alt="小穗"></div>
-            <div class="msg-bubble">
-              你好，我是小穗。我可以帮你 <b>解读本餐营养</b>、<b>评价今日膳食</b>、
-              <b>推荐下一餐</b>（含粤式替代方案），以及 <b>提醒过敏与营养失衡</b>。
-              <br><br>试试点击下面的快捷问题吧 👇
-            </div>
+        <div class="msg">
+          <div class="msg-avatar mascot-avatar"><img src="images/xiaosui-assistant.png" alt="小穗"></div>
+          <div class="msg-bubble">
+            例如：<b>“今天午餐吃了煲仔饭，晚餐怎么安排？”</b>
           </div>
         </div>
+      </div>
 
-        <div class="quick-questions">
-          <button class="quick-btn" data-reply="本餐营养">🥗 本餐营养</button>
-          <button class="quick-btn" data-reply="今日膳食">📊 今日膳食</button>
-          <button class="quick-btn" data-reply="推荐晚餐">🍲 推荐晚餐</button>
-          <button class="quick-btn" data-reply="健康提醒">⚠️ 健康提醒</button>
-        </div>
+      <div class="quick-questions" aria-label="快捷问题">
+        <button class="quick-btn" data-reply="本餐营养">本餐营养怎么样？</button>
+        <button class="quick-btn" data-reply="今日膳食">今天吃得均衡吗？</button>
+        <button class="quick-btn" data-reply="推荐晚餐">推荐一份粤式晚餐</button>
+        <button class="quick-btn" data-reply="健康提醒">有哪些需要注意？</button>
+      </div>
 
-        <div class="chat-input">
-          <input type="text" placeholder="输入你的问题，比如「今天吃太咸了怎么办？」">
-          <button class="chat-send">发送</button>
-        </div>
+      <div class="chat-input">
+        <input type="text" aria-label="向小穗提问" placeholder="输入你的问题，例如：减脂期间能吃肠粉吗？">
+        <button class="chat-send">发送</button>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<p class="assistant-disclaimer">原型演示：仅提供一般性膳食管理建议，不替代医生诊断或注册营养师服务。</p>
-
-<!-- 使用场景 -->
-<section class="section">
-  <div class="section-inner">
-    <div class="section-head reveal">
-      <span class="section-tag">典型场景</span>
-      <h2>助手最擅长解决这四类问题</h2>
-      <p>每一类都对应一个具体的用户困扰</p>
-    </div>
-    <div class="grid-2 reveal">
-      <div class="card">
-        <div class="card-icon">😕</div>
-        <h3>"这餐是不是吃多了？"</h3>
-        <p>助手：本餐 612 kcal，占今日目标 34%，蛋白质达标但脂肪偏高，钠接近单餐上限。
-           下一餐建议清淡，减少油盐即可。</p>
-      </div>
-      <div class="card">
-        <div class="card-icon blue">🤷</div>
-        <h3>"今天吃得健康吗？"</h3>
-        <p>助手：今日累计 1650 kcal，达成 82%。蔬菜偏少（240g，目标 300-500g），
-           水果缺失。整体评分 B，主要问题是膳食纤维不足。</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🍽️</div>
-        <h3>"晚上吃什么好？"</h3>
-        <p>助手：推荐清蒸鲈鱼 + 蒜蓉西兰花 + 糙米饭 + 木瓜，热量 520 kcal，
-           可补充蛋白质 32g、膳食纤维 8g。粤式替代：白灼菜心 + 蒸滑鸡 + 冬瓜薏米汤。</p>
-      </div>
-      <div class="card">
-        <div class="card-icon blue">⚠️</div>
-        <h3>"我有虾过敏，怎么办？"</h3>
-        <p>助手：已在过敏原档案标注"虾"。识别本餐时检测到虾，已高亮提示。
-           本餐钠含量偏高，高血压/心血管疾病人群请注意控盐。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section section-alt">
-  <div class="section-inner text-center reveal">
-    <h2 style="font-size:32px;margin-bottom:16px">从"记录"到"决策"，一步到位</h2>
-    <p style="color:var(--gray-500);margin-bottom:28px">
-      穗食拍希望做的，不是又一款记录工具，而是让广州人更容易“吃得明白”的AI膳食搭子
-    </p>
-    <a href="index.html" class="btn btn-primary">回到首页 →</a>
-    <a href="solution.html" class="btn btn-secondary">💡 查看完整解决方案</a>
-  </div>
-</section>
+  <p class="assistant-disclaimer">仅提供一般性膳食管理建议，不替代医生诊断或注册营养师服务。</p>
+</main>
 
 <footer class="footer">
-  <div>"穗"食拍，AI来算 · 广州商学院 · 挑战杯参赛作品 · 2026</div>
-  <div style="margin-top:8px">数据来源：广州6区1248份有效问卷 + 10款样本应用1352条有效公开评论</div>
+  <div>“穗”食拍，AI来算 · 广州商学院 · 挑战杯参赛作品 · 2026</div>
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/desktop-pet.js"></script>
 </body>
 </html>

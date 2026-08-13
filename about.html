@@ -5,8 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>膳食简介 · 穗食拍AI来算</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/desktop-pet.css">
+<link rel="stylesheet" href="css/content-enhance.css">
 </head>
-<body>
+<body class="content-page">
 
 <nav class="nav">
   <div class="nav-inner">
@@ -26,14 +28,20 @@
   </div>
 </nav>
 
-<section class="hero" style="padding:80px 24px 60px">
+<section class="hero content-hero">
   <div class="hero-inner">
-    <div class="hero-badge">📖 概念·功能·场景</div>
-    <h1>什么是<span class="grad">AI膳食管理</span></h1>
-    <p class="lead">
-      用人工智能帮你"吃得更明白"——拍照识别食物、自动记录营养、生成个性化食谱、追踪健康目标。
-      从"吃饱"到"吃对"，AI正在改变我们的餐桌。
-    </p>
+    <div class="hero-copy">
+      <div class="hero-badge">AI 膳食管理基础</div>
+      <h1>让每一餐都<span class="grad hero-line">有据可循</span></h1>
+      <p class="lead">拍照识别食物，记录营养摄入，再依据个人目标给出下一餐建议。把复杂的膳食管理变成日常习惯。</p>
+    </div>
+    <figure class="hero-media organic-accent">
+      <img src="images/hero-morning-kitchen.png" alt="晨间厨房中的健康餐食" width="1400" height="1000">
+      <figcaption class="hero-proof">
+        <span class="hero-proof-item"><strong>3 秒</strong><span>完成一次餐食记录</span></span>
+        <span class="hero-proof-item"><strong>4 类</strong><span>能力形成管理闭环</span></span>
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -41,30 +49,44 @@
 <section class="section">
   <div class="section-inner">
     <div class="section-head reveal">
-      <span class="section-tag">核心功能</span>
+      <span class="section-tag">核心能力</span>
       <h2>四大能力，覆盖膳食管理全链路</h2>
-      <p>识别 · 记录 · 推荐 · 管理，闭环形成个人化健康饮食工具</p>
+      <p>从识别到建议，每一步都服务于更准确、更容易坚持的饮食记录。</p>
     </div>
     <div class="grid-4 reveal">
       <div class="card">
-        <div class="card-icon">📷</div>
+        <div class="feature-mark">识</div>
         <h3>食物识别</h3>
         <p>拍照识别菜品与食材，自动估算份量与热量，几秒完成一餐的营养记录。</p>
       </div>
       <div class="card">
-        <div class="card-icon blue">📋</div>
+        <div class="feature-mark">记</div>
         <h3>营养记录</h3>
         <p>热量、蛋白质、脂肪、碳水、钠等关键指标自动累加，天/周/月维度可视化。</p>
       </div>
       <div class="card">
-        <div class="card-icon">🍲</div>
+        <div class="feature-mark">荐</div>
         <h3>个性化推荐</h3>
         <p>基于身体数据、健康目标和当日缺口，生成下一餐建议与粤式替代方案。</p>
       </div>
       <div class="card">
-        <div class="card-icon blue">📊</div>
+        <div class="feature-mark">管</div>
         <h3>健康管理</h3>
         <p>追踪体重、体脂、目标达成率，配合智能提醒与打卡功能，让改变可持续。</p>
+      </div>
+    </div>
+    <div class="ring-board mt-6 reveal" aria-label="示例日营养完成情况">
+      <div style="position:relative">
+        <div class="nutrition-ring" style="--ring-value:93%"></div>
+        <div class="ring-center" style="inset:50% auto auto 50%;transform:translate(-50%,-50%)"><strong>93%</strong>今日热量目标</div>
+      </div>
+      <div>
+        <h3 style="font-size:26px;margin-bottom:10px">营养信息，不只是一串数字</h3>
+        <p style="color:var(--content-muted);margin-bottom:18px">以页面中的一日场景为例，1680 kcal 对应 1800 kcal 日目标。环图用于快速理解完成度，具体建议仍结合蛋白质、蔬菜和钠摄入判断。</p>
+        <div class="ring-metrics">
+          <div class="ring-metric"><strong>75 g</strong><span>蛋白质目标</span></div>
+          <div class="ring-metric"><strong>400 g</strong><span>蔬菜目标</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -74,9 +96,9 @@
 <section class="section section-alt">
   <div class="section-inner">
     <div class="section-head reveal">
-      <span class="section-tag blue">使用场景</span>
+      <span class="section-tag blue">一天如何使用</span>
       <h2>一天的AI膳食管理是什么样</h2>
-      <p>把"记录"从繁琐变成三秒完成，把"建议"从模糊变成可执行</p>
+      <p>记录更快，建议更具体，变化也更容易被看见。</p>
     </div>
     <div class="reveal">
       <div class="timeline">
@@ -111,7 +133,7 @@
           <div class="timeline-year">22:00 · 今日总结</div>
           <div class="timeline-text">
             收到今日饮食报告：<b>整体评分 A</b>。系统标注"钠摄入略高，明日建议减盐"，
-            并同步至健康档案。<em>——这就是AI膳食管理的日常。</em>
+            并同步至健康档案。这就是AI膳食管理的日常。
           </div>
         </div>
       </div>
@@ -135,5 +157,6 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/desktop-pet.js"></script>
 </body>
 </html>
