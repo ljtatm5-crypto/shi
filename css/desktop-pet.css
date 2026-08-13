@@ -66,7 +66,7 @@
   object-fit: cover;
   object-position: 50% 38%;
   border-radius: 42px 42px 28px 28px;
-  border: 2px solid rgba(255, 255, 255, 0.9);
+  border: 0;
   box-shadow: 0 7px 24px rgba(24, 82, 64, 0.17);
   pointer-events: none;
 }
@@ -105,10 +105,9 @@
 }
 
 .desktop-pet-root.pet-panel-open .desktop-pet-launcher img {
-  border-color: rgba(24, 122, 102, 0.48);
+  border-color: transparent;
 }
 
-.desktop-pet-launcher:focus-visible,
 .desktop-pet-panel button:focus-visible,
 .desktop-pet-panel textarea:focus-visible,
 .desktop-pet-recall:focus-visible {
@@ -116,14 +115,26 @@
   outline-offset: 3px;
 }
 
+.desktop-pet-launcher:focus-visible {
+  outline: 0;
+}
+
+.desktop-pet-launcher:focus-visible img {
+  box-shadow: 0 7px 24px rgba(24, 82, 64, 0.2), 0 0 0 3px rgba(255,255,255,.92);
+}
+
 .desktop-pet-panel {
   position: fixed;
   z-index: 981;
   display: grid;
   grid-template-rows: auto minmax(130px, 1fr) auto auto auto auto;
-  width: min(360px, calc(100vw - 24px));
-  max-height: min(540px, calc(100dvh - 24px));
+  width: min(var(--pet-panel-width, 360px), calc(100vw - 24px));
+  height: var(--pet-panel-height, auto);
+  min-width: min(320px, calc(100vw - 24px));
+  max-width: calc(100vw - 24px);
+  max-height: calc(100dvh - 24px);
   overflow: hidden;
+  resize: both;
   border: 1px solid rgba(24, 91, 73, 0.17);
   border-radius: var(--pet-radius);
   background: var(--pet-surface);
@@ -418,8 +429,12 @@
   .desktop-pet-panel {
     grid-template-rows: auto minmax(120px, 1fr) auto auto auto auto;
     width: calc(100vw - 20px);
+    height: auto;
+    min-width: 0;
+    min-height: 0;
     max-height: min(480px, calc(100dvh - 20px));
     border-radius: 14px;
+    resize: none;
   }
 
   .desktop-pet-panel-foot {

@@ -203,7 +203,9 @@
       x: Number.isFinite(storedState.x) ? storedState.x : null,
       y: Number.isFinite(storedState.y) ? storedState.y : null,
       visible: storedState.visible !== false,
-      panelOpen: storedState.panelOpen === true
+      panelOpen: storedState.panelOpen === true,
+      panelWidth: Number.isFinite(storedState.panelWidth) ? storedState.panelWidth : null,
+      panelHeight: Number.isFinite(storedState.panelHeight) ? storedState.panelHeight : null
     };
     var storedMessages = readJson(CHAT_KEY, []);
     var chat = Array.isArray(storedMessages) ? storedMessages.filter(function (item) {
@@ -231,6 +233,24 @@
 
     function saveState() {
       writeJson(STATE_KEY, state);
+    }
+
+    function applyPanelSize() {
+      if (window.innerWidth <= 600) {
+        ui.panel.style.removeProperty("--pet-panel-width");
+        ui.panel.style.removeProperty("--pet-panel-height");
+        return;
+      }
+      var maxWidth = Math.max(320, window.innerWidth - PET_MARGIN * 2);
+      var maxHeight = Math.max(410, window.innerHeight - PET_MARGIN * 2);
+      if (state.panelWidth !== null) {
+        state.panelWidth = Math.round(clamp(state.panelWidth, 320, maxWidth));
+        ui.panel.style.setProperty("--pet-panel-width", state.panelWidth + "px");
+      }
+      if (state.panelHeight !== null) {
+        state.panelHeight = Math.round(clamp(state.panelHeight, 410, maxHeight));
+        ui.panel.style.setProperty("--pet-panel-height", state.panelHeight + "px");
+      }
     }
 
     function placePet(x, y, persist) {
@@ -390,6 +410,7 @@
     var defaultX = window.innerWidth - size.width - 22;
     var defaultY = document.body.classList.contains("assistant-page") ? 92 : window.innerHeight - size.height - 24;
     placePet(state.x === null ? defaultX : state.x, state.y === null ? defaultY : state.y, false);
+    applyPanelSize();
     avoidAssistantInput(false);
     renderMessages();
     setVisible(state.visible);
@@ -485,10 +506,25 @@
       if (event.key === "Escape" && state.panelOpen) setOpen(false, false);
     });
     window.addEventListener("resize", function () {
+      applyPanelSize();
       placePet(state.x, state.y, false);
       avoidAssistantInput(false);
       placePanel();
     }, { passive: true });
+
+    if ("ResizeObserver" in window) {
+      var resizeSaveTimer = 0;
+      new ResizeObserver(function () {
+        if (window.innerWidth <= 600 || ui.panel.hidden) return;
+        state.panelWidth = Math.round(ui.panel.offsetWidth);
+        state.panelHeight = Math.round(ui.panel.offsetHeight);
+        window.requestAnimationFrame(placePanel);
+        window.clearTimeout(resizeSaveTimer);
+        resizeSaveTimer = window.setTimeout(function () {
+          saveState();
+        }, 180);
+      }).observe(ui.panel);
+    }
 
     if (document.body.classList.contains("assistant-page") && "IntersectionObserver" in window) {
       var assistantInput = document.querySelector(".chat-shell-large .chat-input, .assistant-console .chat-input");
