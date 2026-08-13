@@ -33,9 +33,9 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  min-height: 72px;
-  border-bottom: 1px solid rgba(27, 67, 50, .08);
-  background: rgba(250, 250, 245, .88);
+  min-height: 78px;
+  border-bottom: 3px solid #e2f1f5;
+  background: rgba(255,255,255,.96);
   box-shadow: none;
   -webkit-backdrop-filter: blur(16px) saturate(130%);
   backdrop-filter: blur(16px) saturate(130%);
@@ -45,10 +45,10 @@
 .assistant-page .nav-inner {
   width: min(1320px, calc(100% - 48px));
   max-width: none;
-  min-height: 72px;
+  min-height: 78px;
   margin-inline: auto;
-  padding: 8px 0;
-  gap: 22px;
+  padding: 9px 0;
+  gap: 26px;
 }
 
 .content-page .nav-logo,
@@ -122,38 +122,41 @@
   display: flex;
   flex: 1;
   justify-content: center;
-  gap: 2px;
+  gap: 7px;
 }
 
 .content-page .nav-links a,
 .assistant-page .nav-links a {
   position: relative;
-  padding: 9px 11px;
-  border-radius: 0;
-  color: #304d45;
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 17px;
+  border-radius: 12px;
+  color: #3c4140;
   background: transparent;
-  font-size: 14px;
+  font-size: 15px;
   white-space: nowrap;
+  transition: color .2s ease, background .2s ease, transform .2s ease;
 }
 
 .content-page .nav-links a:hover,
-.assistant-page .nav-links a:hover,
+.assistant-page .nav-links a:hover {
+  color: var(--shell-mint-dark);
+  background: #edf8f5;
+}
+
 .content-page .nav-links a.active,
 .assistant-page .nav-links a.active {
-  color: var(--shell-mint-dark);
-  background: transparent;
+  color: #fff;
+  background: linear-gradient(135deg, #2f7d3d 0%, #1477c9 100%);
+  box-shadow: 0 8px 20px rgba(30,104,111,.16);
 }
 
 .content-page .nav-links a.active::after,
 .assistant-page .nav-links a.active::after {
-  content: "";
-  position: absolute;
-  right: 12px;
-  bottom: 1px;
-  left: 12px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--shell-mint);
+  display: none;
 }
 
 .content-page .nav-action,
@@ -470,12 +473,12 @@
 .assistant-page .assistant-workspace {
   width: min(1320px, calc(100% - 48px));
   max-width: none;
-  height: calc(100dvh - 72px);
+  height: calc(100dvh - 78px);
   display: grid;
   grid-template-rows: 170px minmax(0, 1fr) auto;
   gap: 10px;
   margin: 0 auto;
-  min-height: calc(100dvh - 72px);
+  min-height: calc(100dvh - 78px);
   padding: 12px 0;
 }
 
@@ -705,6 +708,11 @@
   .assistant-page .nav-logo,
   .content-page .nav-links a,
   .assistant-page .nav-links a { color: #304d45; }
+  .content-page .nav-links a.active,
+  .assistant-page .nav-links a.active {
+    color: #fff;
+    background: linear-gradient(135deg, #2f7d3d 0%, #1477c9 100%);
+  }
   .content-page .section-alt { background: linear-gradient(135deg, rgba(232,244,248,.76), rgba(239,249,245,.82)); }
   .content-page .content-hero { background: #f4fbf7; }
   .content-page .card,
