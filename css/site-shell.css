@@ -150,7 +150,7 @@
 .content-page .nav-links a.active,
 .assistant-page .nav-links a.active {
   color: #fff;
-  background: linear-gradient(135deg, #2f7d3d 0%, #1477c9 100%);
+  background: #145b49;
   box-shadow: 0 8px 20px rgba(30,104,111,.16);
 }
 
@@ -711,7 +711,7 @@
   .content-page .nav-links a.active,
   .assistant-page .nav-links a.active {
     color: #fff;
-    background: linear-gradient(135deg, #2f7d3d 0%, #1477c9 100%);
+    background: #145b49;
   }
   .content-page .section-alt { background: linear-gradient(135deg, rgba(232,244,248,.76), rgba(239,249,245,.82)); }
   .content-page .content-hero { background: #f4fbf7; }
