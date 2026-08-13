@@ -7,14 +7,15 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/desktop-pet.css">
 <link rel="stylesheet" href="css/content-enhance.css">
+<link rel="stylesheet" href="css/site-shell.css">
 </head>
 <body class="content-page">
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <div class="nav-logo-mark">穗</div>
-      <span>穗食拍 · AI来算</span>
+    <a href="index.html" class="nav-logo" aria-label="穗食拍首页">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="brand-copy"><strong>穗食拍</strong><small>AI膳食管理</small></span>
     </a>
     <div class="nav-links">
       <a href="index.html">首页</a>
@@ -25,6 +26,7 @@
       <a href="product.html" class="active">产品体验</a>
       <a href="assistant.html">智能助手</a>
     </div>
+    <a class="nav-action" href="product.html">开始识餐</a>
   </div>
 </nav>
 
@@ -224,8 +226,15 @@
 
 <p class="prototype-note">原型演示 · 当前识别结果与营养数据为示例估算，不构成医疗或诊断建议。</p>
 
-<footer class="footer">
-  <div>"穗"食拍，AI来算 · 广州商学院 · 挑战杯参赛作品 · 2026</div>
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="site-footer-brand">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <div><strong>穗食拍</strong><small>AI膳食管理</small></div>
+    </div>
+    <p>广州商学院挑战杯参赛作品 · 2026</p>
+    <nav aria-label="页脚导航"><a href="solution.html">解决方案</a><a href="product.html">产品体验</a><a href="assistant.html">智能助手</a></nav>
+  </div>
 </footer>
 
 <script src="js/main.js"></script>
