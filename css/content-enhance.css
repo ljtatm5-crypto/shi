@@ -377,11 +377,13 @@
 }
 .content-page .step {
   min-height: 82px;
-  border: 0;
+  border: 1px solid rgba(24, 122, 102, .18);
   border-radius: 14px;
-  background: transparent;
+  background: #e7f5ef;
+  color: #17332d;
 }
-.content-page .step.active { box-shadow: none; background: var(--green-soft); color: var(--green); }
+.content-page .step.active { box-shadow: 0 6px 18px rgba(24, 122, 102, .18); background: #cfe9dc; color: #0d4a3c; border-color: rgba(24, 122, 102, .35); }
+.content-page .step-num { color: inherit; }
 .content-page .step-num { font-size: 15px; font-weight: 850; }
 .content-page .step-panel {
   border: 1px solid var(--content-line);
@@ -401,7 +403,7 @@
   position: relative;
 }
 .content-page .photo-panel img { width: 100%; height: 100%; min-height: 310px; object-fit: cover; }
-.content-page .upload-icon { width: 52px; height: 52px; margin: 0 auto 12px; object-fit: contain; }
+.content-page .upload-icon { display: block; width: 56px; height: 56px; margin: 0 auto 12px; color: var(--shell-mint-dark, #187A66); }
 
 .content-page .prototype-note {
   max-width: 1160px;
@@ -506,7 +508,7 @@
   .content-page .nutrition-table td { border-color: rgba(125, 211, 192, .12); }
   .content-page .nutrition-table th { background: #1a3a31; }
   .content-page .step-visual [style*="background:#fff"] { background: #1b3a31 !important; color: #dce9e4; }
-  .content-page .upload-box { background: #1a3a31; }
-  .content-page .upload-box:hover { background: #20483c; }
+  .content-page .upload-box { background: #eaf5ef; color: #17332d; }
+  .content-page .upload-box:hover { background: #d8ecdd; }
   .content-page .persona-visual { background: #1a3a31 !important; }
 }
