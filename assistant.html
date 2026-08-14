@@ -67,17 +67,18 @@
   body.content-page .history-item small { font-size: 11px; color: #8a7f5c; }
   body.content-page .history-empty {
     flex: 1 1 auto; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; padding: 24px; text-align: center;
+    align-items: center; justify-content: flex-start;
+    min-height: 300px; padding: 60px 24px 24px; text-align: center; gap: 4px;
   }
   body.content-page .history-empty .history-empty-mark {
-    width: 48px; height: 48px; border-radius: 12px;
+    width: 56px; height: 56px; border-radius: 14px;
     background: linear-gradient(135deg, #ffd166, #f4a261);
     display: flex; align-items: center; justify-content: center;
-    margin-bottom: 12px; opacity: 0.9;
+    margin-bottom: 16px; opacity: 0.9;
   }
-  body.content-page .history-empty .history-empty-mark img { width: 24px; height: 24px; }
-  body.content-page .history-empty strong { font-size: 14px; color: #2c2a1e; margin-bottom: 4px; }
-  body.content-page .history-empty p { margin: 0; font-size: 12px; color: #8a7f5c; }
+  body.content-page .history-empty .history-empty-mark img { width: 28px; height: 28px; }
+  body.content-page .history-empty strong { font-size: 15px; color: #2c2a1e; margin-bottom: 4px; }
+  body.content-page .history-empty p { margin: 0; font-size: 13px; color: #8a7f5c; line-height: 1.6; max-width: 200px; }
   body.content-page .history-clear {
     background: transparent; border: none; color: #a89b70; font-size: 12px;
     cursor: pointer; padding: 12px 20px; border-top: 1px solid #e5dcc4;
