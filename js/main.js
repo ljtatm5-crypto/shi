@@ -108,6 +108,46 @@ function fillMealForm(result) {
   }
 }
 
+function collectMealSnapshot() {
+  const dish = document.querySelector('#meal-correction input[name="dish"]')?.value?.trim();
+  const weight = document.querySelector('#meal-correction input[name="weight"]')?.value?.trim();
+  const ingredients = document.querySelector('#meal-correction textarea[name="ingredients"]')?.value?.trim();
+  const nutrition = {};
+  document.querySelectorAll("[data-nutrition]").forEach((el) => {
+    const key = el.getAttribute("data-nutrition");
+    if (key && !(key in nutrition)) nutrition[key] = el.textContent.trim();
+  });
+  return { dish, weight_g: weight, ingredients, nutrition };
+}
+
+function initSendMealToAssistant() {
+  const btn = document.querySelector(".meal-send-to-assistant");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    const meal = collectMealSnapshot();
+    if (!meal.dish) { window.alert("请先在第三步确认菜品，或上传餐食完成识别。"); return; }
+    try { sessionStorage.setItem("suishipai:pending-meal", JSON.stringify(meal)); } catch (e) {}
+    window.location.href = "assistant.html";
+  });
+}
+
+function initAssistantMealHandoff() {
+  const chatBody = document.querySelector(".chat-body");
+  const input = document.querySelector(".chat-input input");
+  const send = document.querySelector(".chat-send");
+  if (!chatBody || !input || !send) return;
+  let payload;
+  try { payload = JSON.parse(sessionStorage.getItem("suishipai:pending-meal") || "null"); } catch (e) { payload = null; }
+  if (!payload || !payload.dish) return;
+  sessionStorage.removeItem("suishipai:pending-meal");
+  const n = payload.nutrition || {};
+  const question = `我刚刚吃了「${payload.dish}」（约 ${payload.weight_g || "?"} g，食材：${payload.ingredients || "未填"}）。经AI估算营养约为：热量 ${n.calories_kcal || "?"} kcal、蛋白质 ${n.protein_g || "?"} g、脂肪 ${n.fat_g || "?"} g、碳水 ${n.carbohydrate_g || "?"} g、钠 ${n.sodium_mg || "?"} mg。请帮我解读这一餐，并给出下一餐的搭配建议。`;
+  setTimeout(() => {
+    input.value = question;
+    send.click();
+  }, 400);
+}
+
 function initMealUpload() {
   const input = document.querySelector("#meal-upload");
   const preview = document.querySelector(".upload-preview");
@@ -142,6 +182,7 @@ function initMealUpload() {
       const summary = document.querySelector(".nutrition-ai-summary");
       if (summary) summary.textContent = `${result.summary || "识别完成。"} 结果为 AI 估算值。`;
       if (status) status.textContent = `识别置信度 ${Math.round((result.confidence || 0) * 100)}%，请到第三步确认菜品与份量。`;
+      setTimeout(() => { document.querySelector('.step[data-step="3"]')?.click(); }, 1200);
     } catch (error) {
       if (status) status.textContent = (error && error.message) || "识餐服务暂时不可用，请到第三步手动填写菜品与份量。";
     }
@@ -175,6 +216,7 @@ function initMealRecalculation() {
       if (summary) summary.textContent = `${result.summary || "已完成营养估算。"} ${result.suggestion || ""} 结果为AI估算值。`;
       status.textContent = "估算完成，已更新第四步营养卡片。";
       document.querySelector('.step[data-step="4"]')?.click();
+      setTimeout(() => { document.querySelector('.step[data-step="5"]')?.click(); }, 2500);
     } catch (error) {
       status.textContent = error.message || "营养估算服务暂时不可用，请稍后再试。";
     } finally {
@@ -427,7 +469,9 @@ document.addEventListener("DOMContentLoaded", () => {
   initStepFlow();
   initMealUpload();
   initMealRecalculation();
+  initSendMealToAssistant();
   initChat();
   initChatHistory();
+  initAssistantMealHandoff();
   initFloatingMascot();
 });
