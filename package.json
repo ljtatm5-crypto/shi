@@ -1,0 +1,20 @@
+{
+  "name": "suishipai-ai-gateway",
+  "version": "1.0.0",
+  "private": true,
+  "description": "穗食拍 AI 网关：小穗问答与营养估算，部署于阿里云函数计算 FC Web 函数。",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@alicloud/fc20230330": "^4.7.9",
+    "@alicloud/openapi-client": "^0.4.15",
+    "@alicloud/sts20150401": "^1.2.0",
+    "@alicloud/tea-util": "^1.4.11",
+    "express": "^4.19.2"
+  }
+}

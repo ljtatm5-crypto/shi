@@ -5,3 +5,7 @@ qa-unified/
 .env
 .env.local
 .vercel/
+node_modules/
+fc-deploy.zip
+fc-node20.zip
+fc-node20-stage-*/
