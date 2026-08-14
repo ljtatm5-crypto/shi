@@ -9,3 +9,4 @@ node_modules/
 fc-deploy.zip
 fc-node20.zip
 fc-node20-stage-*/
+*.zip

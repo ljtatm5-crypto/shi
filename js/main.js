@@ -68,25 +68,61 @@ function initStepFlow() {
   });
 }
 
+function fillNutritionCard(nutrition) {
+  if (!nutrition) return;
+  Object.keys(nutrition).forEach((key) => {
+    const target = document.querySelector(`[data-nutrition="${key}"]`);
+    if (target) target.textContent = Math.round(Number(nutrition[key]) || 0);
+  });
+}
+
+function fillMealForm(result) {
+  const dishInput = document.querySelector('#meal-correction input[name="dish"]');
+  const weightInput = document.querySelector('#meal-correction input[name="weight"]');
+  const ingredientsInput = document.querySelector('#meal-correction textarea[name="ingredients"]');
+  if (dishInput && result.dish) dishInput.value = result.dish;
+  if (weightInput && Number.isFinite(result.estimated_weight_g)) weightInput.value = result.estimated_weight_g;
+  if (ingredientsInput && Array.isArray(result.ingredients)) {
+    ingredientsInput.value = result.ingredients.map((item) => `${item.name}${item.weight_g}g`).join("、");
+  }
+}
+
 function initMealUpload() {
   const input = document.querySelector("#meal-upload");
   const preview = document.querySelector(".upload-preview");
   if (!input || !preview) return;
-  input.addEventListener("change", () => {
+  input.addEventListener("change", async () => {
     const file = input.files?.[0];
     if (!file) return;
-    if (file.size > 10 * 1024 * 1024) {
-      window.alert("图片不能超过 10MB，请重新选择。");
+    if (file.size > 8 * 1024 * 1024) {
+      window.alert("图片不能超过 8MB，请重新选择。");
       input.value = "";
       return;
     }
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-      preview.src = reader.result;
-      preview.hidden = false;
-      document.querySelector('.step[data-step="2"]')?.click();
+    const dataUrl = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.addEventListener("load", () => resolve(reader.result));
+      reader.addEventListener("error", () => reject(new Error("图片读取失败")));
+      reader.readAsDataURL(file);
     });
-    reader.readAsDataURL(file);
+    preview.src = dataUrl;
+    preview.hidden = false;
+    document.querySelector('.step[data-step="2"]')?.click();
+
+    const status = document.querySelector(".meal-api-status");
+    if (status) status.textContent = "AI 正在识别菜品与食材……";
+    if (!window.SuishipaiAPI || typeof window.SuishipaiAPI.analyze !== "function") return;
+    try {
+      const response = await window.SuishipaiAPI.analyze(dataUrl);
+      const result = response.result || {};
+      fillMealForm(result);
+      fillNutritionCard(result.nutrition);
+      const summary = document.querySelector(".nutrition-ai-summary");
+      if (summary) summary.textContent = `${result.summary || "识别完成。"} 结果为 AI 估算值。`;
+      if (status) status.textContent = `识别置信度 ${Math.round((result.confidence || 0) * 100)}%，请到第三步确认菜品与份量。`;
+    } catch (error) {
+      if (status) status.textContent = (error && error.message) || "识餐服务暂时不可用，请到第三步手动填写菜品与份量。";
+    }
   });
 }
 
