@@ -76,6 +76,27 @@ function fillNutritionCard(nutrition) {
   });
 }
 
+function renderRecognizedList(result) {
+  const container = document.querySelector(".recognized-list");
+  if (!container) return;
+  const confidence = Math.round((result.confidence || 0) * 100);
+  const confColor = confidence >= 70 ? "var(--green)" : "var(--warning)";
+  const items = Array.isArray(result.ingredients) ? result.ingredients : [];
+  const rows = [
+    `<div style="background:#fff;padding:16px;border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow-sm)"><b style="color:${confColor}">${confidence >= 70 ? "✓" : "?"} ${escapeHtml(result.dish || "待确认菜品")}</b><span style="float:right;color:var(--gray-500);font-size:13px">置信度 ${confidence}%</span></div>`,
+  ];
+  items.forEach((item) => {
+    rows.push(`<div style="background:#fff;padding:12px 16px;border-radius:10px;margin-bottom:8px;box-shadow:var(--shadow-sm);font-size:14px"><span>${escapeHtml(item.name)}</span><span style="float:right;color:var(--gray-500)">约 ${item.weight_g} g</span></div>`);
+  });
+  container.innerHTML = rows.join("");
+}
+
+function escapeHtml(text) {
+  const span = document.createElement("span");
+  span.textContent = String(text == null ? "" : text);
+  return span.innerHTML;
+}
+
 function fillMealForm(result) {
   const dishInput = document.querySelector('#meal-correction input[name="dish"]');
   const weightInput = document.querySelector('#meal-correction input[name="weight"]');
@@ -115,6 +136,7 @@ function initMealUpload() {
     try {
       const response = await window.SuishipaiAPI.analyze(dataUrl);
       const result = response.result || {};
+      renderRecognizedList(result);
       fillMealForm(result);
       fillNutritionCard(result.nutrition);
       const summary = document.querySelector(".nutrition-ai-summary");
