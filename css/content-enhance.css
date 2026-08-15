@@ -13,7 +13,7 @@
 
 .content-page .nav { box-shadow: 0 8px 30px rgba(23, 51, 45, .035); }
 .content-page .section { padding-block: clamp(54px, 7vw, 82px); }
-.product-page.content-page .content-hero + .section { padding-top: clamp(54px, 7vw, 82px); padding-bottom: clamp(54px, 7vw, 82px); }
+.product-page.content-page .content-hero + .section { padding-top: clamp(16px, 2.5vw, 32px); padding-bottom: clamp(54px, 7vw, 82px); }
 .product-page.content-page .content-hero { min-height: min(690px, calc(100dvh - 60px)) !important; padding-bottom: clamp(48px, 6vw, 76px) !important; }
 .content-page .section-alt { background: rgba(255, 255, 255, .66); }
 .content-page .section-inner { max-width: 1160px; }
