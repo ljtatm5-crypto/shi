@@ -62,6 +62,9 @@
   min-height: 720px;
   padding: 60px 24px 84px;
 }
+.content-page:not(.product-page) .content-hero + .section {
+  padding-top: clamp(20px, 3vw, 36px);
+}
 .content-page:not(.product-page) .content-hero .hero-inner {
   grid-template-columns: minmax(0, 1fr) minmax(480px, .92fr);
   gap: clamp(44px, 6vw, 90px);
