@@ -393,37 +393,49 @@
 }
 .content-page .step-visual { background: rgba(234, 248, 244, .56); }
 .content-page .step-panel[data-step="2"] .step-visual { background: rgba(228, 244, 236, .62); aspect-ratio: 1; max-width: 420px; margin-inline: auto; }
-.content-page .step-panel[data-step="1"] .step-visual { background: transparent; padding: 0; min-height: 0; }
-.content-page .step-panel[data-step="1"] .step-visual > .upload-box { width: 100%; }
+.content-page .step-panel[data-step="1"] .step-visual { background: transparent; padding: 0; min-height: 0; display: flex; justify-content: flex-start; }
 .content-page .step-panel[data-step="1"] .upload-box {
   box-sizing: border-box;
   border: 2px solid rgba(24, 122, 102, .45);
-  width: 100%;
-  max-width: 420px;
-  aspect-ratio: 1;
-  margin-left: 0;
-  padding: 24px;
+  background: var(--green-soft);
+  width: 320px;
+  height: 320px;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  margin: 0;
+  padding: 20px;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 10px;
   overflow: hidden;
+  flex-shrink: 0;
 }
 .content-page .step-panel[data-step="1"] .upload-box:has(.upload-preview:not([hidden])) {
   gap: 6px;
-  padding: 16px;
+  padding: 14px;
 }
 .content-page .step-panel[data-step="1"] .upload-box:has(.upload-preview:not([hidden])) p { display: none; }
 .content-page .step-panel[data-step="1"] .upload-icon {
-  display: block; width: 56px; height: 56px; margin: 0 auto;
+  display: block; width: 48px; height: 48px; margin: 0 auto;
   color: var(--shell-mint-dark, #187A66);
+  flex-shrink: 0;
+}
+.content-page .step-panel[data-step="1"] .upload-box p {
+  margin: 0;
+  text-align: center;
+  flex-shrink: 0;
 }
 .content-page .step-panel[data-step="1"] .upload-preview {
   width: 100%;
-  max-width: 260px;
-  aspect-ratio: 1;
+  height: 100%;
+  max-width: 280px;
+  max-height: 280px;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 12px;
-  flex-shrink: 1;
-  min-height: 0;
+  flex-shrink: 0;
+}
+@media (max-width: 480px) {
+  .content-page .step-panel[data-step="1"] .upload-box { width: 260px; height: 260px; }
 }
 .content-page .step-panel[data-step="2"] .recognized-placeholder {
   background: #f0f9f4 !important;
