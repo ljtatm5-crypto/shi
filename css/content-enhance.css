@@ -13,6 +13,7 @@
 
 .content-page .nav { box-shadow: 0 8px 30px rgba(23, 51, 45, .035); }
 .content-page .section { padding-block: clamp(54px, 7vw, 82px); }
+.content-page .content-hero + .section { padding-top: clamp(28px, 4vw, 46px); }
 .content-page .section-alt { background: rgba(255, 255, 255, .66); }
 .content-page .section-inner { max-width: 1160px; }
 .content-page .section-head {
@@ -371,10 +372,13 @@
 .content-page .step-flow {
   gap: 8px;
   padding: 10px;
+  margin-top: -18px;
+  margin-bottom: 28px;
   border: 1px solid var(--content-line);
   border-radius: var(--content-radius);
   background: rgba(255, 255, 255, .72);
 }
+.content-page .step-name { font-size: 16px; font-weight: 700; letter-spacing: .01em; }
 .content-page .step {
   min-height: 82px;
   border: 1px solid rgba(24, 122, 102, .18);
