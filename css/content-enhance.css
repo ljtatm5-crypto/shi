@@ -461,6 +461,7 @@
   box-shadow: none;
   color: #3a5a4e !important;
 }
+.product-page.content-page .step-panel[data-step="5"] .step-visual { background: transparent; padding: 0; }
 .content-page .step-body h3 { color: var(--content-ink); font-size: 26px; letter-spacing: -.025em; }
 .content-page .step-body p,
 .content-page .step-body li { color: var(--content-muted); }
