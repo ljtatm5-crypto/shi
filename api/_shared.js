@@ -35,7 +35,14 @@ function rateLimit(req, res, max = 20) {
 }
 
 function words(text) {
-  return String(text || "").toLowerCase().match(/[\u4e00-\u9fff]{2,}|[a-z0-9.%-]+/g) || [];
+  const source = String(text || "").toLowerCase();
+  const tokens = source.match(/[a-z0-9.%-]+/g) || [];
+  const cjk = source.match(/[\u4e00-\u9fff]+/g) || [];
+  cjk.forEach((seg) => {
+    if (seg.length <= 2) { tokens.push(seg); return; }
+    for (let i = 0; i < seg.length - 1; i += 1) tokens.push(seg.slice(i, i + 2));
+  });
+  return tokens;
 }
 
 function retrieve(query, limit = 4) {

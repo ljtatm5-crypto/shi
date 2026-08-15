@@ -48,9 +48,10 @@ python -m http.server 5500
 - `POST /api/recalculate-food`：用户确认菜品和重量后，由 DeepSeek 输出结构化营养估算。
 - `POST /api/analyze-food`：视觉模型预留接口。DeepSeek V4 官方 API 当前为文本输入，不能直接分析餐食照片。
 - `GET /api/health`：服务健康检查。
-- `data/research_chunks.json`：第一版静态项目知识库。
+- `data/research_chunks.json`：知识库分片（30 片，来源为两份实证报告，见 `data/raw/`）。
+- `docs/rag-pipeline.md`：RAG 全流程说明（分片 → 召回 → 重排 → 生成）。
 
-默认使用本地关键词召回。配置 Embedding 和 Reranker 环境变量后，会自动升级为向量 Top10 召回与 Top4 重排。
+默认使用本地关键词召回。配置 Embedding 和 Reranker 环境变量后，会自动升级为向量 Top10 召回与 Top4 重排。知识库更新与 embedding 批量生成见 `scripts/` 目录。
 
 ### Vercel 部署
 
