@@ -408,14 +408,22 @@
   overflow: hidden;
 }
 .content-page .step-panel[data-step="1"] .upload-box:has(.upload-preview:not([hidden])) {
-  aspect-ratio: auto; height: auto;
+  gap: 6px;
+  padding: 16px;
 }
+.content-page .step-panel[data-step="1"] .upload-box:has(.upload-preview:not([hidden])) p { display: none; }
 .content-page .step-panel[data-step="1"] .upload-icon {
   display: block; width: 56px; height: 56px; margin: 0 auto;
   color: var(--shell-mint-dark, #187A66);
 }
 .content-page .step-panel[data-step="1"] .upload-preview {
-  width: 250px; height: 250px; object-fit: cover; border-radius: 12px; margin-top: 10px;
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 1;
+  min-height: 0;
 }
 .content-page .step-panel[data-step="2"] .recognized-placeholder {
   background: #f0f9f4 !important;
