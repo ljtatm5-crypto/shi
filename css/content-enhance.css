@@ -401,12 +401,16 @@
   margin-left: 0;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
+.content-page .step-panel[data-step="1"] .upload-box:has(.upload-preview:not([hidden])) {
+  width: 100%; max-width: 420px; aspect-ratio: auto; height: auto;
+  padding: 12px; gap: 8px;
+}
 .content-page .step-panel[data-step="1"] .upload-icon {
   display: block; width: 56px; height: 56px; margin: 0 auto 12px;
   color: var(--shell-mint-dark, #187A66);
 }
 .content-page .step-panel[data-step="1"] .upload-preview {
-  width: 250px; height: 250px; object-fit: cover; border-radius: 12px;
+  width: 250px; height: 250px; object-fit: cover; border-radius: 12px; margin-top: 10px;
 }
 .content-page .step-panel[data-step="2"] .recognized-placeholder {
   background: #f0f9f4 !important;
