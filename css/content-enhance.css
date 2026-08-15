@@ -57,31 +57,8 @@
     linear-gradient(115deg, rgba(234, 248, 244, .96), rgba(247, 249, 245, .82)),
     var(--grad-soft);
 }
-/* Home-style roomy hero for the four content pages (product keeps its tuned layout). */
-.content-page:not(.product-page) .content-hero {
-  min-height: 720px;
-  padding: 60px 24px 84px;
-}
 .content-page:not(.product-page) .content-hero + .section {
-  padding-top: clamp(20px, 3vw, 36px);
-}
-.content-page:not(.product-page) .content-hero .hero-inner {
-  grid-template-columns: minmax(0, 1fr) minmax(480px, .92fr);
-  gap: clamp(44px, 6vw, 90px);
-}
-.content-page:not(.product-page) .hero h1 {
-  max-width: 760px;
-  font-size: clamp(48px, 5.3vw, 78px);
-}
-.content-page:not(.product-page) .hero p.lead {
-  max-width: 640px;
-  font-size: clamp(17px, 1.4vw, 20px);
-}
-.content-page:not(.product-page) .hero-media {
-  min-height: 520px;
-}
-.content-page:not(.product-page) .hero-media > img {
-  min-height: 520px;
+  padding-top: clamp(16px, 2.5vw, 32px);
 }
 .content-page .content-hero::before {
   background:
