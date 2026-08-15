@@ -391,6 +391,8 @@ function mdToHtml(md) {
   return html;
 }
 
+window.SuishipaiChatUtil = { mdToHtml, escapeChatText };
+
 async function askXiaosui(question) {
   if (!window.SuishipaiAPI) throw new Error("AI接口尚未加载");
   const history = chatHistoryForAPI();

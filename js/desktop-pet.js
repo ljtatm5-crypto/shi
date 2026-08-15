@@ -361,7 +361,12 @@
           alt: "小穗"
         }));
       }
-      var bubble = makeElement("div", "desktop-pet-bubble", { text: item.text });
+      var bubble = makeElement("div", "desktop-pet-bubble");
+      if (item.role === "bot" && window.SuishipaiChatUtil && typeof window.SuishipaiChatUtil.mdToHtml === "function") {
+        bubble.innerHTML = window.SuishipaiChatUtil.mdToHtml(item.text || "");
+      } else {
+        bubble.textContent = String(item.text || "");
+      }
       row.appendChild(bubble);
       ui.messages.appendChild(row);
     }

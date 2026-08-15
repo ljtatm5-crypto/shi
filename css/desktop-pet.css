@@ -315,6 +315,20 @@
   color: #0f3a30;
 }
 
+.desktop-pet-bubble p { margin: 0 0 6px; }
+.desktop-pet-bubble p:last-child { margin-bottom: 0; }
+.desktop-pet-bubble strong { color: #0e7a5c; font-weight: 600; }
+.desktop-pet-bubble ul,
+.desktop-pet-bubble ol { margin: 4px 0 6px; padding-left: 20px; }
+.desktop-pet-bubble li { margin: 2px 0; }
+.desktop-pet-bubble h2,
+.desktop-pet-bubble h3,
+.desktop-pet-bubble h4 { font-size: 13px; margin: 6px 0 4px; color: #0e5a44; }
+.desktop-pet-bubble code {
+  background: #f0f6f4; padding: 1px 4px; border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px;
+}
+
 .desktop-pet-typing {
   padding: 5px 14px 8px;
   background: #eaf9f4;
