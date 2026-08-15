@@ -13,8 +13,9 @@
 
 .content-page .nav { box-shadow: 0 8px 30px rgba(23, 51, 45, .035); }
 .content-page .section { padding-block: clamp(54px, 7vw, 82px); }
-.content-page .content-hero + .section { padding-top: 8px; padding-bottom: clamp(40px, 6vw, 68px); }
-.content-page .content-hero { padding-bottom: clamp(24px, 3vw, 40px); min-height: auto; }
+.content-page .content-hero + .section { padding-top: 0 !important; padding-bottom: clamp(40px, 6vw, 68px); }
+.content-page .content-hero { padding-bottom: 0 !important; min-height: auto !important; }
+.content-page .content-hero + .section > .section-inner > .step-flow.reveal:first-child { margin-top: -40px !important; }
 .content-page .section-alt { background: rgba(255, 255, 255, .66); }
 .content-page .section-inner { max-width: 1160px; }
 .content-page .section-head {
@@ -379,18 +380,18 @@
   border-radius: var(--content-radius);
   background: rgba(255, 255, 255, .72);
 }
-.content-page .step-name { font-size: 16px; font-weight: 700; letter-spacing: .01em; }
+.content-page .step-name { font-size: 18px !important; font-weight: 700 !important; letter-spacing: .01em; }
 .content-page .step {
-  min-height: 118px;
-  padding: 22px 14px;
+  min-height: 140px !important;
+  padding: 26px 16px !important;
   border: 1px solid rgba(24, 122, 102, .18);
   border-radius: 16px;
   background: #e7f5ef;
   color: #17332d;
 }
 .content-page .step.active { box-shadow: 0 6px 18px rgba(24, 122, 102, .18); background: #cfe9dc; color: #0d4a3c; border-color: rgba(24, 122, 102, .35); }
-.content-page .step-num { color: inherit; width: 44px; height: 44px; margin: 0 auto 12px; font-size: 17px; font-weight: 850; }
-.content-page .step-num img { width: 24px; height: 24px; }
+.content-page .step-num { color: inherit; width: 52px !important; height: 52px !important; margin: 0 auto 14px !important; font-size: 18px; font-weight: 850; }
+.content-page .step-num img { width: 28px; height: 28px; }
 .content-page .step-panel {
   border: 1px solid var(--content-line);
   border-radius: var(--content-radius);
