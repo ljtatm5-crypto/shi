@@ -231,10 +231,15 @@ function initAssistantMealHandoff() {
 function initMealUpload() {
   const input = document.querySelector("#meal-upload");
   const preview = document.querySelector(".upload-preview");
+  const uploadBox = document.querySelector(".upload-box");
   if (!input || !preview) return;
-  input.addEventListener("change", async () => {
-    const file = input.files?.[0];
+
+  async function processFile(file) {
     if (!file) return;
+    if (!/^image\//.test(file.type)) {
+      window.alert("请上传图片文件（JPG / PNG / HEIC / WEBP）。");
+      return;
+    }
     if (file.size > 8 * 1024 * 1024) {
       window.alert("图片不能超过 8MB，请重新选择。");
       input.value = "";
@@ -266,7 +271,31 @@ function initMealUpload() {
     } catch (error) {
       if (status) status.textContent = (error && error.message) || "识餐服务暂时不可用，请到第三步手动填写菜品与份量。";
     }
-  });
+  }
+
+  input.addEventListener("change", () => processFile(input.files?.[0]));
+
+  if (uploadBox) {
+    ["dragenter", "dragover"].forEach((ev) => {
+      uploadBox.addEventListener(ev, (e) => {
+        e.preventDefault(); e.stopPropagation();
+        uploadBox.classList.add("dragover");
+      });
+    });
+    ["dragleave", "dragend", "drop"].forEach((ev) => {
+      uploadBox.addEventListener(ev, (e) => {
+        e.preventDefault(); e.stopPropagation();
+        uploadBox.classList.remove("dragover");
+      });
+    });
+    uploadBox.addEventListener("drop", (e) => {
+      const file = e.dataTransfer?.files?.[0];
+      if (file) processFile(file);
+    });
+
+    document.addEventListener("dragover", (e) => e.preventDefault());
+    document.addEventListener("drop", (e) => e.preventDefault());
+  }
 }
 
 function initMealRecalculation() {

@@ -443,6 +443,7 @@ img { max-width: 100%; display: block; }
   transition: all .25s;
 }
 .upload-box:hover { background: var(--white); transform: scale(1.02); }
+.upload-box.dragover { background: #d8ecdd; border-color: var(--green); transform: scale(1.03); box-shadow: 0 8px 24px rgba(42,106,87,.18); }
 .upload-emoji { font-size: 56px; margin-bottom: 10px; }
 .visually-hidden { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0,0,0,0) !important; white-space: nowrap !important; border: 0 !important; }
 .upload-preview { width: 100%; max-height: 280px; margin-top: 18px; border-radius: 14px; object-fit: cover; }
