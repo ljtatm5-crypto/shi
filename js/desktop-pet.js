@@ -6,7 +6,18 @@
   var PET_MARGIN = 10;
   var DRAG_THRESHOLD = 7;
   var MAX_MESSAGES = 30;
-  var WELCOME = "你好，我是小穗。可以问我粤式餐食搭配、日常营养和下一餐怎么安排。";
+  var WELCOME = "你好，我是小穗，穗食拍的AI膳食助手。你可以问我营养标准、粤式餐食搭配、健康饮食，或者今天该吃什么。想知道自己吃得够不够标准？去「产品体验」拍一张餐盘，我帮你算清楚每一克营养。";
+  var MEAL_DAY_KEY = "suishipai:meal-day";
+  function todayKey() {
+    var d = new Date();
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  }
+  function getMealDay() {
+    var day = null;
+    try { day = JSON.parse(localStorage.getItem(MEAL_DAY_KEY) || "null"); } catch (e) { day = null; }
+    if (!day || day.date !== todayKey()) return null;
+    return day && Array.isArray(day.meals) && day.meals.length ? day : null;
+  }
 
   function readJson(key, fallback) {
     try {
@@ -137,7 +148,7 @@
       "aria-live": "polite"
     });
     var quick = makeElement("div", "desktop-pet-quick", { "aria-label": "快捷问题" });
-    ["晚餐怎么搭配？", "肠粉怎么吃更均衡？", "今天蛋白质怎么补？"].forEach(function (label) {
+    ["我的膳食怎么样？", "今晚还能吃什么？", "为什么选广州调研？", "减脂能吃肠粉吗？"].forEach(function (label) {
       var button = makeElement("button", "", { type: "button", text: label });
       button.dataset.question = label;
       quick.appendChild(button);
@@ -148,7 +159,7 @@
       rows: "1",
       maxlength: "300",
       "aria-label": "向小穗提问",
-      placeholder: "输入膳食问题"
+      placeholder: "输入你的问题，例如：每日推荐营养标准是什么？"
     });
     var send = makeElement("button", "desktop-pet-send", {
       type: "submit",
@@ -427,7 +438,7 @@
       ui.typing.textContent = "小穗正在整理建议...";
       saveChat();
       var request = window.SuishipaiAPI
-        ? window.SuishipaiAPI.chat(value, apiHistory())
+        ? window.SuishipaiAPI.chat(value, apiHistory(), getMealDay())
         : Promise.reject(new Error("AI接口尚未加载"));
       request.then(function (result) {
         var answer = { role: "bot", text: result.reply, time: Date.now() };
