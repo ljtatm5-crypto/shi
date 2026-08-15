@@ -393,59 +393,23 @@
 }
 .content-page .step-visual { background: rgba(234, 248, 244, .56); }
 .content-page .step-panel[data-step="2"] .step-visual { background: rgba(228, 244, 236, .62); aspect-ratio: 1; max-width: 420px; margin-inline: auto; }
-.content-page .step-panel[data-step="1"] .step-visual { background: transparent; padding: 0; min-height: 0; display: flex; justify-content: flex-start; }
+.content-page .step-panel[data-step="1"] .step-visual { display: flex; align-items: center; justify-content: center; }
 .content-page .step-panel[data-step="1"] .upload-box {
-  box-sizing: border-box;
-  border: 2px solid rgba(24, 122, 102, .45);
-  background: var(--green-soft);
-  width: 240px;
-  height: 240px;
-  max-width: 100%;
-  aspect-ratio: 1 / 1;
-  margin: 0;
-  padding: 16px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 8px;
-  overflow: hidden;
-  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
-.content-page .step-panel[data-step="1"] .upload-box:has(.upload-preview:not([hidden])) {
-  gap: 6px;
-  padding: 12px;
-}
-.content-page .step-panel[data-step="1"] .upload-box:has(.upload-preview:not([hidden])) p { display: none; }
 .content-page .step-panel[data-step="1"] .upload-icon {
-  display: block; width: 40px; height: 40px; margin: 0 auto;
+  display: block; width: 56px; height: 56px; margin: 0 auto 12px;
   color: var(--shell-mint-dark, #187A66);
-  flex-shrink: 0;
 }
-.content-page .step-panel[data-step="1"] .upload-box p {
-  margin: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 13px;
-  line-height: 1.5;
-  flex-shrink: 0;
-}
-.content-page .step-panel[data-step="1"] .upload-box p b { font-size: 14px; }
+.content-page .step-panel[data-step="1"] .upload-box p { margin: 0; text-align: center; }
 .content-page .step-panel[data-step="1"] .upload-box .upload-hint {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--gray-500);
-  margin-top: 2px;
-}
-.content-page .step-panel[data-step="1"] .upload-preview {
-  width: 100%;
-  height: 100%;
-  max-width: 210px;
-  max-height: 210px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 12px;
-  flex-shrink: 0;
-}
-@media (max-width: 480px) {
-  .content-page .step-panel[data-step="1"] .upload-box { width: 220px; height: 220px; }
+  margin-top: 6px;
 }
 .content-page .step-panel[data-step="2"] .recognized-placeholder {
   background: #f0f9f4 !important;
