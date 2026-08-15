@@ -12,7 +12,11 @@
       signal: controller.signal
     }, options || {})).then(function (response) {
       return response.json().catch(function () { return {}; }).then(function (data) {
-        if (!response.ok) throw new Error(data.error || "小穗服务暂时不可用");
+        if (!response.ok) {
+          var error = new Error(data.error || "小穗服务暂时不可用");
+          error.status = response.status;
+          throw error;
+        }
         return data;
       });
     }).finally(function () { window.clearTimeout(timer); });
@@ -27,6 +31,14 @@
           history: (history || []).slice(-6),
           day: day || undefined
         })
+      }).catch(function (error) {
+        if (error && error.status === 404) {
+          return request("/api/research-chat", {
+            method: "POST",
+            body: JSON.stringify({ message: message, history: (history || []).slice(-6) })
+          });
+        }
+        throw error;
       });
     },
     recalculate: function (meal) {
