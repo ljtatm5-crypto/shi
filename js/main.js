@@ -121,10 +121,10 @@ function renderRecognizedList(result) {
   const confColor = confidence >= 70 ? "var(--green)" : "var(--warning)";
   const items = Array.isArray(result.ingredients) ? result.ingredients : [];
   const rows = [
-    `<div style="background:#f4f9fd;border:1px solid rgba(70,140,190,.22);padding:16px;border-radius:12px;margin-bottom:10px"><b style="color:${confColor}">${confidence >= 70 ? "✓" : "?"} ${escapeHtml(result.dish || "待确认菜品")}</b><span style="float:right;color:#4a6a80;font-size:13px">置信度 ${confidence}%</span></div>`,
+    `<div style="background:#f0f9f4;border:1px solid rgba(24,122,102,.20);padding:16px;border-radius:12px;margin-bottom:10px"><b style="color:${confColor}">${confidence >= 70 ? "✓" : "?"} ${escapeHtml(result.dish || "待确认菜品")}</b><span style="float:right;color:#3a5a4e;font-size:13px">置信度 ${confidence}%</span></div>`,
   ];
   items.forEach((item) => {
-    rows.push(`<div style="background:#f4f9fd;border:1px solid rgba(70,140,190,.16);padding:12px 16px;border-radius:10px;margin-bottom:8px;font-size:14px"><span style="color:#33546a">${escapeHtml(item.name)}</span><span style="float:right;color:#4a6a80">约 ${item.weight_g} g</span></div>`);
+    rows.push(`<div style="background:#f0f9f4;border:1px solid rgba(24,122,102,.14);padding:12px 16px;border-radius:10px;margin-bottom:8px;font-size:14px"><span style="color:#33544a">${escapeHtml(item.name)}</span><span style="float:right;color:#3a5a4e">约 ${item.weight_g} g</span></div>`);
   });
   container.innerHTML = rows.join("");
 }
