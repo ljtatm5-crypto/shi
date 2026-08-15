@@ -537,8 +537,24 @@ img { max-width: 100%; display: block; }
   line-height: 1.65;
 }
 .msg.user .msg-bubble { background: var(--blue); color: #fff; }
-.msg-bubble b { color: var(--green); }
-.msg.user .msg-bubble b { color: #fff; }
+.msg-bubble b, .msg-bubble strong { color: var(--green); }
+.msg.user .msg-bubble b, .msg.user .msg-bubble strong { color: #fff; }
+.msg-bubble p { margin: 0 0 8px; }
+.msg-bubble p:last-child { margin-bottom: 0; }
+.msg-bubble h2, .msg-bubble h3, .msg-bubble h4 {
+  margin: 4px 0 8px; font-size: 15px; line-height: 1.4;
+}
+.msg-bubble h2 { font-size: 16px; }
+.msg-bubble h2:first-child, .msg-bubble h3:first-child, .msg-bubble h4:first-child { margin-top: 0; }
+.msg-bubble ul, .msg-bubble ol { margin: 6px 0 10px; padding-left: 20px; }
+.msg-bubble li { margin: 4px 0; }
+.msg-bubble li::marker { color: var(--green); }
+.msg.user .msg-bubble li::marker { color: #fff; }
+.msg-bubble code {
+  padding: 1px 5px; border-radius: 4px;
+  background: var(--green-soft); color: var(--green);
+  font-size: 13px;
+}
 .chat-input {
   padding: 16px 24px;
   border-top: 1px solid var(--gray-300);

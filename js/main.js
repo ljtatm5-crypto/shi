@@ -339,7 +339,50 @@ function chatHistoryForAPI() {
 function escapeChatText(text) {
   const span = document.createElement("span");
   span.textContent = String(text || "");
-  return span.innerHTML.replace(/\n/g, "<br>");
+  return span.innerHTML;
+}
+
+function inlineMd(text) {
+  const escaped = escapeChatText(text);
+  return escaped
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/`([^`]+)`/g, "<code>$1</code>");
+}
+
+function mdToHtml(md) {
+  const lines = String(md || "").split(/\r?\n/);
+  let html = "";
+  let listType = null;
+  const closeList = () => {
+    if (listType) { html += `</${listType}>`; listType = null; }
+  };
+  lines.forEach((raw) => {
+    const line = raw.trim();
+    if (!line) { closeList(); return; }
+    const heading = line.match(/^#{1,4}\s+(.*)$/);
+    if (heading) {
+      closeList();
+      const level = Math.min(raw.match(/^#+/)[0].length, 3);
+      html += `<h${level + 1}>${inlineMd(heading[1])}</h${level + 1}>`;
+      return;
+    }
+    const list = line.match(/^[-*]\s+(.*)$/);
+    if (list) {
+      if (listType !== "ul") { closeList(); html += "<ul>"; listType = "ul"; }
+      html += `<li>${inlineMd(list[1])}</li>`;
+      return;
+    }
+    const ordered = line.match(/^\d+[.、]\s*(.*)$/);
+    if (ordered) {
+      if (listType !== "ol") { closeList(); html += "<ol>"; listType = "ol"; }
+      html += `<li>${inlineMd(ordered[1])}</li>`;
+      return;
+    }
+    closeList();
+    html += `<p>${inlineMd(line)}</p>`;
+  });
+  closeList();
+  return html;
 }
 
 async function askXiaosui(question) {
@@ -364,11 +407,11 @@ function initChat() {
   quickBtns.forEach(b => {
     b.addEventListener("click", async () => {
       const q = b.textContent.trim();
-      appendMsg("user", "👤", q);
+      appendMsg("user", "👤", escapeChatText(q));
       b.disabled = true;
       try {
         const reply = await askXiaosui(q);
-        appendMsg("bot", "🌱", escapeChatText(reply));
+        appendMsg("bot", "🌱", mdToHtml(reply));
       } catch (error) {
         appendMsg("bot", "🌱", "小穗暂时无法连接AI服务，请稍后再试。项目介绍与调研数据仍可在网站其他页面查看。");
       } finally { b.disabled = false; }
@@ -380,13 +423,13 @@ function initChat() {
   async function handleSend() {
     const v = input.value.trim();
     if (!v || send.disabled) return;
-    appendMsg("user", "👤", v);
+    appendMsg("user", "👤", escapeChatText(v));
     input.value = "";
     send.disabled = true;
     send.textContent = "思考中";
     try {
       const reply = await askXiaosui(v);
-      appendMsg("bot", "🌱", escapeChatText(reply));
+      appendMsg("bot", "🌱", mdToHtml(reply));
     } catch (error) {
       appendMsg("bot", "🌱", "小穗暂时无法连接AI服务，请稍后再试。若持续失败，请检查AI服务配置。");
     } finally {
