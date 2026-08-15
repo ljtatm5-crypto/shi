@@ -114,6 +114,59 @@ function updateDailySummary() {
   }
 }
 
+// -------- 今日餐食记录（localStorage，比赛演示版） --------
+const MEAL_DAY_KEY = "suishipai:meal-day";
+
+function todayKey() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+function getMealDay() {
+  let day = null;
+  try { day = JSON.parse(localStorage.getItem(MEAL_DAY_KEY) || "null"); } catch (e) { day = null; }
+  if (!day || day.date !== todayKey()) return { date: todayKey(), meals: [], goal: "", target_kcal: 1800 };
+  return day;
+}
+
+function saveMealDay(day) {
+  try { localStorage.setItem(MEAL_DAY_KEY, JSON.stringify(day)); } catch (e) {}
+}
+
+function collectCurrentMeal() {
+  const dish = document.querySelector('#meal-correction input[name="dish"]')?.value?.trim();
+  const weight = document.querySelector('#meal-correction input[name="weight"]')?.value?.trim();
+  const ingredients = document.querySelector('#meal-correction textarea[name="ingredients"]')?.value?.trim();
+  const nutrition = {};
+  document.querySelectorAll("[data-nutrition]").forEach((el) => {
+    const key = el.getAttribute("data-nutrition");
+    if (key && !(key in nutrition)) nutrition[key] = Number(el.textContent.replace(/[^\d.]/g, "")) || 0;
+  });
+  return { dish, weight_g: Number(weight) || 0, ingredients, nutrition };
+}
+
+function saveCurrentMealToDay() {
+  const meal = collectCurrentMeal();
+  if (!meal.dish) return false;
+  const day = getMealDay();
+  day.meals.push(meal);
+  saveMealDay(day);
+  return true;
+}
+
+function upsertCurrentMealToDay() {
+  const meal = collectCurrentMeal();
+  if (!meal.dish) return false;
+  const day = getMealDay();
+  if (day.meals.length && day.meals[day.meals.length - 1].dish === meal.dish) {
+    day.meals[day.meals.length - 1] = meal;
+  } else {
+    day.meals.push(meal);
+  }
+  saveMealDay(day);
+  return true;
+}
+
 function renderRecognizedList(result) {
   const container = document.querySelector(".recognized-list");
   if (!container) return;
@@ -148,44 +201,31 @@ function fillMealForm(result) {
   }
 }
 
-function collectMealSnapshot() {
-  const dish = document.querySelector('#meal-correction input[name="dish"]')?.value?.trim();
-  const weight = document.querySelector('#meal-correction input[name="weight"]')?.value?.trim();
-  const ingredients = document.querySelector('#meal-correction textarea[name="ingredients"]')?.value?.trim();
-  const nutrition = {};
-  document.querySelectorAll("[data-nutrition]").forEach((el) => {
-    const key = el.getAttribute("data-nutrition");
-    if (key && !(key in nutrition)) nutrition[key] = el.textContent.trim();
-  });
-  return { dish, weight_g: weight, ingredients, nutrition };
-}
-
 function initSendMealToAssistant() {
   const btn = document.querySelector(".meal-send-to-assistant");
   if (!btn) return;
   btn.addEventListener("click", () => {
-    const meal = collectMealSnapshot();
+    const meal = collectCurrentMeal();
     if (!meal.dish) { window.alert("请先在第三步确认菜品，或上传餐食完成识别。"); return; }
-    try { sessionStorage.setItem("suishipai:pending-meal", JSON.stringify(meal)); } catch (e) {}
+    upsertCurrentMealToDay();
+    try { sessionStorage.setItem("suishipai:pending-meal", JSON.stringify({ handoff: true, dish: meal.dish })); } catch (e) {}
     window.location.href = "assistant.html";
   });
 }
 
 function initAssistantMealHandoff() {
   const chatBody = document.querySelector(".chat-body");
-  const input = document.querySelector(".chat-input input");
-  const send = document.querySelector(".chat-send");
-  if (!chatBody || !input || !send) return;
+  if (!chatBody) return;
   let payload;
   try { payload = JSON.parse(sessionStorage.getItem("suishipai:pending-meal") || "null"); } catch (e) { payload = null; }
-  if (!payload || !payload.dish) return;
+  if (!payload || !payload.handoff) return;
   sessionStorage.removeItem("suishipai:pending-meal");
-  const n = payload.nutrition || {};
-  const question = `我刚刚吃了「${payload.dish}」（约 ${payload.weight_g || "?"} g，食材：${payload.ingredients || "未填"}）。经AI估算营养约为：热量 ${n.calories_kcal || "?"} kcal、蛋白质 ${n.protein_g || "?"} g、脂肪 ${n.fat_g || "?"} g、碳水 ${n.carbohydrate_g || "?"} g、钠 ${n.sodium_mg || "?"} mg。请帮我解读这一餐，并给出下一餐的搭配建议。`;
-  setTimeout(() => {
-    input.value = question;
-    send.click();
-  }, 400);
+  const chat = window.suishipaiChat;
+  if (!chat) return;
+  const day = getMealDay();
+  const n = day.meals.length ? day.meals[day.meals.length - 1].nutrition || {} : {};
+  const question = `我刚在「产品体验」页记录了「${payload.dish || "本餐"}」。经确认的营养约为：热量 ${n.calories_kcal ?? "?"} kcal、蛋白质 ${n.protein_g ?? "?"} g、脂肪 ${n.fat_g ?? "?"} g、碳水 ${n.carbohydrate_g ?? "?"} g、钠 ${n.sodium_mg ?? "?"} mg。请帮我解读这一餐，并给出下一餐的搭配建议。`;
+  setTimeout(() => { chat.ask(question); }, 400);
 }
 
 function initMealUpload() {
@@ -253,9 +293,10 @@ function initMealRecalculation() {
         if (target) target.textContent = Math.round(Number(nutrition[key]) || 0);
       });
       updateDailySummary();
+      upsertCurrentMealToDay();
       const summary = document.querySelector(".nutrition-ai-summary");
-      if (summary) summary.textContent = `${result.summary || "已完成营养估算。"} ${result.suggestion || ""} 结果为AI估算值。`;
-      status.textContent = "估算完成，已更新第四步营养卡片。";
+      if (summary) summary.textContent = `${result.summary || "已完成营养估算。"}${result.suggestion ? " " + result.suggestion : ""}${result.disclaimer ? " " + result.disclaimer : ""}`;
+      status.textContent = "估算完成，已更新第四步营养卡片，并计入今日餐食记录。";
       document.querySelector('.step[data-step="4"]')?.click();
       setTimeout(() => { document.querySelector('.step[data-step="5"]')?.click(); }, 2500);
     } catch (error) {
@@ -278,41 +319,6 @@ function initFloatingMascot() {
 }
 
 // -------- Assistant chat --------
-const REPLIES = {
-  "本餐营养": {
-    title: "🥗 本餐营养解读",
-    lines: [
-      "本餐总热量 <b>612 kcal</b>，蛋白质 <b>28g</b>、脂肪 <b>22g</b>、碳水 <b>76g</b>。",
-      "蛋白/脂肪/碳水供能比 = 18% / 32% / 50%，脂肪偏高，建议下一餐控制油量。",
-      "钠含量约 <b>980mg</b>，接近单餐推荐上限（1000mg），下一餐清淡为宜。"
-    ]
-  },
-  "今日膳食": {
-    title: "📊 今日膳食评价",
-    lines: [
-      "今日累计摄入 <b>1650 kcal</b>，达成目标的 82%。",
-      "蔬菜摄入 <b>240g</b>（推荐 300-500g），<b>偏少</b>；水果摄入 <b>0g</b>，缺失。",
-      "整体评分：<b>B（良好）</b>，主要问题是膳食纤维不足和水果缺失。"
-    ]
-  },
-  "推荐晚餐": {
-    title: "🍲 晚餐推荐",
-    lines: [
-      "结合今日缺口，推荐 <b>粤式清蒸鲈鱼 + 蒜蓉西兰花 + 糙米饭 + 木瓜</b>。",
-      "预估热量 <b>520 kcal</b>，可补充蛋白质 32g、膳食纤维 8g、维生素 C 78mg。",
-      "粤式替代方案：白灼菜心 + 蒸滑鸡 + 冬瓜薏米汤，热量更低（约 460 kcal）。"
-    ]
-  },
-  "健康提醒": {
-    title: "⚠️ 健康提醒",
-    lines: [
-      "本餐钠含量偏高，<b>高血压/心血管疾病人群</b>请注意控盐。",
-      "检测到本餐含 <b>虾</b>，若有海鲜过敏史请谨慎食用。",
-      "已连续 3 天蔬菜摄入不足 300g，建议明日午餐增加深色蔬菜。"
-    ]
-  }
-};
-
 function appendMsg(role, avatar, html) {
   const body = document.querySelector(".chat-body");
   if (!body) return;
@@ -389,50 +395,48 @@ async function askXiaosui(question) {
   if (!window.SuishipaiAPI) throw new Error("AI接口尚未加载");
   const history = chatHistoryForAPI();
   if (history.length && history[history.length - 1].role === "user" && history[history.length - 1].content === question) history.pop();
-  const result = await window.SuishipaiAPI.chat(question, history);
-  return result.reply;
+  const day = getMealDay();
+  return window.SuishipaiAPI.chat(question, history, day.meals.length ? day : undefined);
 }
 
-function botReply(key) {
-  const data = REPLIES[key];
-  if (!data) {
-    appendMsg("bot", "🌱", "我可以帮你解读本餐营养、评价今日膳食、推荐下一餐，也能提醒过敏与营养失衡。试试上面的快捷问题吧。");
-    return;
-  }
-  appendMsg("bot", "🌱", `<b>${data.title}</b><br>${data.lines.join("<br>")}`);
+function renderSources(sources) {
+  if (!Array.isArray(sources) || !sources.length) return "";
+  const items = sources.map((item) => item.topic || item.source || "").filter(Boolean);
+  if (!items.length) return "";
+  return `<div class="msg-sources">📚 研究依据：${items.map((t) => escapeChatText(t)).join(" · ")}</div>`;
 }
 
 function initChat() {
+  const input = document.querySelector(".chat-input input");
+  const send = document.querySelector(".chat-send");
+
+  async function handleQuestion(q) {
+    appendMsg("user", "👤", escapeChatText(q));
+    try {
+      const result = await askXiaosui(q);
+      appendMsg("bot", "🌱", mdToHtml(result.reply) + renderSources(result.sources));
+    } catch (error) {
+      appendMsg("bot", "🌱", "小穗暂时无法连接AI服务，请稍后再试。项目介绍与调研数据仍可在网站其他页面查看。");
+    }
+  }
+
   const quickBtns = document.querySelectorAll(".quick-btn");
   quickBtns.forEach(b => {
     b.addEventListener("click", async () => {
       const q = b.textContent.trim();
-      appendMsg("user", "👤", escapeChatText(q));
+      if (b.disabled) return;
       b.disabled = true;
-      try {
-        const reply = await askXiaosui(q);
-        appendMsg("bot", "🌱", mdToHtml(reply));
-      } catch (error) {
-        appendMsg("bot", "🌱", "小穗暂时无法连接AI服务，请稍后再试。项目介绍与调研数据仍可在网站其他页面查看。");
-      } finally { b.disabled = false; }
+      try { await handleQuestion(q); } finally { b.disabled = false; }
     });
   });
 
-  const input = document.querySelector(".chat-input input");
-  const send = document.querySelector(".chat-send");
   async function handleSend() {
     const v = input.value.trim();
     if (!v || send.disabled) return;
-    appendMsg("user", "👤", escapeChatText(v));
     input.value = "";
     send.disabled = true;
     send.textContent = "思考中";
-    try {
-      const reply = await askXiaosui(v);
-      appendMsg("bot", "🌱", mdToHtml(reply));
-    } catch (error) {
-      appendMsg("bot", "🌱", "小穗暂时无法连接AI服务，请稍后再试。若持续失败，请检查AI服务配置。");
-    } finally {
+    try { await handleQuestion(v); } finally {
       send.disabled = false;
       send.textContent = "发送";
       input.focus();
@@ -440,6 +444,8 @@ function initChat() {
   }
   send?.addEventListener("click", handleSend);
   input?.addEventListener("keydown", e => { if (e.key === "Enter") handleSend(); });
+
+  window.suishipaiChat = { ask: handleQuestion };
 }
 
 function initChatHistory() {

@@ -19,10 +19,14 @@
   }
 
   window.SuishipaiAPI = {
-    chat: function (message, history) {
-      return request("/api/research-chat", {
+    chat: function (message, history, day) {
+      return request("/api/chat", {
         method: "POST",
-        body: JSON.stringify({ message: message, history: (history || []).slice(-6) })
+        body: JSON.stringify({
+          message: message,
+          history: (history || []).slice(-6),
+          day: day || undefined
+        })
       });
     },
     recalculate: function (meal) {

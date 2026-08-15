@@ -1,5 +1,4 @@
-const { cors, json, rateLimit } = require("./_shared");
-const nutritionDb = require("../data/nutrition-db.json");
+const { cors, json, rateLimit, calcNutritionFromIngredients } = require("./_shared");
 
 const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
 
@@ -17,26 +16,6 @@ function cleanVisionResult(value) {
     confidence: Math.max(0, Math.min(1, Number(value.confidence) || 0)),
     ingredients
   };
-}
-
-function findFood(name) {
-  const input = String(name || "").replace(/[（）()\s]/g, "");
-  return Object.entries(nutritionDb).find(([food, item]) => [food].concat(item.aliases || []).some((alias) => input.includes(alias) || alias.includes(input)));
-}
-
-function calculateNutrition(ingredients) {
-  const total = { calories_kcal: 0, protein_g: 0, fat_g: 0, carbohydrate_g: 0, sodium_mg: 0 };
-  const matched = [];
-  ingredients.forEach((ingredient) => {
-    const found = findFood(ingredient.name);
-    if (!found) return;
-    const [food, item] = found;
-    const factor = ingredient.weight_g / 100;
-    Object.keys(total).forEach((key) => { total[key] += Number(item[key] || 0) * factor; });
-    matched.push({ name: ingredient.name, database_food: food, weight_g: ingredient.weight_g });
-  });
-  Object.keys(total).forEach((key) => { total[key] = Math.round(total[key] * 10) / 10; });
-  return { nutrition: total, matched };
 }
 
 module.exports = async function handler(req, res) {
@@ -70,14 +49,14 @@ module.exports = async function handler(req, res) {
     let identified;
     try { identified = cleanVisionResult(JSON.parse(stripFence(raw))); } catch { throw new Error("VISION_RESULT_INVALID"); }
     if (!identified.ingredients.length) throw new Error("VISION_NO_FOOD");
-    const calculation = calculateNutrition(identified.ingredients);
+    const calculation = calcNutritionFromIngredients(identified.ingredients);
     return json(res, 200, {
       success: true,
       result: {
         ...identified,
         estimated_weight_g: identified.ingredients.reduce((sum, item) => sum + item.weight_g, 0),
         ...calculation,
-        summary: `已识别为${identified.dish}，请在下一步确认菜品与份量。营养结果按本地食物数据表和确认份量估算。`,
+        summary: `已识别为${identified.dish}，请在下一步确认菜品与份量。营养结果由本地食物数据表按确认份量确定性计算，不是AI估算。`,
         usage: data.usage ? { total_tokens: data.usage.total_tokens } : undefined
       }
     });

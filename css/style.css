@@ -555,6 +555,11 @@ img { max-width: 100%; display: block; }
   background: var(--green-soft); color: var(--green);
   font-size: 13px;
 }
+.msg-sources {
+  margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--gray-300);
+  font-size: 12px; color: var(--text-light);
+  display: flex; gap: 6px; align-items: baseline;
+}
 .chat-input {
   padding: 16px 24px;
   border-top: 1px solid var(--gray-300);

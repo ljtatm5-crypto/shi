@@ -3,16 +3,20 @@
 "use strict";
 
 const health = require("./api/health");
+const chat = require("./api/chat");
 const researchChat = require("./api/research-chat");
 const recalculateFood = require("./api/recalculate-food");
 const analyzeFood = require("./api/analyze-food");
+const mealAdvice = require("./api/meal-advice");
 
 const routes = {
   "GET /": health,
   "GET /api/health": health,
+  "POST /api/chat": chat,
   "POST /api/research-chat": researchChat,
   "POST /api/recalculate-food": recalculateFood,
-  "POST /api/analyze-food": analyzeFood
+  "POST /api/analyze-food": analyzeFood,
+  "POST /api/meal-advice": mealAdvice
 };
 
 function responseBridge(resolve) {
