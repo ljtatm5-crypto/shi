@@ -64,6 +64,7 @@ function initStepFlow() {
       s.classList.add("active");
       const key = s.dataset.step;
       document.querySelector(`.step-panel[data-step="${key}"]`)?.classList.add("active");
+      if (key === "5") updateDailySummary();
     });
   });
 }
@@ -74,6 +75,43 @@ function fillNutritionCard(nutrition) {
     const target = document.querySelector(`[data-nutrition="${key}"]`);
     if (target) target.textContent = Math.round(Number(nutrition[key]) || 0);
   });
+  updateDailySummary();
+}
+
+function updateDailySummary() {
+  const panel = document.querySelector('.step-panel[data-step="5"]');
+  if (!panel) return;
+  const currentEl = document.querySelector('[data-nutrition="calories_kcal"]');
+  const current = Math.round(Number(currentEl?.textContent) || 0);
+  const target = 1800;
+  const intake = current;
+  const percent = Math.max(0, Math.min(999, Math.round((intake / target) * 100)));
+
+  let box = panel.querySelector(".daily-summary");
+  if (!box) {
+    box = panel.querySelector(".step-visual > div > div") || panel.querySelector(".step-visual > div");
+    if (box) box.classList.add("daily-summary");
+  }
+  if (!box) return;
+
+  const setByAttr = (key, value) => {
+    const el = box.querySelector(`[data-daily="${key}"]`);
+    if (el) el.textContent = value;
+  };
+  setByAttr("intake", intake);
+  setByAttr("target", target);
+  setByAttr("percent", percent);
+  setByAttr("current", current);
+
+  if (!box.querySelector('[data-daily="intake"]')) {
+    box.querySelectorAll("span").forEach((el) => {
+      const txt = el.textContent.trim();
+      if (/\d+\s*\/\s*\d+\s*kcal/.test(txt)) el.textContent = `${intake} / ${target} kcal`;
+    });
+    box.querySelectorAll("div").forEach((el) => {
+      if (el.children.length === 0 && /^\s*\d+%\s*$/.test(el.textContent)) el.textContent = `${percent}%`;
+    });
+  }
 }
 
 function renderRecognizedList(result) {
@@ -212,6 +250,7 @@ function initMealRecalculation() {
         const target = document.querySelector(`[data-nutrition="${key}"]`);
         if (target) target.textContent = Math.round(Number(nutrition[key]) || 0);
       });
+      updateDailySummary();
       const summary = document.querySelector(".nutrition-ai-summary");
       if (summary) summary.textContent = `${result.summary || "已完成营养估算。"} ${result.suggestion || ""} 结果为AI估算值。`;
       status.textContent = "估算完成，已更新第四步营养卡片。";
@@ -474,4 +513,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initChatHistory();
   initAssistantMealHandoff();
   initFloatingMascot();
+  updateDailySummary();
 });

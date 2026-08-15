@@ -173,12 +173,15 @@
       <div class="step-panel" data-step="5">
         <div class="step-visual">
           <div style="width:100%">
-            <div style="background:#fff;padding:20px;border-radius:12px;box-shadow:var(--shadow-sm)">
+            <div class="daily-summary" data-daily-target="1800" style="background:#fff;padding:20px;border-radius:12px;box-shadow:var(--shadow-sm)">
               <div style="display:flex;justify-content:space-between;margin-bottom:14px">
                 <b>今日累计</b>
-                <span style="color:var(--green);font-weight:700">1650 / 1800 kcal</span>
+                <span style="color:var(--green);font-weight:700"><span data-daily="intake">612</span> / <span data-daily="target">1800</span> kcal</span>
               </div>
-              <div style="font-size:34px;font-weight:800;color:var(--green);line-height:1">82%</div>
+              <div style="font-size:34px;font-weight:800;color:var(--green);line-height:1"><span data-daily="percent">34</span>%</div>
+              <div class="daily-breakdown" style="margin-top:10px;color:var(--gray-500);font-size:13px">
+                本餐已计入 <span data-daily="current">612</span> kcal
+              </div>
               <div style="margin-top:20px;padding:14px;background:var(--green-soft);border-radius:10px">
                 <b style="color:var(--green)">✓ 本餐已保存</b>
                 <p style="font-size:13px;color:var(--gray-700);margin-top:4px">
