@@ -64,7 +64,7 @@ function initStepFlow() {
       s.classList.add("active");
       const key = s.dataset.step;
       document.querySelector(`.step-panel[data-step="${key}"]`)?.classList.add("active");
-      if (key === "5") updateDailySummary();
+      if (key === "5") { updateDailySummary(); renderMealDayTable(); }
     });
   });
 }
@@ -265,6 +265,94 @@ function initExportMealReport() {
     document.body.removeChild(a);
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   });
+}
+
+// -------- 今日餐食存档表格（可编辑、可删除） --------
+const MEAL_ROW_FIELDS = [
+  { key: "dish", label: "餐食名称", type: "text" },
+  { key: "weight_g", label: "重量(g)", type: "number" },
+  { key: "calories_kcal", label: "热量(kcal)", type: "number" },
+  { key: "protein_g", label: "蛋白(g)", type: "number" },
+  { key: "fat_g", label: "脂肪(g)", type: "number" },
+  { key: "carbohydrate_g", label: "碳水(g)", type: "number" },
+  { key: "sodium_mg", label: "钠(mg)", type: "number" }
+];
+
+function renderMealDayTable() {
+  const container = document.querySelector(".meal-day-list");
+  if (!container) return;
+  const day = getMealDay();
+  const meals = Array.isArray(day.meals) ? day.meals : [];
+
+  if (!meals.length) {
+    container.innerHTML = `<div style="font-size:13px;color:var(--gray-500);text-align:center;padding:14px;border:1px dashed var(--gray-300);border-radius:10px">今日还没有保存的餐食，去第三步确认菜品后会自动计入。</div>`;
+    return;
+  }
+
+  const rows = meals.map((m, i) => {
+    const n = m.nutrition || {};
+    const cells = MEAL_ROW_FIELDS.map((f) => {
+      let val = "";
+      if (f.key === "dish") val = m.dish || "";
+      else if (f.key === "weight_g") val = m.weight_g || "";
+      else val = n[f.key] != null && n[f.key] !== "" ? n[f.key] : "";
+      return `<td><input type="${f.type}" data-row="${i}" data-field="${f.key}" value="${escapeHtml(String(val))}" ${f.key === "dish" ? `placeholder="餐食名称"` : `style="width:76px"`}></td>`;
+    }).join("");
+    return `<tr>${cells}<td><button type="button" class="meal-del" data-row="${i}" style="background:#fff0f0;color:#c0392b;border:1px solid #f5c6c6;border-radius:8px;padding:6px 10px;cursor:pointer;font-size:13px">删除</button></td></tr>`;
+  }).join("");
+
+  container.innerHTML = `
+    <div style="font-size:14px;font-weight:700;color:var(--green);margin:0 0 8px">今日餐食存档（可直接修改）</div>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow-sm)">
+        <thead>
+          <tr style="background:#eef7f2;color:#33544a;text-align:left">
+            ${MEAL_ROW_FIELDS.map((f) => `<th style="padding:8px 6px;white-space:nowrap">${f.label}</th>`).join("")}
+            <th style="padding:8px 6px"></th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--gray-500);margin-top:8px">修改后会自动保存到浏览器本地并刷新今日累计。</p>`;
+
+  container.querySelectorAll(".meal-del").forEach((btn) => {
+    btn.addEventListener("click", () => deleteMealByIndex(Number(btn.dataset.row)));
+  });
+  container.querySelectorAll("input[data-field]").forEach((input) => {
+    input.addEventListener("change", () => commitMealEdit(input));
+  });
+}
+
+function commitMealEdit(input) {
+  const idx = Number(input.dataset.row);
+  const field = input.dataset.field;
+  const day = getMealDay();
+  if (!day.meals[idx]) return;
+  const raw = input.value.trim();
+  if (field === "dish") {
+    if (!raw) { input.value = day.meals[idx].dish || ""; return; }
+    day.meals[idx].dish = raw;
+  } else if (field === "weight_g") {
+    const num = Number(raw);
+    day.meals[idx].weight_g = Number.isFinite(num) ? num : 0;
+  } else {
+    const num = Number(raw);
+    if (Number.isFinite(num)) { day.meals[idx].nutrition = day.meals[idx].nutrition || {}; day.meals[idx].nutrition[field] = num; }
+    else { input.value = ""; return; }
+  }
+  saveMealDay(day);
+  updateDailySummary();
+  renderMealDayTable();
+}
+
+function deleteMealByIndex(idx) {
+  const day = getMealDay();
+  if (!day.meals[idx]) return;
+  day.meals.splice(idx, 1);
+  saveMealDay(day);
+  updateDailySummary();
+  renderMealDayTable();
 }
 
 function initAssistantMealHandoff() {
@@ -664,4 +752,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initAssistantMealHandoff();
   initFloatingMascot();
   updateDailySummary();
+  renderMealDayTable();
 });
