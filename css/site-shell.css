@@ -371,8 +371,8 @@
   max-width: 720px;
   margin-bottom: 16px;
   color: var(--shell-ink);
-  font-size: clamp(34px, 4vw, 52px);
-  line-height: 1.16;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.14;
   letter-spacing: -.045em;
   text-wrap: balance;
 }
@@ -389,7 +389,7 @@
   padding: 0;
   color: var(--shell-mint-dark) !important;
   background: transparent !important;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 800;
   letter-spacing: .12em;
 }
