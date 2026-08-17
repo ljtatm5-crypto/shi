@@ -487,8 +487,8 @@
 /* 第五步：今日餐食存档表格（可编辑） */
 .meal-day-list { margin-top: 16px; }
 .meal-day-card {
-  background: rgba(255, 255, 255, .82);
-  border: 1px solid var(--content-line);
+  background: #F5F8FB;
+  border: 1px solid #E4EAF2;
   border-radius: 16px;
   box-shadow: var(--shadow-sm);
   overflow: hidden;
@@ -498,44 +498,44 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 18px;
-  border-bottom: 1px solid var(--content-line);
+  border-bottom: 1px solid #E4EAF2;
 }
-.meal-day-title { font-size: 14px; font-weight: 800; color: var(--content-ink); letter-spacing: -.01em; }
+.meal-day-title { font-size: 15px; font-weight: 800; color: #2D3436; letter-spacing: -.01em; }
 .meal-day-count {
-  font-size: 12px; font-weight: 700; color: var(--content-muted);
-  padding: 3px 10px; border-radius: 999px; background: var(--gray-100);
+  font-size: 13px; font-weight: 700; color: #636E72;
+  padding: 3px 10px; border-radius: 999px; background: #EAF0F7;
 }
 .meal-day-scroll { overflow-x: auto; }
-.meal-day-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.meal-day-table { width: 100%; border-collapse: collapse; font-size: 14px; }
 .meal-day-table th {
   padding: 11px 10px; text-align: left; white-space: nowrap;
-  font-size: 12px; font-weight: 700; color: var(--content-muted);
-  background: var(--gray-100); border-bottom: 1px solid var(--content-line);
+  font-size: 13px; font-weight: 700; color: #636E72;
+  background: #EDF2F8; border-bottom: 1px solid #E4EAF2;
 }
-.meal-day-table td { padding: 6px 8px; border-bottom: 1px solid rgba(24, 122, 102, .08); }
+.meal-day-table td { padding: 6px 8px; border-bottom: 1px solid #EDF1F6; }
 .meal-day-table tbody tr:last-child td { border-bottom: none; }
-.meal-day-table tbody tr:hover { background: rgba(125, 211, 192, .06); }
+.meal-day-table tbody tr:hover { background: #EAF1F8; }
 .meal-day-table .cell-dish { min-width: 150px; }
 .meal-day-table .cell-num { min-width: 78px; }
 .meal-day-table .cell-del { width: 60px; text-align: right; }
 .meal-day-table input {
   width: 100%; min-width: 0; padding: 8px 10px;
-  font: inherit; font-variant-numeric: tabular-nums; color: var(--content-ink);
+  font: inherit; font-variant-numeric: tabular-nums; color: #2D3436;
   background: transparent; border: 1px solid transparent; border-radius: 8px; outline: none;
 }
-.meal-day-table input:hover { border-color: rgba(24, 122, 102, .16); background: #fff; }
-.meal-day-table input:focus { border-color: var(--blue, #2A88A8); background: #fff; box-shadow: 0 0 0 3px rgba(42, 136, 168, .12); }
+.meal-day-table input:hover { border-color: #CBD7E4; background: #fff; }
+.meal-day-table input:focus { border-color: #2A88A8; background: #fff; box-shadow: 0 0 0 3px rgba(42, 136, 168, .14); }
 .meal-day-table .cell-num input { text-align: center; }
 .meal-day-table .cell-dish input { font-weight: 700; }
 .meal-del {
-  padding: 6px 12px; cursor: pointer; font-size: 12px; font-weight: 600;
+  padding: 6px 12px; cursor: pointer; font-size: 13px; font-weight: 600;
   color: var(--danger); background: transparent; border: 1px solid rgba(231, 76, 60, .28); border-radius: 8px;
 }
 .meal-del:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
-.meal-day-hint { margin: 0; padding: 11px 18px; font-size: 12px; color: var(--content-muted); border-top: 1px solid var(--content-line); }
+.meal-day-hint { margin: 0; padding: 11px 18px; font-size: 13px; color: #636E72; border-top: 1px solid #E4EAF2; }
 .meal-day-empty {
-  padding: 16px; font-size: 13px; color: var(--content-muted); text-align: center;
-  border: 1px dashed var(--content-line); border-radius: 12px;
+  padding: 16px; font-size: 14px; color: #636E72; text-align: center;
+  border: 1px dashed #CBD7E4; border-radius: 12px;
 }
 
 
@@ -641,16 +641,4 @@
   .content-page .upload-box { background: #eaf5ef; color: #17332d; }
   .content-page .upload-box:hover { background: #d8ecdd; }
   .content-page .persona-visual { background: #1a3a31 !important; }
-  .content-page .meal-day-card { background: rgba(24, 50, 43, .86); border-color: rgba(125, 211, 192, .16); }
-  .content-page .meal-day-head,
-  .content-page .meal-day-hint { border-color: rgba(125, 211, 192, .12); }
-  .content-page .meal-day-title { color: #e9f1ed; }
-  .content-page .meal-day-count { color: #a9bbb5; background: #1a3a31; }
-  .content-page .meal-day-table th { color: #a9bbb5; background: #1a3a31; border-color: rgba(125, 211, 192, .12); }
-  .content-page .meal-day-table td { border-color: rgba(125, 211, 192, .08); }
-  .content-page .meal-day-table tbody tr:hover { background: rgba(125, 211, 192, .08); }
-  .content-page .meal-day-table input { color: #e9f1ed; }
-  .content-page .meal-day-table input:hover { border-color: rgba(125, 211, 192, .2); background: #1b3a31; }
-  .content-page .meal-day-table input:focus { border-color: var(--blue-light, #8CCFE0); background: #1b3a31; }
-  .content-page .meal-day-empty { color: #a9bbb5; border-color: rgba(125, 211, 192, .16); }
 }
