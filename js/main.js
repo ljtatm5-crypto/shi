@@ -81,10 +81,22 @@ function fillNutritionCard(nutrition) {
 function updateDailySummary() {
   const panel = document.querySelector('.step-panel[data-step="5"]');
   if (!panel) return;
+  const target = 1800;
+
+  // 当前餐热量（第四步营养卡片）
   const currentEl = document.querySelector('[data-nutrition="calories_kcal"]');
   const current = Math.round(Number(currentEl?.textContent) || 0);
-  const target = 1800;
-  const intake = current;
+  const currentDish = document.querySelector('#meal-correction input[name="dish"]')?.value?.trim() || "";
+
+  // 累计当日已保存的所有餐
+  const day = getMealDay();
+  let saved = 0;
+  (day.meals || []).forEach((m) => { saved += Math.round(Number(m.nutrition?.calories_kcal) || 0); });
+
+  // 若当前餐尚未保存进当日记录（识别后预览阶段），把当前餐也计入累计
+  const lastMeal = day.meals && day.meals.length ? day.meals[day.meals.length - 1] : null;
+  const alreadySaved = !!(lastMeal && currentDish && lastMeal.dish === currentDish);
+  const intake = (current > 0 && !alreadySaved) ? saved + current : saved;
   const percent = Math.max(0, Math.min(999, Math.round((intake / target) * 100)));
 
   let box = panel.querySelector(".daily-summary");
