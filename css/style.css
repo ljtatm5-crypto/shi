@@ -398,7 +398,8 @@ img { max-width: 100%; display: block; }
   margin: 0 auto 10px; font-weight: 700;
 }
 .step.active .step-num { background: var(--grad-primary); }
-.step-name { font-size: 13px; font-weight: 600; }
+.step-name { font-size: 14px; font-weight: 800; color: var(--gray-800, #1f2937); letter-spacing: 0.3px; }
+.step.active .step-name { color: var(--green, #187a66); }
 
 .step-panel {
   background: #fff;
@@ -421,7 +422,7 @@ img { max-width: 100%; display: block; }
   text-align: center;
 }
 .step-visual-emoji { font-size: 80px; }
-.step-body h3 { font-size: 22px; margin-bottom: 12px; }
+.step-body h3 { font-size: 22px; margin-bottom: 12px; color: #0d1117; font-weight: 800; }
 .step-body p { color: var(--gray-700); margin-bottom: 16px; }
 .step-body ul { list-style: none; padding: 0; }
 .step-body ul li {
