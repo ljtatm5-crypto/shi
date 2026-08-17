@@ -225,6 +225,48 @@ function initSendMealToAssistant() {
   });
 }
 
+function initExportMealReport() {
+  const btn = document.querySelector(".meal-export-report");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    const day = getMealDay();
+    if (!day.meals || !day.meals.length) { window.alert("今日还没有保存的餐食记录，请先在第三步确认并保存本餐。"); return; }
+    const total = { calories_kcal: 0, protein_g: 0, fat_g: 0, carbohydrate_g: 0, sodium_mg: 0 };
+    const keys = ["calories_kcal", "protein_g", "fat_g", "carbohydrate_g", "sodium_mg"];
+    day.meals.forEach((m) => {
+      keys.forEach((k) => { total[k] += Number(m.nutrition?.[k]) || 0; });
+    });
+    const lines = [];
+    lines.push("穗食拍 AI 膳食档案");
+    lines.push("日期：" + day.date);
+    lines.push("目标热量：1800 kcal");
+    lines.push("");
+    lines.push("—— 今日餐食明细 ——");
+    day.meals.forEach((m, i) => {
+      lines.push(`${i + 1}. ${m.dish}（${m.weight_g || 0} g）`);
+      if (m.ingredients) lines.push(`   食材：${m.ingredients}`);
+      if (m.nutrition) lines.push(`   营养：热量 ${m.nutrition.calories_kcal || 0} kcal · 蛋白 ${m.nutrition.protein_g || 0} g · 脂肪 ${m.nutrition.fat_g || 0} g · 碳水 ${m.nutrition.carbohydrate_g || 0} g · 钠 ${m.nutrition.sodium_mg || 0} mg`);
+    });
+    lines.push("");
+    lines.push("—— 今日累计 ——");
+    lines.push(`热量 ${Math.round(total.calories_kcal)} / 1800 kcal（${Math.round((total.calories_kcal / 1800) * 100)}%）`);
+    lines.push(`蛋白质 ${Math.round(total.protein_g)} g · 脂肪 ${Math.round(total.fat_g)} g · 碳水 ${Math.round(total.carbohydrate_g)} g · 钠 ${Math.round(total.sodium_mg)} mg`);
+    lines.push("");
+    lines.push("（本档案由浏览器本地记录生成，营养数值为估算值，不构成医疗建议。）");
+
+    const text = lines.join("\n");
+    const blob = new Blob(["﻿" + text], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `穗食拍膳食档案_${day.date}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+}
+
 function initAssistantMealHandoff() {
   const chatBody = document.querySelector(".chat-body");
   if (!chatBody) return;
@@ -603,6 +645,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initMealUpload();
   initMealRecalculation();
   initSendMealToAssistant();
+  initExportMealReport();
   initChat();
   initChatHistory();
   initAssistantMealHandoff();

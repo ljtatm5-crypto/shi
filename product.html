@@ -8,10 +8,10 @@
 <meta http-equiv="Expires" content="0">
 <meta name="suishipai-api-base" content="https://shi-node-guxametasc.cn-shenzhen.fcapp.run">
 <title>产品体验 · 穗食拍AI来算</title>
-<link rel="stylesheet" href="css/style.css?v=20260815-daily14">
-<link rel="stylesheet" href="css/desktop-pet.css?v=20260815-daily14">
-<link rel="stylesheet" href="css/content-enhance.css?v=20260815-daily14">
-<link rel="stylesheet" href="css/site-shell.css?v=20260815-daily14">
+<link rel="stylesheet" href="css/style.css?v=20260815-daily15">
+<link rel="stylesheet" href="css/desktop-pet.css?v=20260815-daily15">
+<link rel="stylesheet" href="css/content-enhance.css?v=20260815-daily15">
+<link rel="stylesheet" href="css/site-shell.css?v=20260815-daily15">
 </head>
 <body class="content-page product-page">
 
@@ -188,20 +188,23 @@
               <div style="margin-top:20px;padding:14px;background:var(--green-soft);border-radius:10px">
                 <b style="color:var(--green)">✓ 本餐已保存</b>
                 <p style="font-size:13px;color:var(--gray-700);margin-top:4px">
-                  想让小穗帮你解读这一餐？点下方按钮把营养分析发送给智能助手。
+                  想让小穗帮你解读这一餐？点下方按钮把营养分析发送给智能助手，或导出今日饮食档案。
                 </p>
-                <button type="button" class="btn btn-primary meal-send-to-assistant" style="margin-top:12px">发送到小穗解读 →</button>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+                  <button type="button" class="btn btn-primary meal-send-to-assistant">发送到小穗解读 →</button>
+                  <button type="button" class="btn btn-secondary meal-export-report">导出今日档案</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="step-body">
           <h3>第五步：饮食记录</h3>
-          <p>保存本餐，自动同步至今日膳食档案。你可以在时间轴查看每一餐、每一天的完整轨迹。</p>
+          <p>保存本餐，自动计入今日膳食档案（保存在你的浏览器本地）。</p>
           <ul>
-            <li>本餐 → 今日 → 本周 → 本月，四层聚合</li>
-            <li>支持导出健康档案（PDF / 分享给营养师）</li>
-            <li>关联智能硬件（手环/体脂秤）可自动打卡</li>
+            <li>今日累计热量实时更新，超出目标时用暖色提示</li>
+            <li>可导出今日饮食档案，保存为文本文件</li>
+            <li>可把本餐营养发送给小穗，获得解读与下一餐建议</li>
           </ul>
         </div>
       </div>
@@ -232,8 +235,8 @@
   </div>
 </footer>
 
-<script src="js/api.js?v=20260815-daily14"></script>
-<script src="js/main.js?v=20260815-daily14"></script>
-<script src="js/desktop-pet.js?v=20260815-daily14"></script>
+<script src="js/api.js?v=20260815-daily15"></script>
+<script src="js/main.js?v=20260815-daily15"></script>
+<script src="js/desktop-pet.js?v=20260815-daily15"></script>
 </body>
 </html>
