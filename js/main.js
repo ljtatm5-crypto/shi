@@ -636,12 +636,25 @@ function initMobileNav() {
   });
 }
 
+// -------- 从导航"开始识餐"进入时，滚动到五步流程栏 --------
+function initMealFlowAnchor() {
+  const flow = document.getElementById("meal-flow");
+  if (!flow) return;
+  let start = false;
+  try { start = new URLSearchParams(window.location.search).get("start") === "1"; } catch (e) {}
+  if (!start) return;
+  const navHeight = document.querySelector(".nav")?.offsetHeight || 0;
+  const top = flow.getBoundingClientRect().top + window.scrollY - navHeight - 16;
+  window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+}
+
 // -------- Init --------
 document.addEventListener("DOMContentLoaded", () => {
   initMobileNav();
   initReveal();
   initPersonaTabs();
   initStepFlow();
+  initMealFlowAnchor();
   initMealUpload();
   initMealRecalculation();
   initSendMealToAssistant();
