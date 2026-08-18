@@ -678,6 +678,45 @@ img { max-width: 100%; display: block; }
   z-index: 0;
   pointer-events: none;
 }
+
+/* -------- 向下滑动引导箭头 -------- */
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  z-index: 5;
+  width: 30px;
+  height: 48px;
+  border: 2px solid rgba(42, 136, 168, .5);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .35);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transform: translateX(-50%);
+}
+.scroll-hint::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 9px;
+  width: 4px;
+  height: 9px;
+  border-radius: 2px;
+  background: rgba(24, 118, 95, .75);
+  transform: translateX(-50%);
+  animation: scroll-hint-drop 1.6s ease-in-out infinite;
+}
+.scroll-hint:hover {
+  border-color: rgba(42, 136, 168, .8);
+  background: rgba(255, 255, 255, .6);
+}
+@keyframes scroll-hint-drop {
+  0% { transform: translate(-50%, 0); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translate(-50%, 16px); opacity: 0; }
+}
 @media (prefers-reduced-motion: reduce) {
   .fx-particle-layer { display: none; }
+  .scroll-hint::after { animation: none; }
 }
