@@ -10,7 +10,7 @@
   var ctx = canvas.getContext("2d");
   var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
   var particles = [];
-  var COUNT = 150;
+  var COUNT = 70;
   var LEFT = 0.6;
 
   function resize() {
