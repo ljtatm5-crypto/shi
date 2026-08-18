@@ -91,7 +91,7 @@
 .story-panel { position: relative; overflow: hidden; min-height: 330px; padding: 34px; border-radius: var(--home-radius); border: 1px solid rgba(42, 136, 168, .28); color: var(--home-ink); background: rgba(224, 240, 248, .40); -webkit-backdrop-filter: blur(14px) saturate(130%); backdrop-filter: blur(14px) saturate(130%); box-shadow: 0 0 22px rgba(42, 136, 168, .12); transition: transform .25s ease, box-shadow .25s ease; }
 .story-panel:hover { transform: translateY(-4px); box-shadow: 0 0 30px rgba(42, 136, 168, .2), 0 20px 55px rgba(42,106,87,.12); color: var(--home-ink); }
 .panel-index { display: block; margin-bottom: 12px; color: var(--home-mint-dark); font-size: 15px; font-weight: 800; letter-spacing: .08em; }
-.story-panel h3 { max-width: 450px; margin: 0; font-size: clamp(28px, 3vw, 40px); line-height: 1.18; letter-spacing: -.025em; }
+.story-panel h3 { max-width: 450px; margin: 0; font-size: clamp(32px, 3.4vw, 46px); line-height: 1.18; letter-spacing: -.025em; }
 .story-panel p { max-width: 500px; margin: 16px 0 0; color: #3a524b; font-size: 17px; line-height: 1.75; }
 .story-intro { grid-area: intro; display: grid; grid-template-columns: .8fr 1.2fr; gap: 24px; align-items: stretch; background: linear-gradient(135deg, #ecf8f4, #fff); }
 .story-intro > div { align-self: center; }
