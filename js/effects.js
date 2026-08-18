@@ -11,6 +11,7 @@
   var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
   var particles = [];
   var COUNT = 90;
+  var LEFT = 0.56;
 
   function resize() {
     W = window.innerWidth;
@@ -26,7 +27,7 @@
 
   function spawn() {
     return {
-      x: Math.random() * W,
+      x: Math.random() * W * LEFT,
       y: Math.random() * H,
       r: 0.8 + Math.random() * 2.1,
       vx: (Math.random() - 0.5) * 0.22,
@@ -61,7 +62,7 @@
       var p = particles[j];
       p.x += p.vx;
       p.y += p.vy;
-      if (p.x < -10) p.x = W + 10; else if (p.x > W + 10) p.x = -10;
+      if (p.x < -10) p.x = W * LEFT + 10; else if (p.x > W * LEFT + 10) p.x = -10;
       if (p.y < -10) p.y = H + 10; else if (p.y > H + 10) p.y = -10;
       if (check) p.overImage = isOverImage(p.x, p.y);
       var alpha = p.overImage ? p.a * 0.06 : p.a;
