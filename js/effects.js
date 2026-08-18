@@ -33,7 +33,7 @@
       vx: (Math.random() - 0.5) * 0.5,
       vy: (Math.random() - 0.5) * 0.5,
       a: 0.1 + Math.random() * 0.3,
-      hue: Math.random() < 0.62 ? "70,191,165" : "42,136,168",
+      hue: Math.random() < 0.5 ? "42,136,168" : "90,160,200",
       overImage: false
     };
   }
