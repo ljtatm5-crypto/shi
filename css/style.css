@@ -670,3 +670,27 @@ img { max-width: 100%; display: block; }
     .nav-links { background: #18231f; border-color: #31463e; }
   }
 }
+
+/* -------- 环境特效：动态粒子 + 鼠标光效 -------- */
+.fx-particle-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.fx-cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 320px;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(42, 136, 168, .10) 0%, rgba(70, 191, 165, .05) 40%, transparent 70%);
+  transform: translate(-9999px, -9999px);
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-particle-layer, .fx-cursor-glow { display: none; }
+}

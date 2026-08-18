@@ -405,12 +405,12 @@
 .content-page .step-panel,
 .content-page .persona-card,
 .content-page .nutrition-table {
-  border: 1px solid rgba(255,255,255,.74);
+  border: 1px solid rgba(42, 136, 168, .32);
   border-radius: var(--shell-radius);
-  background: rgba(255,255,255,.72);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.84), 0 18px 48px rgba(42,106,87,.09);
-  -webkit-backdrop-filter: blur(14px) saturate(125%);
-  backdrop-filter: blur(14px) saturate(125%);
+  background: rgba(224, 240, 248, .42);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .35) inset, 0 0 22px rgba(42, 136, 168, .14), 0 18px 48px rgba(42, 106, 87, .08);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px) saturate(130%);
 }
 
 .content-page .card,
@@ -422,7 +422,7 @@
 .content-page .card:hover,
 .content-page .problem-card:hover {
   transform: translateY(-4px);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.88), 0 24px 56px rgba(42,106,87,.13);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.4) inset, 0 0 30px rgba(42, 136, 168, .2), 0 24px 56px rgba(42,106,87,.12);
 }
 
 .content-page .card h3,
