@@ -1,19 +1,17 @@
 (function () {
   "use strict";
 
-  // 在 hero 底部注入「向下滑动」引导箭头
+  // 在浏览器视口底部注入「向下滑动」引导箭头
   (function injectScrollHint() {
-    var hero = document.querySelector(".home-hero, .content-page .content-hero");
-    if (!hero || hero.querySelector(".scroll-hint")) return;
+    if (document.querySelector(".scroll-hint")) return;
     var btn = document.createElement("button");
     btn.type = "button";
     btn.className = "scroll-hint";
     btn.setAttribute("aria-label", "向下滚动查看更多");
     btn.addEventListener("click", function () {
-      var next = hero.nextElementSibling;
-      if (next) next.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.scrollBy({ top: window.innerHeight * 0.9, behavior: "smooth" });
     });
-    hero.appendChild(btn);
+    document.body.appendChild(btn);
   })();
 
   if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
