@@ -1,12 +1,8 @@
 (function () {
   "use strict";
 
-  // 尊重减少动态偏好
   if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  /* ---------- 少量动态粒子 ---------- */
   var canvas = document.createElement("canvas");
   canvas.setAttribute("aria-hidden", "true");
   canvas.className = "fx-particle-layer";
@@ -14,7 +10,7 @@
   var ctx = canvas.getContext("2d");
   var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
   var particles = [];
-  var COUNT = 34;
+  var COUNT = 44;
 
   function resize() {
     W = window.innerWidth;
@@ -28,50 +24,54 @@
   resize();
   window.addEventListener("resize", resize);
 
-  function spawn(i) {
+  function spawn() {
     return {
       x: Math.random() * W,
       y: Math.random() * H,
-      r: 0.8 + Math.random() * 1.9,
+      r: 0.8 + Math.random() * 2.1,
       vx: (Math.random() - 0.5) * 0.22,
       vy: (Math.random() - 0.5) * 0.22,
-      a: 0.08 + Math.random() * 0.28,
-      hue: Math.random() < 0.62 ? "70,191,165" : "42,136,168"
+      a: 0.1 + Math.random() * 0.3,
+      hue: Math.random() < 0.62 ? "70,191,165" : "42,136,168",
+      overImage: false
     };
   }
-  for (var i = 0; i < COUNT; i++) particles.push(spawn(i));
+  for (var i = 0; i < COUNT; i++) particles.push(spawn());
 
+  // 粒子落在图片或背景图区域时几乎隐藏，只保留空白处的粒子
+  function isOverImage(x, y) {
+    var el = document.elementFromPoint(x, y);
+    if (!el) return false;
+    var node = el;
+    while (node && node.nodeType === 1 && node !== document.body) {
+      if (node.tagName === "IMG" || node.tagName === "VIDEO" || node.tagName === "SVG") return true;
+      var bg = getComputedStyle(node).backgroundImage;
+      if (bg && bg !== "none") return true;
+      node = node.parentElement;
+    }
+    return false;
+  }
+
+  var frame = 0;
   function tick() {
+    frame++;
     ctx.clearRect(0, 0, W, H);
+    var check = frame % 6 === 0;
     for (var j = 0; j < particles.length; j++) {
       var p = particles[j];
-      p.x += p.vx; p.y += p.vy;
+      p.x += p.vx;
+      p.y += p.vy;
       if (p.x < -10) p.x = W + 10; else if (p.x > W + 10) p.x = -10;
       if (p.y < -10) p.y = H + 10; else if (p.y > H + 10) p.y = -10;
+      if (check) p.overImage = isOverImage(p.x, p.y);
+      var alpha = p.overImage ? p.a * 0.06 : p.a;
+      if (alpha < 0.01) continue;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(" + p.hue + "," + p.a + ")";
+      ctx.fillStyle = "rgba(" + p.hue + "," + alpha + ")";
       ctx.fill();
     }
     requestAnimationFrame(tick);
   }
   tick();
-
-  /* ---------- 鼠标轻微光效 ---------- */
-  var glow = document.createElement("div");
-  glow.setAttribute("aria-hidden", "true");
-  glow.className = "fx-cursor-glow";
-  document.body.appendChild(glow);
-
-  var raf = null;
-  function move(e) {
-    if (reduced) return;
-    var x = e.clientX, y = e.clientY;
-    if (raf) return;
-    raf = requestAnimationFrame(function () {
-      glow.style.transform = "translate(" + (x - 160) + "px," + (y - 160) + "px)";
-      raf = null;
-    });
-  }
-  window.addEventListener("pointermove", move, { passive: true });
 })();
