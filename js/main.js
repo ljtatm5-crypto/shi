@@ -499,7 +499,7 @@ function appendMsg(role, avatar, html) {
   const msg = document.createElement("div");
   msg.className = "msg " + role;
   const avatarMarkup = role === "bot"
-    ? '<div class="msg-avatar mascot-avatar"><img src="images/xiaosui-assistant.old.png" alt="小穗"></div>'
+    ? '<div class="msg-avatar mascot-avatar"><img src="images/xiaosui-assistant.png" alt="小穗"></div>'
     : `<div class="msg-avatar">${avatar}</div>`;
   msg.innerHTML = `
     ${avatarMarkup}
