@@ -372,12 +372,15 @@
 }
 .content-page .persona-card.persona-sheet-card {
   grid-template-columns: minmax(0, 1fr);
+  width: min(100%, 830px);
+  margin-inline: auto;
   padding: 20px;
 }
 .content-page .persona-profile-sheet {
   display: block;
-  width: 100%;
+  width: min(100%, 780px);
   height: auto;
+  margin-inline: auto;
   border-radius: 14px;
 }
 
