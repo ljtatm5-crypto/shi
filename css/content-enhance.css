@@ -352,8 +352,8 @@
 .content-page .flow-solution-detail { line-height: 1.85; }
 
 .content-page .cluster-ring {
-  --a: 40.38%;
-  --b: 80.2%;
+  --a: 25.7%;
+  --b: 52.5%;
   background: conic-gradient(#187a66 0 var(--a), #d79b42 var(--a) var(--b), #b75f58 var(--b) 100%);
 }
 .content-page .cluster-legend { display: grid; gap: 9px; }
@@ -369,6 +369,16 @@
   object-fit: cover;
   object-position: center top;
   border-radius: 0 0 14px 14px;
+}
+.content-page .persona-card.persona-sheet-card {
+  grid-template-columns: minmax(0, 1fr);
+  padding: 20px;
+}
+.content-page .persona-profile-sheet {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
 }
 
 /* Product journey */
@@ -576,6 +586,8 @@
   .content-page .flow-arrow { transform: rotate(90deg); padding: 2px; }
   .content-page .step-flow { grid-template-columns: repeat(5, minmax(84px, 1fr)); overflow-x: auto; scroll-snap-type: x mandatory; }
   .content-page .step { scroll-snap-align: start; }
+  .content-page .persona-card.persona-sheet-card { overflow-x: auto; padding: 12px; }
+  .content-page .persona-profile-sheet { width: 720px; max-width: none; }
 }
 
 @media (max-width: 460px) {
