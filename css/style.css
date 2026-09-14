@@ -450,7 +450,7 @@ img { max-width: 100%; display: block; }
 .upload-preview[hidden] { display: none !important; }
 .prototype-note, .assistant-disclaimer { width: min(760px, calc(100% - 40px)); margin: 0 auto 48px; padding: 13px 18px; border: 1px solid rgba(27,67,50,.12); border-radius: 999px; background: #fafaf5; color: #636e72; font-size: 13px; text-align: center; }
 .mascot-avatar { overflow: hidden; }
-.mascot-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 16%; transform: scale(1.55); }
+.mascot-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
 .chat-header .chat-avatar.mascot-avatar { width: 48px; height: 48px; border-radius: 50%; background: #fff; padding: 0; }
 .msg .msg-avatar.mascot-avatar { width: 34px; height: 34px; border-radius: 50%; background: #fff; padding: 0; }
 .mascot-avatar picture { display: block; width: 100%; height: 100%; }

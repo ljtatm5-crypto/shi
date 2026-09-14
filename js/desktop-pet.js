@@ -112,7 +112,7 @@
       head.appendChild(dot);
     });
     var avatar = makeElement("img", "", {
-      src: "images/xiaosui-assistant.old.png",
+      src: "images/xiaosui-avatar.png",
       alt: "",
       width: "40",
       height: "40",
@@ -357,7 +357,7 @@
       var row = makeElement("div", "desktop-pet-message " + item.role);
       if (item.role !== "user") {
         row.appendChild(makeElement("img", "desktop-pet-message-avatar", {
-          src: "images/xiaosui-assistant.old.png",
+          src: "images/xiaosui-avatar.png",
           alt: "小穗"
         }));
       }
