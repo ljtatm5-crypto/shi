@@ -488,7 +488,7 @@ function initFloatingMascot() {
   link.className = "floating-mascot";
   link.href = "assistant.html";
   link.setAttribute("aria-label", "咨询小穗");
-  link.innerHTML = '<span>问问小穗</span><img src="images/xiaosui-assistant.png" alt="">';
+  link.innerHTML = '<span>问问小穗</span><img src="images/xiaosui-assistant.svg" alt="">';
   document.body.appendChild(link);
 }
 
@@ -499,7 +499,7 @@ function appendMsg(role, avatar, html) {
   const msg = document.createElement("div");
   msg.className = "msg " + role;
   const avatarMarkup = role === "bot"
-    ? '<div class="msg-avatar mascot-avatar"><img src="images/xiaosui-assistant.old.png" alt="小穗"></div>'
+    ? '<div class="msg-avatar mascot-avatar"><img src="images/xiaosui-assistant.svg" alt="小穗"></div>'
     : `<div class="msg-avatar">${avatar}</div>`;
   msg.innerHTML = `
     ${avatarMarkup}
