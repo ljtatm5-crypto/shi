@@ -361,6 +361,7 @@
 .content-page .cluster-legend i { width: 10px; height: 10px; border-radius: 50%; background: var(--green); }
 .content-page .cluster-legend span:nth-child(2) i { background: #d79b42; }
 .content-page .cluster-legend span:nth-child(3) i { background: #b75f58; }
+.content-page .persona-tab.tab-blue.active { border-color: var(--blue); background: var(--blue); }
 .content-page .persona-visual { overflow: hidden; padding: 18px 18px 24px; }
 .content-page .persona-portrait {
   width: 100%;
