@@ -153,7 +153,7 @@
 .footer-brand { display: flex; gap: 12px; align-items: center; }
 .footer-brand > div { display: grid; }.footer-brand small { margin-top: 3px; color: #6b7b76; font-size: 10px; }
 .footer-layout p { margin: 0; color: #6b7b76; font-size: 12px; text-align: center; }
-.footer-layout nav { display: flex; justify-content: end; gap: 20px; font-size: 13px; }
+.footer-layout nav { grid-column: 3; justify-self: end; display: flex; justify-content: end; gap: 20px; font-size: 13px; }
 
 @media (prefers-reduced-motion: no-preference) {
   .hero-result { animation: none; }
@@ -204,7 +204,7 @@
   .assistant-stage { grid-template-columns: 1fr; padding: 38px 24px; }
   .assistant-orbit { width: 230px; }
   .footer-layout { grid-template-columns: 1fr; text-align: center; }
-  .footer-brand, .footer-layout nav { justify-content: center; }
+  .footer-brand, .footer-layout nav { grid-column: auto; justify-self: center; justify-content: center; }
 }
 
 @media (prefers-reduced-motion: reduce) {
